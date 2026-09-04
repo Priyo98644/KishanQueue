@@ -1,0 +1,267 @@
+:root {
+  --kq-green-dark: #1b5e20;
+  --kq-green-main: #2e7d32;
+  --kq-green-light: #e8f5e9;
+  --kq-amber-main: #ed6c02;
+  --kq-amber-light: #fff4e5;
+  --kq-blue-main: #0288d1;
+  --kq-blue-light: #e1f5fe;
+  --kq-slate-900: #0f172a;
+  --kq-slate-700: #334155;
+  --kq-slate-500: #64748b;
+  --kq-slate-200: #e2e8f0;
+  --kq-slate-100: #f8fafc;
+  --kq-card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+.digital-token-ticket {
+  position: relative;
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 1.75rem 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid var(--kq-slate-200);
+  box-shadow: var(--kq-card-shadow);
+  text-align: center;
+  overflow: hidden;
+}
+
+.digital-token-ticket::before,
+.digital-token-ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-bg);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  border: 1px solid var(--kq-slate-200);
+}
+
+.digital-token-ticket::before {
+  left: -11px;
+}
+
+.digital-token-ticket::after {
+  right: -11px;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--kq-slate-500);
+}
+
+.centre-badge {
+  background: var(--kq-slate-100);
+  color: var(--kq-slate-700);
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--kq-slate-200);
+}
+
+.digital-token-ticket h2 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--kq-green-dark);
+  letter-spacing: -0.03em;
+  margin: 0.25rem 0;
+  font-family: monospace, system-ui, sans-serif;
+}
+
+.farmer-meta {
+  font-size: 0.875rem;
+  color: var(--kq-slate-700);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.eta-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--kq-slate-200);
+}
+
+.eta-metrics > div {
+  display: flex;
+  flex-direction: column;
+  background: var(--kq-slate-100);
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.eta-metrics span {
+  font-size: 0.7rem;
+  color: var(--kq-slate-500);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.eta-metrics strong {
+  font-size: 1.15rem;
+  color: var(--kq-slate-900);
+  margin-top: 0.2rem;
+}
+
+.alert-box {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.alert-box.pulse {
+  background-color: var(--kq-amber-light);
+  color: var(--kq-amber-main);
+  border: 1px solid rgba(237, 108, 2, 0.3);
+  animation: attention-glow 1.8s infinite ease-in-out;
+}
+
+.alert-box.success {
+  background-color: var(--kq-green-light);
+  color: var(--kq-green-dark);
+  border: 1px solid rgba(46, 125, 50, 0.25);
+  line-height: 1.4;
+}
+
+@keyframes attention-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(237, 108, 2, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(237, 108, 2, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(237, 108, 2, 0);
+    transform: scale(1);
+  }
+}
+
+#active-counters-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.counter-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--kq-slate-200);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.counter-card:hover {
+  transform: translateY(-2px);
+}
+
+.counter-card h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--kq-slate-500);
+  margin-bottom: 0.75rem;
+}
+
+.counter-card.busy {
+  border-color: rgba(2, 136, 209, 0.4);
+  background: linear-gradient(180deg, #ffffff 0%, var(--kq-blue-light) 100%);
+}
+
+.counter-card.idle {
+  border-color: var(--kq-slate-200);
+  background: #ffffff;
+}
+
+.token-badge {
+  display: inline-block;
+  font-family: monospace, system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--kq-blue-main);
+  background: #ffffff;
+  border: 1px solid rgba(2, 136, 209, 0.2);
+  padding: 0.2rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.idle-text {
+  color: var(--kq-slate-500);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.counter-card button {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.counter-card.idle button {
+  background-color: var(--kq-green-main);
+  color: #ffffff;
+}
+
+.counter-card.idle button:hover {
+  background-color: var(--kq-green-dark);
+}
+
+.counter-card.busy button {
+  background-color: var(--kq-slate-900);
+  color: #ffffff;
+}
+
+.counter-card.busy button:hover {
+  background-color: var(--kq-slate-700);
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.status-tag.arrived,
+.status-tag.booked {
+  background: var(--kq-amber-light);
+  color: var(--kq-amber-main);
+}
+
+.status-tag.called,
+.status-tag.inspection {
+  background: var(--kq-blue-light);
+  color: var(--kq-blue-main);
+}
+
+.status-tag.completed {
+  background: var(--kq-green-light);
+  color: var(--kq-green-dark);
+}
