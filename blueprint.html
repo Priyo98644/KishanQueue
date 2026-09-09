@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KishanQueue - Architectural Blueprint</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm 14mm 14mm;
+    @top-left { content: "KISHANQUEUE: ARCHITECTURAL BLUEPRINT"; font-size: 7pt; font-weight: 700; color: #1b4332; font-family: sans-serif; }
+    @top-right { content: "WB e-PADDY / e-NAM BENCHMARK & VOICE AI"; font-size: 7pt; color: #64748b; font-family: sans-serif; }
+    @bottom-center { content: "Page " counter(page) " of " counter(pages); font-size: 8pt; color: #475569; font-family: sans-serif; font-weight: 600; }
+  }
+  body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 8.5pt; line-height: 1.42; margin: 0; padding: 0; background: #fff; }
+  .header { border-bottom: 3px solid #1b4332; padding-bottom: 8px; margin-bottom: 12px; }
+  .title { font-size: 16pt; font-weight: 800; color: #1b4332; margin: 0; }
+  .subtitle { font-size: 8.5pt; color: #475569; margin: 3px 0 6px 0; }
+  .badge { display: inline-block; padding: 2px 7px; font-size: 7pt; font-weight: 700; border-radius: 3px; margin-right: 5px; text-transform: uppercase; }
+  .badge-primary { background: #1b4332; color: #fff; }
+  .badge-accent { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+  .badge-warn { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  h2 { font-size: 10.5pt; font-weight: 800; color: #1b4332; border-left: 4px solid #2d6a4f; padding-left: 6px; margin: 14px 0 6px 0; text-transform: uppercase; page-break-after: avoid; }
+  h3 { font-size: 9pt; font-weight: 700; color: #0f172a; margin: 9px 0 4px 0; page-break-after: avoid; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 8pt; page-break-inside: avoid; }
+  th { background: #1b4332; color: #fff; padding: 5px 6px; text-align: left; font-weight: 700; border: 1px solid #1b4332; }
+  td { padding: 4.5px 6px; border: 1px solid #cbd5e1; vertical-align: top; }
+  tr:nth-child(even) { background: #f8fafc; }
+  ol { margin: 0; padding-left: 16px; }
+  li { margin-bottom: 4px; }
+  .num { font-weight: 800; color: #1b4332; }
+  .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 7px 10px; margin-bottom: 8px; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">🌾 KISHANQUEUE: ADVANCED MANDI OPERATING SYSTEM</div>
+    <div class="subtitle">Complete Architectural Blueprint, Loophole Matrix, Voice AI & 52-Point Master Specification</div>
+    <div>
+      <span class="badge badge-primary">Standard: ICAR / APMC / e-NAM</span>
+      <span class="badge badge-accent">Gateway: Dual-Portal (Citizen vs Operator)</span>
+      <span class="badge badge-warn">Inclusivity: Regional Voice AI (Bengali / Hindi)</span>
+    </div>
+  </div>
+
+  <h2>1. Executive Concept & The Two-Tier Gateway Model</h2>
+  <p>Inspired by the West Bengal Social Security (BMSSY) and WB e-Paddy architectures, KishanQueue decouples operations into two specialized interfaces sharing a real-time event pipeline:</p>
+  <table>
+    <thead>
+      <tr><th>Portal Gateway</th><th>Target Persona</th><th>Authentication</th><th>Core Capabilities</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Door 1: Citizen / Farmer Portal</strong></td>
+        <td>Farmers, tractor drivers, rural producers</td>
+        <td>Mobile OTP, Krishak Bandhu ID, KCC</td>
+        <td>Voice-driven pass creation, radial queue radar, slot booking, transit delay buffer, offline QR ticket.</td>
+      </tr>
+      <tr>
+        <td><strong>Door 2: Operator / Official Desk</strong></td>
+        <td>Gate guards, scale operators, assayers, secretary</td>
+        <td>Official Mandi ID + PIN / MFA</td>
+        <td>Weighbridge serial telemetry, FAQ quality deductions, DBT voucher compilation, statutory APMC ledger exports.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. Comparative Benchmarking & Loophole Matrix</h2>
+  <table>
+    <thead>
+      <tr><th>Platform</th><th>Systemic Failure Mode</th><th>Impact on Farmers</th><th>KishanQueue Resolution</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>WB e-Paddy</strong></td>
+        <td>10 AM server lockups; bot slot hoarding by middlemen.</td>
+        <td>Farmers travel 30+ km and get turned away without tokens.</td>
+        <td>Sliding-window rate limiter, CAPTCHA, and Krishak Bandhu database lock.</td>
+      </tr>
+      <tr>
+        <td><strong>e-NAM</strong></td>
+        <td>Assaying labs detached from scales; heavy apps freeze on 2G/3G.</td>
+        <td>Vehicles remain stranded at gates for 8–14 hours.</td>
+        <td>Offline PWA micro-assaying station with instant WebSocket synchronization.</td>
+      </tr>
+      <tr>
+        <td><strong>Kapas Kisan</strong></td>
+        <td>Rigid quotas; tractor breakdowns cancel tokens for 14 days.</td>
+        <td>Farmers forced to sleep overnight outside mandi yard gates.</td>
+        <td>45-minute standby buffer with a "Report Transit Delay" toggle.</td>
+      </tr>
+      <tr>
+        <td><strong>ICAR Standards</strong></td>
+        <td>Manual manipulation of analogue moisture readings above limits.</td>
+        <td>Farmers suffer arbitrary weight cuts of 3–7 kg per quintal.</td>
+        <td>Direct encrypted serial bridge reading moisture straight from digital meters.</td>
+      </tr>
+      <tr>
+        <td><strong>Queue Theory</strong></td>
+        <td>Static FIFO lets 200-quintal trucks block 5-quintal carts.</td>
+        <td>Severe weighbridge gridlock and approach road traffic jams.</td>
+        <td>Shortest-Job-First (SJF) heuristics balancing load size and crop perishability.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>3. Voice-First AI & Regional Language Intelligence</h2>
+  <div class="card">
+    <p><strong>Overcoming the Digital Literacy Divide:</strong> Most rural farmers face literacy barriers. KishanQueue introduces a zero-reading voice assistant supporting Bengali, Hindi, and English via the Web Speech API and Bhashini models. Farmers speak naturally (e.g., <em>"৫০ কুইন্টাল ধান বিক্রির পাস দিন"</em>) to automatically book tickets, check wait times, and receive audio updates.</p>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>4. The 52 Consecutive Master Specifications</h2>
+
+  <h3>Section A: Citizen & Illiterate Farmer Accessibility (Points 01–14)</h3>
+  <ol>
+    <li><span class="num">Point 01: Multi-Identity Verification Module —</span> Support for Krishak Bandhu ID, Kisan Credit Card (KCC), and Mobile OTP.</li>
+    <li><span class="num">Point 02: Pre-Arrival Slot Scheduler —</span> Appointment booking dividing the day into calibrated 2-hour weighbridge capacity bands.</li>
+    <li><span class="num">Point 03: Live Dynamic Radial Turn Indicator —</span> Visual radar showing real-time queue position and dynamic wait times.</li>
+    <li><span class="num">Point 04: Native Web Speech Audio Engine —</span> Spoken announcements in Bengali, Hindi, and English (e.g., <em>"টোকেন ১০৮, স্কেল ২ এ আসুন"</em>).</li>
+    <li><span class="num">Point 05: Offline Cryptographic Pass —</span> Client-side HMAC-SHA256 QR code passes saved in browser localStorage for offline verification.</li>
+    <li><span class="num">Point 06: SMS / WhatsApp Cloud Push Gateway —</span> Automated alerts dispatched when the farmer is 3 slots away from the gate.</li>
+    <li><span class="num">Point 07: Perishable Produce Priority Routing —</span> Express lane routing for perishable crops (tomatoes, greens) over dry cereals.</li>
+    <li><span class="num">Point 08: Farmer Transport Breakdown Hold Toggle —</span> "Report Transit Delay" button providing a 45-minute grace period.</li>
+    <li><span class="num">Point 09: Live Minimum Support Price (MSP) Ticker —</span> Real-time daily APMC market price feeds from data.gov.in APIs.</li>
+    <li><span class="num">Point 10: Multi-Tractor / Multi-Lot Registration —</span> Single farmer account registering multiple haulage vehicles under linked sub-tokens.</li>
+    <li><span class="num">Point 11: Mandi Approach Road Congestion Monitor —</span> Live road status indicators showing approach traffic and yard capacity.</li>
+    <li><span class="num">Point 12: Digital Grievance Redressal / Dispute Log —</span> In-app button to dispute tare weights or moisture cuts with APMC arbiters.</li>
+    <li><span class="num">Point 13: Universal Visual Iconography —</span> High-contrast pictorial icons allowing fully non-literate farmers to navigate easily.</li>
+    <li><span class="num">Point 14: Interactive Voice Response (IVR) Fallback —</span> Toll-free telephone missed-call registration for basic keypad feature phones.</li>
+  </ol>
+
+  <h3>Section B: Operator & Mandi Administration Desk (Points 15–26)</h3>
+  <ol start="15">
+    <li><span class="num">Point 15: Granular Role-Based Access Control (RBAC) —</span> Discrete portal views for Guards, Scale Operators, Assayers, and Mandi Secretary.</li>
+    <li><span class="num">Point 16: IoT Hardware Weighbridge Bridge —</span> Direct serial telemetry capturing gross/tare weights from Avery and Essae indicators.</li>
+    <li><span class="num">Point 17: Two-Stage Tare & Gross Math Engine —</span> Automated net calculation (Net = Gross - Tare - BagTare) with vehicle payload checks.</li>
+    <li><span class="num">Point 18: Gunny Bag Standardization Table —</span> Preset tare deductions for packaging types (Jute 50kg = 580g; HDPE plastic = 120g).</li>
+    <li><span class="num">Point 19: ICAR Fair Average Quality (FAQ) Evaluator —</span> Standardized deduction computation for moisture, foreign matter, and broken grains.</li>
+    <li><span class="num">Point 20: Operator Absent / No-Show Handling —</span> Ability to place absent tokens on "Standby Hold", recalling them after two turns.</li>
+    <li><span class="num">Point 21: High-Contrast Big-Screen Public Display Mode —</span> Dedicated `/display` full-screen page for yard LED signboards.</li>
+    <li><span class="num">Point 22: Counter Reassignment & Load Balancing —</span> Dynamic re-routing of queues if an active weighbridge scale breaks down.</li>
+    <li><span class="num">Point 23: Hamali & Unloading Labor Allocation —</span> Gang assignment and tracking for registered mandi laborers.</li>
+    <li><span class="num">Point 24: End-of-Day APMC Ledger Generation —</span> One-click statutory accounting ledger export matching Agricultural Marketing Board standards.</li>
+    <li><span class="num">Point 25: Tamper-Evident Audit Logging —</span> Immutable log recording all manual weight overrides, cancellations, and staff actions.</li>
+    <li><span class="num">Point 26: Mill / Warehouse Dispatch Integration —</span> Automated outward delivery Challan generation routing accepted grain to FCI warehouses.</li>
+  </ol>
+
+  <h3>Section C: Procurement Valuation & Financial Settlement (Points 27–36)</h3>
+  <ol start="27">
+    <li><span class="num">Point 27: Automated MSP Price Multiplier —</span> Lot valuation multiplying certified net quintals by active government support rates.</li>
+    <li><span class="num">Point 28: Statutory APMC Fee & Cess Ledger —</span> Clear itemization of market fees, weighing cess, and farmer subsidies.</li>
+    <li><span class="num">Point 29: Hamali Subsidy Reconciliation —</span> Transparent documentation of government unloading subsidies credited back to the farmer.</li>
+    <li><span class="num">Point 30: Direct Benefit Transfer (DBT) Integration —</span> Payment payload compilation for PFMS and NPCI Aadhaar Payment Bridge.</li>
+    <li><span class="num">Point 31: Electronic Weighment & Pay Slip (PDF) —</span> Instant generation of signed settlement certificates (e-Parcha).</li>
+    <li><span class="num">Point 32: Multi-Party Digital Signatures —</span> Validation blocks for Farmer thumbprint, Operator seal, and Mandi Secretary approval.</li>
+    <li><span class="num">Point 33: Split-Payment Capability —</span> Multi-account payment disbursement for joint-ownership land holdings.</li>
+    <li><span class="num">Point 34: Immediate Cash-Advance Bridge —</span> Tracking and reconciliation module for authorized short-term emergency cash advances.</li>
+    <li><span class="num">Point 35: Bank Account Verification (Penny Drop) —</span> Real-time API check matching bank account names against land revenue records.</li>
+    <li><span class="num">Point 36: GST & Commercial Trader Invoicing —</span> Automated commercial invoicing for private millers buying outside the state MSP pool.</li>
+  </ol>
+
+  <div class="page-break"></div>
+
+  <h3>Section D: Voice AI & Conversational Intelligence (Points 37–44)</h3>
+  <ol start="37">
+    <li><span class="num">Point 37: Spoken Natural Language Booking —</span> Hands-free voice booking enabling farmers to speak crop quantities aloud.</li>
+    <li><span class="num">Point 38: Multi-Dialect Accent Normalization —</span> Speech engine tuned for rural inflections across Bengali, Hindi, and local dialects.</li>
+    <li><span class="num">Point 39: Spoken Token Status Inquiries —</span> Voice query feature letting farmers ask for their queue position and receive spoken answers.</li>
+    <li><span class="num">Point 40: Voice-Activated Transit Delay Trigger —</span> Spoken command reporting road delays to trigger the 45-minute standby window.</li>
+    <li><span class="num">Point 41: Audio Price & Moisture Quotation —</span> Spoken readouts of declared MSPs, moisture limits, and permissible refractions.</li>
+    <li><span class="num">Point 42: Automated Ambient Noise Reduction —</span> Microphone noise filtering to eliminate tractor engine rumble and market chatter.</li>
+    <li><span class="num">Point 43: Localized Speech Synthesis Persona —</span> Reassuring regional voice profiles for rural farmer interactions.</li>
+    <li><span class="num">Point 44: Spoken Dispute Dictation —</span> Voice-to-text recording allowing farmers to state disputes directly into the arbitration log.</li>
+  </ol>
+
+  <h3>Section E: Distributed Infrastructure, Algorithms & Security (Points 45–52)</h3>
+  <ol start="45">
+    <li><span class="num">Point 45: Shortest-Job-First (SJF) Optimization Engine —</span> Scheduling algorithm balancing FIFO order with load sizes to minimize yard wait times.</li>
+    <li><span class="num">Point 46: WebSocket Connection Resiliency Hub —</span> Auto-reconnecting socket layer with exponential backoff and heartbeat pings.</li>
+    <li><span class="num">Point 47: Redis In-Memory Queue State —</span> Fast in-memory state store providing sub-10 ms latency updates.</li>
+    <li><span class="num">Point 48: Distributed Relational Sync Engine —</span> Dual-persistence layer ensuring operational data is backed up to relational storage.</li>
+    <li><span class="num">Point 49: Progressive Web App (PWA) Offline Service Worker —</span> Full client caching allowing offline app access in cellular dead zones.</li>
+    <li><span class="num">Point 50: Anti-Bot Rate Limiting & CAPTCHA Shield —</span> Token-bucket algorithm blocking automated script attacks during peak booking hours.</li>
+    <li><span class="num">Point 51: Edge-Network Fallback Node —</span> Local Raspberry Pi micro-server deployment ensuring full mandi operation during ISP outages.</li>
+    <li><span class="num">Point 52: Universal REST & GraphQL Public API —</span> Secure, tokenized API endpoints for integration with state e-Paddy and national e-NAM servers.</li>
+  </ol>
+
+  <h2>5. Strategic Phased Implementation Roadmap</h2>
+  <div class="card">
+    <p><strong>Phase 1: Dual-Portal Core & Live Sync —</strong> Separate Citizen Entry vs Operator Desk, Mobile OTP / Krishak Bandhu login, and WebSocket updates.</p>
+    <p><strong>Phase 2: Voice AI & Rural Illiteracy Inclusion —</strong> Conversational Voice Assistant (Bengali, Hindi, English), audio readouts, and visual iconography.</p>
+    <p><strong>Phase 3: Weighbridge IoT & Assaying —</strong> Serial link to scale indicators, digital moisture meter integration, and automated net weight calculations.</p>
+    <p><strong>Phase 4: Financial Settlement & Auditing —</strong> MSP calculation engine, Direct Benefit Transfer (DBT) hooks, and tamper-evident PDF pay slips.</p>
+  </div>
+</body>
+</html>
