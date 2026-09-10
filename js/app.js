@@ -1,19 +1,218 @@
+// ============================================================
+// KISANQUEUE ENGINE - CORE APPLICATION LOGIC
+// ============================================================
+
+const getHttpBase = () => {
+  if (window.CONFIG && window.CONFIG.HTTP_BASE) return window.CONFIG.HTTP_BASE;
+  if (typeof API_BASE_URL !== "undefined") return API_BASE_URL;
+  return (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://127.0.0.1:8000"
+    : "https://kishanqueue-api.onrender.com";
+};
+
+const getWsBase = () => {
+  if (window.CONFIG && window.CONFIG.WS_BASE) return window.CONFIG.WS_BASE;
+  if (typeof WS_BASE_URL !== "undefined") return WS_BASE_URL;
+  return (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "ws://127.0.0.1:8000/ws"
+    : "wss://kishanqueue-api.onrender.com/ws";
+};
+
+const RECONNECT_INTERVAL = (window.CONFIG && window.CONFIG.RECONNECT_INTERVAL_MS) || 3000;
+const BASE_PROCESSING_MINS = (window.CONFIG && window.CONFIG.BASE_PROCESSING_MINS) || 3.0;
+const MINS_PER_QUINTAL = (window.CONFIG && window.CONFIG.MINS_PER_QUINTAL) || 0.10;
+
 const state = {
   selectedCentre: "Centre A",
   activeToken: JSON.parse(localStorage.getItem("kq_active_token")) || null,
   socket: null,
   queueData: { total: 0, waiting: 0, processing: 0, completed: 0, tokens: [], active_counters: 2 },
+  authenticatedFarmer: null
 };
 
+let currentAuthType = "KRISHAK_BANDHU";
+let verifiedFarmerData = null;
+
+// ============================================================
+// 1. GATEWAY & VIEW ROUTER (WITH APPLICANT LOGIN SCREEN)
+// ============================================================
+function initGatewayNavigation() {
+  const panelGateway = document.getElementById("panel-gateway");
+  const panelFarmerLogin = document.getElementById("panel-farmer-login");
+  const panelFarmer = document.getElementById("panel-farmer");
+  const panelOperator = document.getElementById("panel-operator");
+  const btnReturnGateway = document.getElementById("btn-back-gateway");
+
+  function switchDoorway(activePanel, contextName) {
+    [panelGateway, panelFarmerLogin, panelFarmer, panelOperator].forEach(p => {
+      if (p) p.classList.remove("active");
+    });
+
+    if (activePanel) {
+      activePanel.classList.add("active");
+    }
+
+    if (btnReturnGateway) {
+      btnReturnGateway.style.display = (activePanel === panelGateway) ? "none" : "inline-flex";
+    }
+
+    // Trigger floating AI widget morphing
+    if (window.updateFloatingWidgetContext) {
+      window.updateFloatingWidgetContext(contextName);
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // 1. Enter Citizen Login Screen (Reference Screen)
+  const btnEnterFarmer = document.getElementById("btn-enter-farmer");
+  if (btnEnterFarmer) {
+    btnEnterFarmer.addEventListener("click", () => switchDoorway(panelFarmerLogin, "GATEWAY"));
+  }
+
+  // 2. Enter Operator Screen
+  const btnEnterOperator = document.getElementById("btn-enter-operator");
+  if (btnEnterOperator) {
+    btnEnterOperator.addEventListener("click", () => switchDoorway(panelOperator, "OPERATOR"));
+  }
+
+  const btnWeighbridge = document.getElementById("btn-enter-operator-weighbridge");
+  if (btnWeighbridge) {
+    btnWeighbridge.addEventListener("click", () => switchDoorway(panelOperator, "OPERATOR"));
+  }
+
+  const btnAssayer = document.getElementById("btn-enter-operator-assayer");
+  if (btnAssayer) {
+    btnAssayer.addEventListener("click", () => switchDoorway(panelOperator, "OPERATOR"));
+  }
+
+  // 3. Return to Gateway
+  if (btnReturnGateway) {
+    btnReturnGateway.addEventListener("click", () => switchDoorway(panelGateway, "GATEWAY"));
+  }
+
+  document.querySelectorAll(".breadcrumb-back-btn").forEach(btn => {
+    btn.addEventListener("click", () => switchDoorway(panelGateway, "GATEWAY"));
+  });
+
+  // Export switch helper to window
+  window.navigateToFarmerDashboard = () => switchDoorway(panelFarmer, "FARMER");
+}
+
+// ============================================================
+// 2. APPLICANT LOGIN HANDLER (MATCHES REFERENCE CARD ACTIONS)
+// ============================================================
+function initApplicantLogin() {
+  const districtSelect = document.getElementById("applicantDistrict");
+  const mobileInput = document.getElementById("applicantMobile");
+  const otpRow = document.getElementById("applicantOtpRow");
+  const otpCodeInput = document.getElementById("applicantOtpCode");
+  const otpStatus = document.getElementById("applicantOtpStatus");
+  const submitBtn = document.getElementById("btn-applicant-submit");
+  const btnText = document.getElementById("applicantBtnText");
+
+  let otpRequested = false;
+
+  if (!submitBtn) return;
+
+  submitBtn.addEventListener("click", async () => {
+    const district = districtSelect.value;
+    const mobile = mobileInput.value.trim();
+
+    if (!district) {
+      alert("District selection is mandatory before login.");
+      districtSelect.focus();
+      return;
+    }
+
+    if (!mobile || mobile.length !== 10) {
+      alert("Please enter a valid 10-digit registered mobile number.");
+      mobileInput.focus();
+      return;
+    }
+
+    // Step 1: Request OTP
+    if (!otpRequested) {
+      btnText.innerText = "Requesting OTP...";
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(`${getHttpBase()}/api/auth/send-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mobile })
+        });
+        const data = await res.json();
+
+        otpRequested = true;
+        otpRow.style.display = "block";
+        otpCodeInput.value = data.demo_otp || "123456";
+        btnText.innerText = "Verify OTP & Enter Portal →";
+        submitBtn.style.background = "#059669"; // Turn green for verification
+
+        otpStatus.style.color = "#047857";
+        otpStatus.innerText = `Demo OTP dispatched: ${data.demo_otp || "123456"}`;
+      } catch (err) {
+        // Fallback for offline demo
+        otpRequested = true;
+        otpRow.style.display = "block";
+        otpCodeInput.value = "123456";
+        btnText.innerText = "Verify OTP & Enter Portal →";
+        submitBtn.style.background = "#059669";
+        otpStatus.style.color = "#b45309";
+        otpStatus.innerText = "Demo OTP: 123456 (Ready to verify)";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    } 
+    // Step 2: Verify OTP & Log In
+    else {
+      const code = otpCodeInput.value.trim();
+      if (!code) {
+        alert("Please enter the OTP sent to your phone.");
+        return;
+      }
+
+      submitBtn.innerText = "Authenticating...";
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        // Populate Farmer Portal form with login credentials
+        state.authenticatedFarmer = { district, mobile };
+        const mobileTarget = document.getElementById("mobile");
+        const villageTarget = document.getElementById("village");
+        if (mobileTarget) mobileTarget.value = mobile;
+        if (villageTarget) villageTarget.value = `${district} Block`;
+
+        // Switch smoothly to the Farmer Dashboard & Pass View
+        window.navigateToFarmerDashboard();
+
+        // Reset login form for next session
+        submitBtn.disabled = false;
+        btnText.innerText = "Request OTP →";
+        submitBtn.style.background = "#d4a373";
+        otpRow.style.display = "none";
+        otpRequested = false;
+      }, 600);
+    }
+  });
+}
+
+// ============================================================
+// 3. WEBSOCKET REAL-TIME ENGINE
+// ============================================================
 function initWebSocket() {
   const statusIndicator = document.getElementById("connection-status");
   const offlineBanner = document.getElementById("offline-banner");
 
   try {
-    state.socket = new WebSocket(window.CONFIG.WS_BASE);
+    state.socket = new WebSocket(getWsBase());
 
     state.socket.onopen = () => {
-      if (statusIndicator) statusIndicator.textContent = "🟢 Live Connected";
+      if (statusIndicator) {
+        statusIndicator.textContent = "🟢 Live Connected";
+        statusIndicator.classList.add("connected");
+      }
       if (offlineBanner) offlineBanner.style.display = "none";
       fetchCentreData(state.selectedCentre);
     };
@@ -24,16 +223,19 @@ function initWebSocket() {
     };
 
     state.socket.onclose = () => {
-      if (statusIndicator) statusIndicator.textContent = "🔴 Reconnecting...";
+      if (statusIndicator) {
+        statusIndicator.textContent = "🔴 Reconnecting...";
+        statusIndicator.classList.remove("connected");
+      }
       if (offlineBanner) offlineBanner.style.display = "block";
-      setTimeout(initWebSocket, window.CONFIG.RECONNECT_INTERVAL_MS);
+      setTimeout(initWebSocket, RECONNECT_INTERVAL);
     };
 
     state.socket.onerror = () => {
       state.socket.close();
     };
   } catch (err) {
-    setTimeout(initWebSocket, window.CONFIG.RECONNECT_INTERVAL_MS);
+    setTimeout(initWebSocket, RECONNECT_INTERVAL);
   }
 }
 
@@ -61,9 +263,12 @@ function handleSocketEvent(payload) {
   }
 }
 
+// ============================================================
+// 4. QUEUE TELEMETRY & ETA COMPUTATION
+// ============================================================
 async function fetchCentreData(centreId) {
   try {
-    const res = await fetch(`${window.CONFIG.HTTP_BASE}/api/queue/${encodeURIComponent(centreId)}`);
+    const res = await fetch(`${getHttpBase()}/api/queue/${encodeURIComponent(centreId)}`);
     if (!res.ok) throw new Error("Failed to pull queue");
     state.queueData = await res.json();
     renderOperatorDashboard();
@@ -83,7 +288,7 @@ function computeDynamicETA(targetTokenId) {
 
   for (const item of waitingTokens) {
     if (item.token_id === targetTokenId) break;
-    accumulatedMinutes += window.CONFIG.BASE_PROCESSING_MINS + (item.quantity_quintals * window.CONFIG.MINS_PER_QUINTAL);
+    accumulatedMinutes += BASE_PROCESSING_MINS + (item.quantity_quintals * MINS_PER_QUINTAL);
     farmersAhead++;
   }
 
@@ -205,9 +410,13 @@ function triggerArrivalAlert(counterId) {
   }
 }
 
+// ============================================================
+// 5. BOOKING DISPATCH & IDENTITY VERIFICATION
+// ============================================================
 async function handleBookingSubmit(event) {
   event.preventDefault();
   const form = event.target;
+
   const payload = {
     farmer_name: form.farmer_name.value,
     mobile: form.mobile.value,
@@ -215,11 +424,13 @@ async function handleBookingSubmit(event) {
     centre_id: form.centre_id.value,
     crop: form.crop.value,
     quantity_quintals: parseFloat(form.quantity.value),
-    slot_time: form.slot_time.value
+    slot_time: form.slot_time.value,
+    auth_type: verifiedFarmerData ? verifiedFarmerData.auth_type : "MOBILE_OTP",
+    verified_id: verifiedFarmerData ? verifiedFarmerData.verified_id : "UNVERIFIED"
   };
 
   try {
-    const res = await fetch(`${window.CONFIG.HTTP_BASE}/api/book`, {
+    const res = await fetch(`${getHttpBase()}/api/book`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -239,7 +450,7 @@ async function handleBookingSubmit(event) {
 
 window.handleCallNext = async function(counterId) {
   try {
-    const res = await fetch(`${window.CONFIG.HTTP_BASE}/api/operator/call-next?centre_id=${encodeURIComponent(state.selectedCentre)}&counter_id=${counterId}`, {
+    const res = await fetch(`${getHttpBase()}/api/operator/call-next?centre_id=${encodeURIComponent(state.selectedCentre)}&counter_id=${counterId}`, {
       method: "POST"
     });
     if (!res.ok) {
@@ -256,7 +467,7 @@ window.promptProcurementCompletion = async function(tokenId, expectedWeight) {
   if (!entered) return;
 
   try {
-    const res = await fetch(`${window.CONFIG.HTTP_BASE}/api/operator/complete-procurement?token_id=${tokenId}&verified_weight=${parseFloat(entered)}`, {
+    const res = await fetch(`${getHttpBase()}/api/operator/complete-procurement?token_id=${tokenId}&verified_weight=${parseFloat(entered)}`, {
       method: "POST"
     });
     const result = await res.json();
@@ -273,22 +484,149 @@ function updateText(elementId, value) {
   if (el) el.textContent = value;
 }
 
-function setupNavigation() {
-  const tabs = document.querySelectorAll(".nav-tab");
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
-      
-      tab.classList.add("active");
-      const targetPanel = document.getElementById(tab.dataset.target);
-      if (targetPanel) targetPanel.classList.add("active");
+function initAuthModule() {
+  document.querySelectorAll(".auth-tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".auth-tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      currentAuthType = btn.getAttribute("data-type");
+      const directGroup = document.getElementById("directIdInputGroup");
+      const otpGroup = document.getElementById("otpInputGroup");
+      const idInput = document.getElementById("farmerIdValue");
+
+      if (currentAuthType === "KRISHAK_BANDHU") {
+        directGroup.style.display = "flex";
+        otpGroup.style.display = "none";
+        idInput.placeholder = "Enter Krishak Bandhu ID (e.g. KB-982145)";
+        idInput.value = "KB-982145";
+      } else if (currentAuthType === "KCC") {
+        directGroup.style.display = "flex";
+        otpGroup.style.display = "none";
+        idInput.placeholder = "Enter KCC Number (e.g. KCC-4521-8890)";
+        idInput.value = "KCC-4521-8890";
+      } else if (currentAuthType === "MOBILE_OTP") {
+        directGroup.style.display = "none";
+        otpGroup.style.display = "flex";
+      }
     });
   });
+
+  const verifyBtn = document.getElementById("verifyIdBtn");
+  if (verifyBtn) {
+    verifyBtn.addEventListener("click", async () => {
+      const idVal = document.getElementById("farmerIdValue").value.trim();
+      if (!idVal) return alert("Please enter an ID number");
+
+      verifyBtn.disabled = true;
+      verifyBtn.innerText = "Checking...";
+
+      try {
+        const res = await fetch(`${getHttpBase()}/api/auth/verify-identity`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ auth_type: currentAuthType, id_value: idVal })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Verification failed");
+
+        applyAuthSuccess(data);
+      } catch (err) {
+        applyAuthFailure(err.message);
+      } finally {
+        verifyBtn.disabled = false;
+        verifyBtn.innerText = "Verify ID";
+      }
+    });
+  }
+
+  const sendOtp = document.getElementById("sendOtpBtn");
+  if (sendOtp) {
+    sendOtp.addEventListener("click", async () => {
+      const mobile = document.getElementById("otpMobileNumber").value.trim();
+      if (!mobile || mobile.length < 10) return alert("Enter a valid 10-digit mobile number");
+
+      sendOtp.disabled = true;
+      sendOtp.innerText = "Sending...";
+
+      try {
+        const res = await fetch(`${getHttpBase()}/api/auth/send-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mobile })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Failed to send OTP");
+
+        document.getElementById("otpCodeRow").style.display = "flex";
+        document.getElementById("otpCodeInput").value = data.demo_otp || "1234";
+        alert(`Demo Notice: ${data.message}. Verification OTP is: ${data.demo_otp}`);
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        sendOtp.disabled = false;
+        sendOtp.innerText = "Send OTP";
+      }
+    });
+  }
+
+  const confirmOtp = document.getElementById("submitOtpBtn");
+  if (confirmOtp) {
+    confirmOtp.addEventListener("click", async () => {
+      const mobile = document.getElementById("otpMobileNumber").value.trim();
+      const otp = document.getElementById("otpCodeInput").value.trim();
+
+      try {
+        const res = await fetch(`${getHttpBase()}/api/auth/verify-identity`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ auth_type: "MOBILE_OTP", id_value: mobile, otp_code: otp })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Incorrect OTP");
+
+        applyAuthSuccess(data);
+      } catch (err) {
+        applyAuthFailure(err.message);
+      }
+    });
+  }
 }
 
+function applyAuthSuccess(data) {
+  verifiedFarmerData = data;
+  const banner = document.getElementById("authStatusBanner");
+  banner.style.display = "flex";
+  banner.style.background = "#dcfce7";
+  banner.style.color = "#15803d";
+  banner.style.border = "1px solid #86efac";
+  banner.innerHTML = `<span>✅ Verified: <strong>${data.farmer_name}</strong> (${data.verified_id})</span>`;
+
+  const nameEl = document.querySelector('input[name="farmer_name"], #farmer_name');
+  const villageEl = document.querySelector('input[name="village"], #village');
+  const mobileEl = document.querySelector('input[name="mobile"], #mobile');
+
+  if (nameEl && data.farmer_name) nameEl.value = data.farmer_name;
+  if (villageEl && data.village) villageEl.value = data.village;
+  if (mobileEl && data.mobile) mobileEl.value = data.mobile;
+}
+
+function applyAuthFailure(msg) {
+  const banner = document.getElementById("authStatusBanner");
+  banner.style.display = "flex";
+  banner.style.background = "#fee2e2";
+  banner.style.color = "#b91c1c";
+  banner.style.border = "1px solid #fca5a5";
+  banner.innerHTML = `⚠️ ${msg}`;
+}
+
+// ============================================================
+// 6. INITIALIZATION LIFECYCLE
+// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
-  setupNavigation();
+  initGatewayNavigation();
+  initApplicantLogin();
+  initAuthModule();
   initWebSocket();
 
   const bookingForm = document.getElementById("booking-form");

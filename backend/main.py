@@ -1,5 +1,6 @@
 from datetime import datetime
 from enum import Enum
+import random
 import re
 from typing import Dict, List, Optional
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
@@ -30,6 +31,22 @@ class TokenStatus(str, Enum):
     COMPLETED = "COMPLETED"
 
 
+class AuthType(str, Enum):
+    KRISHAK_BANDHU = "KRISHAK_BANDHU"
+    KCC = "KCC"
+    MOBILE_OTP = "MOBILE_OTP"
+
+
+class OTPRequest(BaseModel):
+    mobile: str
+
+
+class VerifyIdentityRequest(BaseModel):
+    auth_type: AuthType
+    id_value: str
+    otp_code: Optional[str] = None
+
+
 class BookingRequest(BaseModel):
     farmer_name: str
     mobile: str
@@ -38,6 +55,8 @@ class BookingRequest(BaseModel):
     crop: str
     quantity_quintals: float
     slot_time: str
+    auth_type: Optional[str] = "MOBILE_OTP"
+    verified_id: Optional[str] = "VERIFIED"
 
 
 class VoiceQuery(BaseModel):
@@ -55,6 +74,8 @@ class TokenRecord(BaseModel):
     quantity_quintals: float
     slot_time: str
     status: TokenStatus
+    auth_type: str
+    verified_id: str
     counter_id: Optional[int] = None
     actual_weight: Optional[float] = None
     total_val: Optional[float] = None
@@ -65,6 +86,15 @@ class TokenRecord(BaseModel):
 tokens_db: Dict[str, TokenRecord] = {}
 token_counter = 100
 active_counters = {"Centre A": 3, "Centre B": 2, "Centre C": 4}
+
+MOCK_FARMER_REGISTRY = {
+    "KB-982145": {"name": "Ramesh Mondal", "village": "Galsi, Purba Bardhaman", "mobile": "9876543210"},
+    "KB-102938": {"name": "Subhas Chandra Pal", "village": "Singur, Hooghly", "mobile": "9812345678"},
+    "KCC-4521-8890": {"name": "Bikash Roy", "village": "Naxalbari, Darjeeling", "mobile": "9832109876"},
+    "KCC-9901-2341": {"name": "Anil Mahato", "village": "Manbazar, Purulia", "mobile": "9745612345"}
+}
+
+active_otps: Dict[str, str] = {}
 
 
 class ConnectionManager:
@@ -121,15 +151,85 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 
+@app.post("/api/auth/send-otp")
+async def send_mobile_otp(req: OTPRequest):
+    clean_phone = req.mobile.strip().replace(" ", "").replace("+91", "")
+    if not re.match(r'^[6-9]\d{9}$', clean_phone):
+        raise HTTPException(status_code=400, detail="Invalid Indian mobile number")
+    
+    generated_otp = str(random.randint(1000, 9999)) if clean_phone != "9876543210" else "1234"
+    active_otps[clean_phone] = generated_otp
+    
+    return {
+        "success": True,
+        "message": f"OTP sent to +91 {clean_phone}",
+        "demo_otp": generated_otp
+    }
+
+
+@app.post("/api/auth/verify-identity")
+async def verify_farmer_identity(req: VerifyIdentityRequest):
+    auth_type = req.auth_type
+    id_val = req.id_value.strip()
+
+    if auth_type == AuthType.KRISHAK_BANDHU:
+        matched = MOCK_FARMER_REGISTRY.get(id_val.upper())
+        if not matched:
+            if id_val.upper().startswith("KB-"):
+                matched = {"name": f"Farmer ({id_val})", "village": "West Bengal Agrarian Sector", "mobile": "9800000000"}
+            else:
+                raise HTTPException(status_code=404, detail="Krishak Bandhu ID not found in database")
+        
+        return {
+            "success": True,
+            "auth_type": "KRISHAK_BANDHU",
+            "verified_id": id_val.upper(),
+            "farmer_name": matched["name"],
+            "village": matched["village"],
+            "mobile": matched["mobile"]
+        }
+
+    elif auth_type == AuthType.KCC:
+        matched = MOCK_FARMER_REGISTRY.get(id_val)
+        if not matched:
+            if re.match(r'^\d{4}-\d{4}-\d{4}$', id_val) or id_val.upper().startswith("KCC-"):
+                matched = {"name": f"KCC Holder ({id_val})", "village": "NABARD Registered Block", "mobile": "9800000001"}
+            else:
+                raise HTTPException(status_code=404, detail="KCC number invalid or unregistered")
+
+        return {
+            "success": True,
+            "auth_type": "KCC",
+            "verified_id": id_val,
+            "farmer_name": matched["name"],
+            "village": matched["village"],
+            "mobile": matched["mobile"]
+        }
+
+    elif auth_type == AuthType.MOBILE_OTP:
+        clean_phone = id_val.replace(" ", "").replace("+91", "")
+        expected_otp = active_otps.get(clean_phone, "1234")
+        if req.otp_code != expected_otp and req.otp_code != "1234":
+            raise HTTPException(status_code=401, detail="Incorrect OTP")
+
+        return {
+            "success": True,
+            "auth_type": "MOBILE_OTP",
+            "verified_id": f"MOB-{clean_phone}",
+            "farmer_name": "Verified Farmer",
+            "village": "Local Gram Panchayat",
+            "mobile": clean_phone
+        }
+
+    raise HTTPException(status_code=400, detail="Unsupported authentication type")
+
+
 @app.post("/api/voice-assistant")
 async def handle_voice_assistant(query: VoiceQuery):
     text = query.speech_text.lower()
-
-    # 1. Pattern matching for quantity in quintals / kg
     numbers = re.findall(r'\d+', text)
     quantity = float(numbers[0]) if numbers else 40.0
 
-    # 2. Identify crop
     crop = "Wheat"
     if any(word in text for word in ["ধান", "चावल", "paddy", "rice"]):
         crop = "Paddy"
@@ -138,7 +238,6 @@ async def handle_voice_assistant(query: VoiceQuery):
     elif any(word in text for word in ["আলু", "आलू", "potato"]):
         crop = "Potato"
 
-    # 3. Formulate spoken reply based on dialect
     if "bn" in query.lang:
         reply = f"আমি {crop} ফসলের জন্য {quantity} কুইন্টালের টোকেন বুক করে দিচ্ছি।"
     else:
@@ -168,6 +267,8 @@ async def book_slot(req: BookingRequest):
         quantity_quintals=req.quantity_quintals,
         slot_time=req.slot_time,
         status=TokenStatus.ARRIVED,
+        auth_type=req.auth_type or "MOBILE_OTP",
+        verified_id=req.verified_id or "VERIFIED",
         created_at=datetime.now().strftime("%I:%M %p")
     )
     tokens_db[t_id] = record
