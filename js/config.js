@@ -1,14 +1,10 @@
-const host = window.location.hostname || "127.0.0.1";
-const isProd = host.includes("github.io");
+// js/config.js
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-window.CONFIG = {
-  HTTP_BASE: isProd
-    ? "https://kishanqueue-api.onrender.com"
-    : `http://${host}:8000`,
-  WS_BASE: isProd
-    ? "wss://kishanqueue-api.onrender.com/ws"
-    : `ws://${host}:8000/ws`,
-  RECONNECT_INTERVAL_MS: 3000,
-  BASE_PROCESSING_MINS: 3.0,
-  MINS_PER_QUINTAL: 0.10,
-};
+const API_BASE_URL = isLocal 
+  ? "http://127.0.0.1:8000" 
+  : "https://kishanqueue-api.onrender.com";
+
+const WS_BASE_URL = isLocal 
+  ? "ws://127.0.0.1:8000/ws" 
+  : "wss://kishanqueue-api.onrender.com/ws";
