@@ -1,713 +1,1053 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KisanQueue | Smart Agricultural Procurement Platform</title>
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/ticket.css">
-  <link rel="icon" href="assets/favicon.ico">
-  <style>
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .gateway-return-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gateway-return-btn.hidden,
-    .applicant-otp-container.hidden,
-    .auth-status-banner.hidden,
-    .ai-modal-body.hidden {
-      display: none;
-    }
-
-    .auth-box-title {
-      margin: 0 0 4px 0;
-      font-size: 13px;
-      color: #1e3a8a;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .auth-box-subtitle {
-      margin: 0 0 10px 0;
-      font-size: 11px;
-      color: #64748b;
-    }
-
-    .auth-tab-row {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-
-    .auth-direct-input-group {
-      display: flex;
-      gap: 8px;
-    }
-
-    .auth-otp-input-group {
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .auth-otp-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .auth-otp-code-row {
-      display: none;
-      gap: 8px;
-    }
-
-    .auth-otp-code {
-      text-align: center;
-      letter-spacing: 3px;
-      font-weight: 800;
-    }
-
-    .auth-status-banner {
-      display: none;
-      margin-top: 10px;
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .auth-otp-input {
-      text-align: center;
-      letter-spacing: 3px;
-      font-weight: 800;
-    }
-
-    .applicant-otp-status {
-      font-size: 11px;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
-    .applicant-otp-input {
-      letter-spacing: 4px;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .ai-modal-body {
-      display: none;
-    }
-
-    .applicant-otp-container {
-      display: none;
-    }
-
-    .auth-box-identity-row,
-    .auth-otp-actions,
-    .auth-otp-row,
-    .direct-id-input-group,
-    .otp-send-row,
-    .otp-code-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .auth-box-identity-row {
-      margin-bottom: 12px;
-    }
-
-    .auth-box-identity-row,
-    .otp-send-row,
-    .otp-code-row {
-      align-items: center;
-    }
-
-    .otp-input-group {
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .auth-status-banner-inline {
-      display: none;
-      margin-top: 10px;
-      padding: 8px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .auth-box-title-inline {
-      margin: 0 0 4px 0;
-      font-size: 13px;
-      color: #1e3a8a;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .auth-box-subtitle-inline {
-      margin: 0 0 10px 0;
-      font-size: 11px;
-      color: #64748b;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Top Navigation & Brand Header -->
-  <header>
-    <div class="brand-wrapper">
-      <span class="brand-logo">🌾</span>
-      <div class="brand-title">
-        <h1>KisanQueue</h1>
-        <p>Smart Last-Mile APMC Procurement System</p>
-      </div>
-    </div>
-    
-    <div class="header-actions">
-      <button id="btn-back-gateway" type="button" class="gateway-return-btn hidden">
-        🚪 Return to Gateway
-      </button>
-      <div class="status-pill" id="connection-status">🟡 Connecting...</div>
-    </div>
-  </header>
-
-  <div id="offline-banner" class="banner-offline">
-    ⚠️ <strong>Backend Offline:</strong> Unable to connect to <code>http://127.0.0.1:8000</code>. Start local server with <code>python -m uvicorn backend.main:app --reload --port 8000</code>.
-  </div>
-
-  <main>
-    <!-- ============================================================ -->
-    <!-- VIEW 0: TWO-FACED GATEWAY LANDING                            -->
-    <!-- ============================================================ -->
-    <section id="panel-gateway" class="view-panel active">
-      <div class="gateway-hero-backdrop">
-        <div class="gateway-container">
-          
-          <div class="gateway-header-text">
-            <span class="gov-sub-badge">DEPARTMENT OF AGRICULTURAL MARKETING & APMC YARD GOVERNANCE</span>
-            <h2>Integrated Mandi Gateway & Dispatch Terminal</h2>
-            <p>Unified digital access for farmers and procurement yard administration</p>
-          </div>
-
-          <div class="doorway-grid">
-            
-            <!-- Citizen / Farmer Access Card -->
-            <div class="doorway-card citizen-card">
-              <div class="card-icon-badge citizen-badge">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-              </div>
-
-              <span class="access-pill public-pill">PUBLIC ACCESS</span>
-              <h3 class="doorway-title">Citizen / Farmer Portal</h3>
-              <p class="doorway-desc">
-                Book capacity-calibrated arrival passes, verify Krishak Bandhu/KCC credentials, track live weighbridge queue telemetry, and monitor direct DBT MSP bank clearance.
-              </p>
-
-              <div class="doorway-footer">
-                <button type="button" id="btn-enter-farmer" class="doorway-action-btn citizen-action">
-                  Access Citizen Portal →
-                </button>
-              </div>
-            </div>
-
-            <!-- Department Officer Login Card -->
-            <div class="doorway-card officer-card">
-              <div class="card-icon-badge officer-badge">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-                  <path d="M4 6h16v2H4zm2 4h12v2H6zm3 4h6v2H9zm-5 6h16v2H4z"/>
-                </svg>
-              </div>
-
-              <span class="access-pill officer-pill">RESTRICTED — AUTHORISED PERSONNEL ONLY</span>
-              <h3 class="doorway-title">Department Officer Login</h3>
-              <p class="doorway-desc">
-                For designated APMC yard operators, weighbridge supervisors, and quality assaying staff. Authenticate via registered credentials to manage yard queues.
-              </p>
-
-              <div class="sub-access-row">
-                <button type="button" class="sub-access-btn" id="btn-enter-operator-weighbridge">
-                  Access Weighbridge <span>→</span>
-                </button>
-                <button type="button" class="sub-access-btn" id="btn-enter-operator-assayer">
-                  Access Assayer / Secy <span>→</span>
-                </button>
-              </div>
-
-              <div class="doorway-footer">
-                <button type="button" id="btn-enter-operator" class="doorway-action-btn officer-action">
-                  Access Department Officer Desk →
-                </button>
-              </div>
-            </div>
-
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KisanQueue | National APMC Procurement Platform</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/ticket.css" />
+    <link rel="icon" href="assets/favicon.ico" />
+    <style>
+      .hidden-inline {
+        display: none !important;
+      }
+      .captcha-input {
+        text-transform: uppercase;
+      }
+      .ai-modal-body {
+        display: block;
+      }
+      .officer-kyc-grid {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .auth-status-banner {
+        margin-top: 10px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .mobile-check-badge {
+        display: none;
+      }
+      .captcha-entry {
+        text-transform: uppercase;
+      }
+      .otp-error-msg.hidden-inline {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Global GovTech Header with Pan-India Multilingual Selector -->
+    <header>
+      <div class="brand-wrapper">
+        <span class="brand-logo">🌾</span>
+        <div class="brand-title">
+          <h1>KisanQueue</h1>
+          <p data-i18n="tagline">National Unified APMC Procurement Gateway</p>
         </div>
       </div>
-    </section>
 
-    <!-- ============================================================ -->
-    <!-- VIEW 1: APPLICANT LOGIN (EXACT REPLICA OF ATTACHED IMAGE)    -->
-    <!-- ============================================================ -->
-    <section id="panel-farmer-login" class="view-panel">
-      <div class="applicant-login-backdrop">
-        <div class="applicant-card-wrapper">
-          
-          <!-- Left Column: Form Controls -->
-          <div class="applicant-form-pane">
-            
-            <!-- Shield Badge Icon -->
-            <div class="applicant-shield-badge">
-              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#ffedd5" stroke="#ea580c"/>
-                <circle cx="12" cy="11" r="3" stroke="#ea580c" stroke-width="2"/>
-              </svg>
+      <div class="header-controls">
+        <!-- Universal Pan-India & Tribal Regional Language Selector -->
+        <div class="lang-selector-box">
+          <span class="lang-globe-icon">🌐</span>
+          <select id="globalLanguageSelect" aria-label="Choose Language">
+            <optgroup label="National / Common">
+              <option value="en" selected>English</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+            </optgroup>
+            <optgroup label="Eastern & North-Eastern / Indigenous">
+              <option value="bn">বাংলা (Bengali)</option>
+              <option value="or">ଓଡ଼ିଆ (Odia)</option>
+              <option value="as">অসমীয়া (Assamese)</option>
+              <option value="grt">A·chik (Garo - Assam/Meghalaya)</option>
+              <option value="sat">ᱥᱟᱱᱛᱟᱲᱤ (Santali)</option>
+              <option value="brx">बर’ (Bodo)</option>
+              <option value="mai">मैथिली (Maithili)</option>
+            </optgroup>
+            <optgroup label="Northern & Western">
+              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+              <option value="mr">मराठी (Marathi)</option>
+              <option value="gu">ગુજરાતી (Gujarati)</option>
+            </optgroup>
+            <optgroup label="Southern">
+              <option value="te">తెలుగు (Telugu)</option>
+              <option value="ta">தமிழ் (Tamil)</option>
+              <option value="kn">ಕನ್ನಡ (Kannada)</option>
+              <option value="ml">മലയാളം (Malayalam)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <button
+          id="btn-back-gateway"
+          type="button"
+          class="gateway-return-btn hidden-inline"
+        >
+          🚪 <span data-i18n="btn_home">Gateway Home</span>
+        </button>
+        <div class="status-pill" id="connection-status">🟡 Connecting...</div>
+      </div>
+    </header>
+
+    <div id="offline-banner" class="banner-offline">
+      ⚠️ <strong>Backend Offline:</strong> Unable to connect to
+      <code>http://127.0.0.1:8000</code>. Run
+      <code>python -m uvicorn backend.main:app --reload --port 8000</code>.
+    </div>
+
+    <main>
+      <!-- ============================================================ -->
+      <!-- VIEW 0: TWO-FACED GATEWAY LANDING                            -->
+      <!-- ============================================================ -->
+      <section id="panel-gateway" class="view-panel active">
+        <div class="gateway-hero-backdrop">
+          <div class="gateway-container">
+            <div class="gateway-header-text">
+              <span class="gov-sub-badge" data-i18n="gov_badge"
+                >MINISTRY OF AGRICULTURE & FARMERS WELFARE • APMC SYSTEM</span
+              >
+              <h2 data-i18n="hero_title">
+                Unified National Mandi Gateway & Dispatch Terminal
+              </h2>
+              <p data-i18n="hero_sub">
+                Digital procurement, capacity-regulated tokens, and direct bank
+                settlement for Indian farmers
+              </p>
             </div>
 
-            <h2 class="applicant-heading">Applicant Login</h2>
-
-            <form id="applicant-login-form">
-              
-              <!-- 1. District Selector -->
-              <div class="applicant-input-group">
-                <label class="applicant-label">
-                  Select Your District <span class="req-star">*</span>
-                </label>
-                <span class="applicant-label-bengali">আপনার জেলা নির্বাচন করুন</span>
-                
-                <div class="input-with-icon">
-                  <span class="input-prefix-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#64748b" stroke-width="2">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                      <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                  </span>
-                  <select id="applicantDistrict" class="applicant-select" title="Select your district" required>
-                    <option value="" disabled selected>Search district...</option>
-                    <option value="Purba Bardhaman">Purba Bardhaman</option>
-                    <option value="Paschim Bardhaman">Paschim Bardhaman</option>
-                    <option value="Hooghly">Hooghly</option>
-                    <option value="Birbhum">Birbhum</option>
-                    <option value="Nadia">Nadia</option>
-                    <option value="Murshidabad">Murshidabad</option>
-                    <option value="Malda">Malda</option>
-                    <option value="Bankura">Bankura</option>
-                  </select>
-                </div>
-                <span class="applicant-subtext">District selection is mandatory before login.</span>
-              </div>
-
-              <!-- 2. Mobile Number Input -->
-              <div class="applicant-input-group">
-                <label class="applicant-label">
-                  Registered Any Mobile Number <span class="mode-tag">(Online /Offline)</span><span class="req-star">*</span>
-                </label>
-                <span class="applicant-label-bengali">নথিভুক্ত মোবাইল নম্বর</span>
-
-                <div class="input-with-icon">
-                  <span class="input-prefix-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#64748b" stroke-width="2">
-                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
-                      <line x1="12" y1="18" x2="12.01" y2="18"/>
-                    </svg>
-                  </span>
-                  <input type="tel" id="applicantMobile" class="applicant-input" placeholder="Enter 10-digit number" pattern="[0-9]{10}" maxlength="10" required>
-                </div>
-                <span class="applicant-subtext">A 6-digit OTP will be sent to this mobile number.</span>
-              </div>
-
-              <!-- OTP Verification Row (Hidden by default, shown upon Request OTP) -->
-              <div id="applicantOtpRow" class="applicant-otp-container hidden">
-                <label class="applicant-label">Enter One Time Password (OTP)</label>
-                <div class="input-with-icon">
-                  <input type="text" id="applicantOtpCode" class="applicant-input applicant-otp-input" placeholder="• • • • • •" maxlength="6">
-                </div>
-                <div id="applicantOtpStatus" class="applicant-otp-status"></div>
-              </div>
-
-              <!-- Action Button -->
-              <button type="button" id="btn-applicant-submit" class="applicant-btn-submit">
-                <span id="applicantBtnText">Request OTP →</span>
-              </button>
-
-              <!-- Information Callout Box -->
-              <div class="applicant-note-card">
-                <div class="note-icon">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#b45309" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="16" x2="12" y2="12"/>
-                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+            <div class="doorway-grid">
+              <!-- Citizen / Farmer Access Card -->
+              <div class="doorway-card citizen-card">
+                <div class="card-icon-badge citizen-badge">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
                   </svg>
                 </div>
-                <div class="note-content">
-                  <strong>Note:</strong> You can check your application status or claim an existing application using any mobile number registered in the application through both <strong>ONLINE</strong> and <strong>OFFLINE</strong> mode.
+
+                <span class="access-pill public-pill" data-i18n="pill_public"
+                  >PUBLIC ACCESS</span
+                >
+                <h3 class="doorway-title" data-i18n="title_citizen">
+                  Citizen / Farmer Portal
+                </h3>
+                <p class="doorway-desc" data-i18n="desc_citizen">
+                  Pan-India applicant verification, capacity-calibrated arrival
+                  passes, live weighbridge queue telemetry, and direct DBT MSP
+                  settlement.
+                </p>
+
+                <div class="doorway-footer">
+                  <button
+                    type="button"
+                    id="btn-enter-farmer"
+                    class="doorway-action-btn citizen-action"
+                  >
+                    <span data-i18n="btn_enter_citizen"
+                      >Access Citizen Portal →</span
+                    >
+                  </button>
                 </div>
               </div>
 
+              <!-- Department Officer Login Card -->
+              <div class="doorway-card officer-card">
+                <div class="card-icon-badge officer-badge">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M4 6h16v2H4zm2 4h12v2H6zm3 4h6v2H9zm-5 6h16v2H4z"
+                    />
+                  </svg>
+                </div>
+
+                <span class="access-pill officer-pill" data-i18n="pill_officer"
+                  >RESTRICTED — OFFICIAL ACCESS</span
+                >
+                <h3 class="doorway-title" data-i18n="title_officer">
+                  Department Officer Login
+                </h3>
+                <p class="doorway-desc" data-i18n="desc_officer">
+                  For authorized APMC mandi superintendents, weighbridge
+                  telemetry operators, and quality assaying officers.
+                </p>
+
+                <div class="sub-access-row">
+                  <button
+                    type="button"
+                    class="sub-access-btn"
+                    id="btn-enter-operator-weighbridge"
+                  >
+                    Weighbridge Bay <span>→</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="sub-access-btn"
+                    id="btn-enter-operator-assayer"
+                  >
+                    Quality Assayer <span>→</span>
+                  </button>
+                </div>
+
+                <div class="doorway-footer">
+                  <button
+                    type="button"
+                    id="btn-enter-operator"
+                    class="doorway-action-btn officer-action"
+                  >
+                    <span data-i18n="btn_enter_officer"
+                      >Access Officer Console →</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- VIEW 1: PAN-INDIA APPLICANT LOGIN (STATE, DISTRICT, CAPTCHA) -->
+      <!-- ============================================================ -->
+      <section id="panel-farmer-login" class="view-panel">
+        <div class="applicant-login-backdrop">
+          <div class="applicant-card-wrapper">
+            <!-- Form Area -->
+            <div class="applicant-form-pane">
+              <div class="applicant-shield-badge">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="26"
+                  height="26"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                    fill="#ecfdf5"
+                    stroke="#059669"
+                  />
+                  <circle
+                    cx="12"
+                    cy="11"
+                    r="3"
+                    stroke="#059669"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+
+              <h2 class="applicant-heading" data-i18n="login_heading">
+                Applicant Login (Farmer Portal)
+              </h2>
+
+              <form id="applicant-login-form" onsubmit="return false;">
+                <!-- 1. Select State (Pan-India) -->
+                <div class="applicant-input-group">
+                  <label class="applicant-label">
+                    <span data-i18n="lbl_state">Select Your State / UT</span>
+                    <span class="req-star">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix-icon">🏛️</span>
+                    <select
+                      id="applicantState"
+                      class="applicant-select"
+                      title="Select your state or union territory"
+                      required
+                    >
+                      <option value="" disabled selected>
+                        -- Choose State / UT --
+                      </option>
+                      <!-- Populated dynamically via JS -->
+                    </select>
+                  </div>
+                </div>
+
+                <!-- 2. Select District -->
+                <div class="applicant-input-group">
+                  <label class="applicant-label">
+                    <span data-i18n="lbl_district">Select Your District</span>
+                    <span class="req-star">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix-icon">📍</span>
+                    <select
+                      id="applicantDistrict"
+                      class="applicant-select"
+                      title="Select your district"
+                      required
+                      disabled
+                    >
+                      <option value="" disabled selected>
+                        -- First Select State --
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- 2b. Rural APMC Yard / Block Cluster (Village Focus) -->
+                <div class="applicant-input-group">
+                  <label class="applicant-label">
+                    <span>Rural Block / APMC Yard Hub</span>
+                    <span class="req-star">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix-icon">🚜</span>
+                    <select
+                      id="applicantBlock"
+                      class="applicant-select"
+                      title="Select your rural block or APMC yard hub"
+                      required
+                      disabled
+                    >
+                      <option value="" disabled selected>
+                        -- First Select District --
+                      </option>
+                    </select>
+                  </div>
+                  <span class="applicant-subtext"
+                    >Maps to village panchayats and nearby weighing
+                    counters.</span
+                  >
+                </div>
+                <!-- 3. Mobile Number with Live Green Tick Validation -->
+                <div class="applicant-input-group">
+                  <label class="applicant-label">
+                    <span data-i18n="lbl_mobile">Registered Mobile Number</span>
+                    <span class="req-star">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-prefix-icon">📱</span>
+                    <input
+                      type="tel"
+                      id="applicantMobile"
+                      class="applicant-input"
+                      placeholder="Enter 10-digit mobile number"
+                      maxlength="10"
+                      autocomplete="tel"
+                      required
+                    />
+                    <!-- Dynamic Green Tick Badge -->
+                    <span
+                      id="mobileValidTick"
+                      class="mobile-check-badge hidden-inline"
+                      title="Valid Indian mobile format"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="18"
+                        height="18"
+                        fill="none"
+                        stroke="#16a34a"
+                        stroke-width="3"
+                      >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                  <span class="applicant-subtext" data-i18n="mobile_subtext"
+                    >An authentic 6-digit OTP will be dispatched to this
+                    number.</span
+                  >
+                </div>
+
+                <!-- 4. Security Captcha Challenge -->
+                <div class="applicant-input-group">
+                  <label class="applicant-label">
+                    <span data-i18n="lbl_captcha"
+                      >Security Verification (Captcha)</span
+                    >
+                    <span class="req-star">*</span>
+                  </label>
+                  <div class="captcha-row">
+                    <div
+                      id="captchaDisplay"
+                      class="captcha-badge"
+                      title="Security Captcha"
+                    ></div>
+                    <button
+                      type="button"
+                      id="btnRefreshCaptcha"
+                      class="btn-refresh-captcha"
+                      title="Regenerate Captcha"
+                    >
+                      🔄
+                    </button>
+                    <input
+                      type="text"
+                      id="captchaInput"
+                      class="applicant-input uppercase-input"
+                      placeholder="Type characters"
+                      maxlength="6"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="button"
+                  id="btn-request-otp"
+                  class="applicant-btn-submit"
+                >
+                  <span data-i18n="btn_get_otp">Get OTP →</span>
+                </button>
+
+                <!-- Official Bilingual Compliance Note -->
+                <div class="applicant-note-card">
+                  <div class="note-icon">ℹ️</div>
+                  <div class="note-content" data-i18n="login_note">
+                    <strong>National APMC Advisory:</strong> Farmers can claim
+                    new token appointments, check verification status, and audit
+                    DBT bank transfers via either <strong>ONLINE</strong> portal
+                    mode or <strong>OFFLINE</strong> Mandi Helpdesk terminals.
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Side Brand Graphic -->
+            <div class="applicant-brand-pane">
+              <div class="brand-inner-content">
+                <div class="brand-sprout-symbol">🌾</div>
+                <h2 class="brand-bengali-title">राष्ट्रीय कृषि पोर्टल</h2>
+                <p class="brand-english-subtitle">
+                  National APMC Queue Governance
+                </p>
+                <div class="brand-tagline" data-i18n="brand_tagline">
+                  Integrated e-Governance & Direct MSP Settlement across all 28
+                  States & 8 UTs
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- VIEW 2: OTP VERIFICATION SCREEN (DISPATCHED NOTICE & RESEND) -->
+      <!-- ============================================================ -->
+      <section id="panel-farmer-otp" class="view-panel">
+        <div class="applicant-login-backdrop">
+          <div class="otp-card-container">
+            <div class="otp-badge-icon">🔐</div>
+            <h2 class="otp-card-title" data-i18n="otp_title">
+              Enter One Time Password
+            </h2>
+
+            <div class="otp-notice-box">
+              <p>
+                <span data-i18n="otp_sent_to">OTP dispatched to:</span>
+                <strong id="dispMaskedMobile">+91 XXXXX X1234</strong>
+              </p>
+              <p class="otp-timer-text">
+                <span data-i18n="otp_validity">Valid for:</span>
+                <strong><span id="otpCountdown">10:00</span> mins</strong>
+              </p>
+            </div>
+
+            <div class="otp-input-wrapper">
+              <label class="applicant-label" data-i18n="lbl_enter_6digit"
+                >Enter 6-Digit OTP</label
+              >
+              <input
+                type="text"
+                id="otpCodeEntry"
+                class="otp-digit-field"
+                placeholder="• • • • • •"
+                maxlength="6"
+                autocomplete="one-time-code"
+              />
+              <div
+                id="otpErrorBanner"
+                class="otp-error-msg hidden-inline"
+              ></div>
+            </div>
+
+            <div class="otp-action-buttons">
+              <button
+                type="button"
+                id="btn-verify-continue"
+                class="btn-primary-green"
+              >
+                <span data-i18n="btn_verify_continue">Verify & Continue →</span>
+              </button>
+              <button
+                type="button"
+                id="btn-change-mobile"
+                class="btn-secondary-outline"
+              >
+                <span data-i18n="btn_change_mobile"
+                  >← Change Mobile Number</span
+                >
+              </button>
+            </div>
+
+            <div class="otp-resend-row">
+              <span data-i18n="not_received">Didn't receive code?</span>
+              <button type="button" id="btnResendOtp" class="btn-link">
+                Resend OTP
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- VIEW 3: POST-LOGIN ACTION HUB (TRACK STATUS VS NEW BOOKING)  -->
+      <!-- ============================================================ -->
+      <section id="panel-farmer-choice" class="view-panel">
+        <div class="portal-breadcrumb">
+          <button type="button" class="breadcrumb-back-btn">
+            ← Switch Portal
+          </button>
+          <span data-i18n="hub_breadcrumb"
+            >Farmer Services & Verification Dashboard</span
+          >
+        </div>
+
+        <div class="choice-hub-container">
+          <div class="choice-greeting-card">
+            <div class="choice-user-meta">
+              <div class="user-avatar-initial">🌾</div>
+              <div>
+                <h3>
+                  <span data-i18n="welcome_user">Welcome, Verified Farmer</span>
+                </h3>
+                <p id="userSessionMeta">
+                  Region: State • Mobile: +91 XXXXX X1234
+                </p>
+              </div>
+            </div>
+            <button type="button" id="btnHubLogout" class="btn-logout-pill">
+              Logout 🚪
+            </button>
+          </div>
+
+          <div class="choice-tiles-grid">
+            <!-- Tile 1: Track Status -->
+            <div class="choice-card" id="card-choice-track">
+              <div class="choice-icon-circle blue-circle">🔍</div>
+              <h3 data-i18n="tile_track_title">
+                Track Application / Pass Status
+              </h3>
+              <p data-i18n="tile_track_desc">
+                Inspect your existing appointments, active tokens, live
+                weighbridge bay queue numbers, and completed DBT payment
+                receipts.
+              </p>
+              <button
+                type="button"
+                id="btnGoToTracking"
+                class="btn-choice-action action-blue"
+              >
+                <span data-i18n="btn_track_status"
+                  >Track Status & Telemetry →</span
+                >
+              </button>
+            </div>
+
+            <!-- Tile 2: New Slot Booking & KYC Registration -->
+            <div class="choice-card" id="card-choice-book">
+              <div class="choice-icon-circle green-circle">📝</div>
+              <h3 data-i18n="tile_book_title">New Booking & Identity KYC</h3>
+              <p data-i18n="tile_book_desc">
+                Declare agricultural produce, verify Aadhaar & PAN credentials,
+                enter land records, and generate a new dynamic arrival token.
+              </p>
+              <button
+                type="button"
+                id="btnGoToBooking"
+                class="btn-choice-action action-green"
+              >
+                <span data-i18n="btn_new_booking">New Appointment & KYC →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- VIEW 4: CITIZEN / FARMER DASHBOARD & KYC PASS FORM           -->
+      <!-- ============================================================ -->
+      <section id="panel-farmer" class="view-panel">
+        <div class="portal-breadcrumb">
+          <button
+            type="button"
+            id="btnBackToChoice"
+            class="breadcrumb-back-btn"
+          >
+            ← Back to Services Hub
+          </button>
+          <span data-i18n="booking_breadcrumb"
+            >APMC Slot Booking & Produce Declaration</span
+          >
+        </div>
+
+        <div class="grid-2col">
+          <div class="card">
+            <h2 class="card-title" data-i18n="form_title">
+              Book Procurement Slot
+            </h2>
+            <p class="card-subtitle" data-i18n="form_sub">
+              Register produce to get a dynamic capacity-calibrated queue token.
+            </p>
+
+            <form id="booking-form">
+              <!-- Multi-Identity Verification Module with PAN, Aadhaar Placeholder, and Registry -->
+              <div class="auth-box">
+                <h3 class="auth-box-title">
+                  <span>🛡️</span>
+                  <span data-i18n="kyc_step"
+                    >Step 1: Farmer Identity Verification</span
+                  >
+                </h3>
+                <p class="auth-box-sub" data-i18n="kyc_desc">
+                  Provide national government IDs to auto-populate registry and
+                  clear yard compliance audits.
+                </p>
+
+                <div class="auth-tabs-row">
+                  <button
+                    type="button"
+                    class="auth-tab-btn active"
+                    data-type="KRISHAK_BANDHU"
+                  >
+                    🏛️ State Farmer Registry
+                  </button>
+                  <button type="button" class="auth-tab-btn" data-type="KCC">
+                    💳 Kisan Credit Card (KCC)
+                  </button>
+                  <button
+                    type="button"
+                    class="auth-tab-btn"
+                    data-type="PAN_CARD"
+                  >
+                    📄 Income PAN ID
+                  </button>
+                </div>
+
+                <!-- Input Group for IDs -->
+                <div id="directIdInputGroup" class="id-input-flex">
+                  <input
+                    type="text"
+                    id="farmerIdValue"
+                    value="KB-982145"
+                    placeholder="Enter Registration ID (e.g. KB-982145)"
+                  />
+                  <button
+                    type="button"
+                    id="verifyIdBtn"
+                    class="btn-verify"
+                    data-i18n="btn_verify_id"
+                  >
+                    Verify ID
+                  </button>
+                </div>
+
+                <!-- PAN & Aadhaar Fields for Officer Verification -->
+                <div class="officer-kyc-grid officer-kyc-grid-spaced">
+                  <div>
+                    <label class="sublabel-tiny"
+                      >Aadhaar (Masked Document Reference)</label
+                    >
+                    <input
+                      type="text"
+                      id="farmerAadhaarRef"
+                      placeholder="XXXX-XXXX-XXXX"
+                      maxlength="14"
+                      class="input-tiny"
+                    />
+                  </div>
+                  <div>
+                    <label class="sublabel-tiny"
+                      >Permanent Account Number (PAN)</label
+                    >
+                    <input
+                      type="text"
+                      id="farmerPanNumber"
+                      placeholder="ABCDE1234F"
+                      maxlength="10"
+                      class="input-tiny uppercase-input"
+                    />
+                  </div>
+                </div>
+
+                <div id="authStatusBanner" class="auth-status-banner"></div>
+              </div>
+
+              <!-- Booking Fields -->
+              <div class="form-group">
+                <label data-i18n="lbl_name">1. Farmer Full Name</label>
+                <input
+                  type="text"
+                  id="farmer_name"
+                  name="farmer_name"
+                  placeholder="e.g. Ramesh Kumar"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_phone">2. Verified Mobile Number</label>
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  pattern="[0-9]{10}"
+                  placeholder="10-digit number"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_village"
+                  >3. Village / Tehsil / Block</label
+                >
+                <input
+                  type="text"
+                  id="village"
+                  name="village"
+                  placeholder="e.g. Rampur"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_centre">4. Procurement Centre</label>
+                <select
+                  id="centre_id"
+                  name="centre_id"
+                  class="centre-dropdown"
+                  title="Select procurement centre"
+                >
+                  <option value="Centre A">
+                    Centre A (Main Mandi Terminal)
+                  </option>
+                  <option value="Centre B">Centre B (North Yard Silo)</option>
+                  <option value="Centre C">
+                    Centre C (Express Grain Railhead)
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_crop">5. Crop Type</label>
+                <select id="crop" name="crop" title="Select crop type">
+                  <option value="Paddy">Paddy (MSP ₹2,300/Qtl)</option>
+                  <option value="Wheat">Wheat (MSP ₹2,275/Qtl)</option>
+                  <option value="Mustard">Mustard (MSP ₹5,650/Qtl)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_qty"
+                  >6. Harvest Produce Quantity (Quintals)</label
+                >
+                <input
+                  type="number"
+                  id="quantity"
+                  step="0.5"
+                  name="quantity"
+                  placeholder="e.g. 45"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label data-i18n="lbl_slot">7. Preferred Arrival Slot</label>
+                <select
+                  id="slot_time"
+                  name="slot_time"
+                  title="Select preferred slot"
+                >
+                  <option value="09:00 AM - 11:00 AM">
+                    Morning (09:00 AM - 11:00 AM)
+                  </option>
+                  <option value="11:00 AM - 01:00 PM">
+                    Mid-Day (11:00 AM - 01:00 PM)
+                  </option>
+                  <option value="02:00 PM - 04:00 PM">
+                    Afternoon (02:00 PM - 04:00 PM)
+                  </option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                id="generatePassSubmitBtn"
+                class="btn-primary"
+                data-i18n="btn_generate_pass"
+              >
+                Generate Pass
+              </button>
             </form>
           </div>
 
-          <!-- Right Column: Branded Portal Graphic -->
-          <div class="applicant-brand-pane">
-            <div class="brand-inner-content">
-              <div class="brand-sprout-symbol">🌾</div>
-              <h2 class="brand-bengali-title">কৃষক পোর্টাল ও প্রকিউরমেন্ট</h2>
-              <p class="brand-english-subtitle">KisanQueue APMC Procurement System</p>
-              <div class="brand-tagline">Last-Mile Queue Automation & Direct Benefit Settlement</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW 2: CITIZEN / FARMER DASHBOARD & PASS TRACKING           -->
-    <!-- ============================================================ -->
-    <section id="panel-farmer" class="view-panel">
-      <div class="portal-breadcrumb">
-        <button type="button" class="breadcrumb-back-btn">← Switch Portal</button>
-        <span>Farmer Procurement & Scheduling Window</span>
-      </div>
-
-      <div class="grid-2col">
-        <div class="card">
-          <h2 class="card-title">Book Procurement Slot</h2>
-          <p class="card-subtitle">Register produce to get a dynamic queue token.</p>
-
-          <form id="booking-form">
-            <!-- Multi-Identity Verification Module -->
-            <div class="auth-box">
-              <h3 class="auth-box-title">
-                <span>🛡️</span> Step 1: Farmer Identity Verification (পরিচিতি যাচাই)
-              </h3>
-              <p class="auth-box-subtitle">
-                Verify identity to auto-populate registry details and secure priority token allocation.
+          <div>
+            <div class="card">
+              <h2 class="card-title" data-i18n="pass_title">
+                Active Digital Pass
+              </h2>
+              <p class="card-subtitle" data-i18n="pass_sub">
+                Live position synchronized with weighbridge counters.
               </p>
-
-              <div class="auth-tab-row">
-                <button type="button" class="auth-tab-btn active" data-type="KRISHAK_BANDHU">
-                  🏛️ Krishak Bandhu
-                </button>
-                <button type="button" class="auth-tab-btn" data-type="KCC">
-                  💳 Kisan Credit Card
-                </button>
-                <button type="button" class="auth-tab-btn" data-type="MOBILE_OTP">
-                  📱 Mobile OTP
-                </button>
-              </div>
-
-              <div id="directIdInputGroup" class="auth-direct-input-group">
-                <input type="text" id="farmerIdValue" value="KB-982145" placeholder="Enter Krishak Bandhu ID (e.g. KB-982145)">
-                <button type="button" id="verifyIdBtn" class="btn-verify">
-                  Verify ID
-                </button>
-              </div>
-
-              <div id="otpInputGroup" class="auth-otp-input-group">
-                <div class="auth-otp-row">
-                  <input type="tel" id="otpMobileNumber" placeholder="Enter 10-Digit Mobile Number">
-                  <button type="button" id="sendOtpBtn" class="btn-otp-send">
-                    Send OTP
-                  </button>
-                </div>
-                <div id="otpCodeRow" class="auth-otp-code-row">
-                  <input type="text" id="otpCodeInput" class="auth-otp-code" placeholder="4-Digit OTP" maxlength="4">
-                  <button type="button" id="submitOtpBtn" class="btn-otp-confirm">
-                    Confirm OTP
-                  </button>
-                </div>
-              </div>
-
-              <div id="authStatusBanner" class="auth-status-banner"></div>
-            </div>
-
-            <!-- Booking Fields -->
-            <div class="form-group">
-              <label>1. Farmer Name</label>
-              <input type="text" id="farmer_name" name="farmer_name" placeholder="e.g. Ramesh Kumar" required>
-            </div>
-            <div class="form-group">
-              <label>2. Mobile Number</label>
-              <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="10-digit number" required>
-            </div>
-            <div class="form-group">
-              <label>3. Village / Tehsil</label>
-              <input type="text" id="village" name="village" placeholder="e.g. Rampur" required>
-            </div>
-            <div class="form-group">
-              <label>4. Procurement Centre</label>
-              <select id="centre_id" name="centre_id" class="centre-dropdown" title="Select procurement centre">
-                <option value="Centre A">Centre A (Main Mandi)</option>
-                <option value="Centre B">Centre B (North Yard)</option>
-                <option value="Centre C">Centre C (Grain Silo)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>5. Crop Type</label>
-              <select id="crop" name="crop" title="Select crop type">
-                <option value="Paddy">Paddy (MSP ₹2,300/Qtl)</option>
-                <option value="Wheat">Wheat (MSP ₹2,275/Qtl)</option>
-                <option value="Mustard">Mustard (MSP ₹5,650/Qtl)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>6. Estimated Quantity (Quintals)</label>
-              <input type="number" id="quantity" step="0.5" name="quantity" placeholder="e.g. 45" required>
-            </div>
-            <div class="form-group">
-              <label>7. Preferred Slot</label>
-              <select id="slot_time" name="slot_time" title="Select preferred slot">
-                <option value="09:00 AM - 11:00 AM">Morning (09:00 AM - 11:00 AM)</option>
-                <option value="11:00 AM - 01:00 PM">Mid-Day (11:00 AM - 01:00 PM)</option>
-                <option value="02:00 PM - 04:00 PM">Afternoon (02:00 PM - 04:00 PM)</option>
-              </select>
-            </div>
-            <button type="submit" id="generatePassSubmitBtn" class="btn-primary">Generate Pass</button>
-          </form>
-        </div>
-
-        <div>
-          <div class="card">
-            <h2 class="card-title">Active Digital Pass</h2>
-            <p class="card-subtitle">Live position synchronized with weighbridge counters.</p>
-            <div id="farmer-ticket-display"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW 3: DEPARTMENT OFFICER DESK VIEW                         -->
-    <!-- ============================================================ -->
-    <section id="panel-operator" class="view-panel">
-      <div class="portal-breadcrumb">
-        <button type="button" class="breadcrumb-back-btn">← Switch Portal</button>
-        <span>Mandi Yard Authority Dispatch Console</span>
-      </div>
-
-      <div class="operator-header">
-        <div>
-          <h2 class="operator-title">Procurement Centre Dashboard</h2>
-          <p class="operator-subtitle">Manage queues, weighbridge throughput, and MSP disbursements.</p>
-        </div>
-        <div class="operator-centre-select">
-          <select class="centre-dropdown" title="Select dashboard procurement centre">
-            <option value="Centre A">Centre A (Main Mandi)</option>
-            <option value="Centre B">Centre B (North Yard)</option>
-            <option value="Centre C">Centre C (Grain Silo)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="metrics-row">
-        <div class="metric-tile">
-          <span>Total Today</span>
-          <strong id="metric-total">0</strong>
-        </div>
-        <div class="metric-tile">
-          <span>In Line</span>
-          <strong id="metric-waiting">0</strong>
-        </div>
-        <div class="metric-tile">
-          <span>At Weighbridge</span>
-          <strong id="metric-processing">0</strong>
-        </div>
-        <div class="metric-tile">
-          <span>Completed</span>
-          <strong id="metric-completed">0</strong>
-        </div>
-      </div>
-
-      <div class="card workload-tracker">
-        <div class="workload-header">
-          <span>Centre Utilization Capacity</span>
-          <strong id="workload-percent">0%</strong>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="workload-bar"></div>
-        </div>
-      </div>
-
-      <h3 class="section-heading">Live Weighbridge Counters</h3>
-      <div id="active-counters-container"></div>
-
-      <div class="card queue-card">
-        <h3 class="card-title">Arrival Queue</h3>
-        <div class="data-table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Seq</th>
-                <th>Token</th>
-                <th>Farmer Name</th>
-                <th>Load</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="operator-queue-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ============================================================ -->
-  <!-- DYNAMIC FLOATING WIDGET (CALLER / SMART AGRO AI ASSISTANT)   -->
-  <!-- ============================================================ -->
-  <div id="ai-assistant-wrapper">
-    <button id="ai-trigger-btn" type="button" class="mode-helpline" aria-label="Support & AI Assistance" title="Mandi Helpdesk">
-      <div class="caller-pulse"></div>
-
-      <!-- Icon 1: Mandi Caller (Gateway / Home Page) -->
-      <div id="icon-caller" class="btn-icon-layer active">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-        </svg>
-      </div>
-
-      <!-- Icon 2: Smart Agricultural AI Sprout (Inside Portals) -->
-      <div id="icon-agro-ai" class="btn-icon-layer">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22V12" stroke="#a7f3d0" stroke-width="2.2" />
-          <path d="M12 12C12 7.5 16 5 21 5C21 10 17 12 12 12Z" fill="#34d399" stroke="#ffffff" />
-          <path d="M12 15C12 11.5 8.5 9.5 4 10C4 14 7.5 15.5 12 15Z" fill="#10b981" stroke="#ffffff" />
-          <circle cx="12" cy="5" r="2.5" fill="#fde047" stroke="#ffffff" stroke-width="1.5" />
-          <path d="M12 1v1.5M9.5 3.5L8.5 2.5M14.5 3.5l1-1" stroke="#fde047" stroke-width="1.5" />
-        </svg>
-      </div>
-    </button>
-
-    <!-- Morphing Modal Popup Window -->
-    <div id="ai-assistant-modal" class="ai-modal-hidden">
-      
-      <!-- Helpline View (Gateway) -->
-      <div id="widget-view-helpline" class="widget-view active">
-        <div class="ai-modal-header helpline-header">
-          <div class="ai-header-info">
-            <div class="ai-call-avatar">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
-                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-              </svg>
-            </div>
-            <div>
-              <h4 class="ai-title">APMC Yard Support Helpline</h4>
-              <p class="ai-sub">Official Procurement Control Desk</p>
-            </div>
-          </div>
-          <button class="ai-modal-close-btn" type="button" title="Close">✕</button>
-        </div>
-
-        <div class="helpline-body">
-          <div class="helpline-caller-pill">
-            <span class="pulse-dot"></span> CALLER ID: <strong>MANDI-CTRL-KOL-01</strong>
-          </div>
-
-          <div class="helpline-phone-card">
-            <span class="phone-label">Kisan Toll-Free Support</span>
-            <strong class="tollfree-number">1800-180-1551</strong>
-            <p class="phone-desc">Direct line to procurement yard officers for token, produce or gate entry assistance.</p>
-            <a href="tel:18001801551" class="btn-call-now">
-              <span>📞</span> Call Helpdesk Directly
-            </a>
-          </div>
-
-          <div class="helpline-directory">
-            <div class="dir-item">
-              <span>Yard Control Room:</span>
-              <strong>033-2248-8220</strong>
-            </div>
-            <div class="dir-item">
-              <span>Weighbridge Supervisor:</span>
-              <strong>+91 98301 22415</strong>
-            </div>
-            <div class="dir-item">
-              <span>Hours of Operation:</span>
-              <strong>Mon – Sat (08:00 AM – 06:00 PM)</strong>
+              <div id="farmer-ticket-display"></div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Agro AI View (Inside Portals) -->
-      <div id="widget-view-ai" class="widget-view">
-        <div class="ai-modal-header agro-header">
-          <div class="ai-header-info">
-            <div class="ai-call-avatar agro-avatar">🌾</div>
-            <div>
-              <h4 id="agro-ai-title" class="ai-title">Kisan Sahayak AI</h4>
-              <p id="agro-ai-sub" class="ai-sub">Smart Agricultural Copilot</p>
-            </div>
+      <!-- ============================================================ -->
+      <!-- VIEW 5: DEPARTMENT OFFICER DESK VIEW                         -->
+      <!-- ============================================================ -->
+      <section id="panel-operator" class="view-panel">
+        <div class="portal-breadcrumb">
+          <button type="button" class="breadcrumb-back-btn">
+            ← Switch Portal
+          </button>
+          <span data-i18n="officer_breadcrumb"
+            >National APMC Authority Dispatch Console</span
+          >
+        </div>
+
+        <div class="operator-header">
+          <div>
+            <h2 class="operator-title" data-i18n="officer_title">
+              Procurement Centre Dashboard
+            </h2>
+            <p class="operator-subtitle" data-i18n="officer_sub">
+              Manage queues, weighbridge throughput, and MSP disbursements.
+            </p>
           </div>
-          <div class="ai-header-actions">
-            <select id="ai-language-select" title="Language">
-              <option value="bn-IN" selected>বাংলা</option>
-              <option value="hi-IN">हिन्दी</option>
-              <option value="en-IN">English</option>
+          <div class="operator-centre-select">
+            <select
+              class="centre-dropdown"
+              title="Select dashboard procurement centre"
+            >
+              <option value="Centre A">Centre A (Main Mandi)</option>
+              <option value="Centre B">Centre B (North Yard)</option>
+              <option value="Centre C">Centre C (Grain Silo)</option>
             </select>
-            <button class="ai-modal-close-btn" type="button" title="Close">✕</button>
           </div>
         </div>
 
-        <div id="ai-mode-selector" class="ai-mode-grid">
-          <button id="btn-mode-form" type="button" class="ai-mode-btn">
-            <span class="mode-icon">🎙️</span>
-            <span id="btn-mode-title" class="mode-title">ভয়েস দিয়ে ফর্ম পূরণ</span>
-            <span id="btn-mode-desc" class="mode-desc">Voice Form Booking (Step-by-Step)</span>
-          </button>
-          <button id="btn-mode-query" type="button" class="ai-mode-btn">
-            <span class="mode-icon">🌱</span>
-            <span class="mode-title">কৃষি ও মান্ডি জিজ্ঞাসা</span>
-            <span class="mode-desc">Mandi Rules, Moisture Tolerance, MSP Rates</span>
-          </button>
+        <div class="metrics-row">
+          <div class="metric-tile">
+            <span data-i18n="metric_total">Total Today</span>
+            <strong id="metric-total">0</strong>
+          </div>
+          <div class="metric-tile">
+            <span data-i18n="metric_line">In Line</span>
+            <strong id="metric-waiting">0</strong>
+          </div>
+          <div class="metric-tile">
+            <span data-i18n="metric_bridge">At Weighbridge</span>
+            <strong id="metric-processing">0</strong>
+          </div>
+          <div class="metric-tile">
+            <span data-i18n="metric_done">Completed</span>
+            <strong id="metric-completed">0</strong>
+          </div>
         </div>
 
-        <div id="ai-modal-body" class="ai-modal-body">
-          <div class="ai-back-bar">
-            <button id="ai-btn-back" type="button">← Back to Menu</button>
-            <span id="ai-step-indicator" class="ai-step-pill">Step 1 of 7</span>
+        <div class="card workload-tracker">
+          <div class="workload-header">
+            <span data-i18n="yard_cap">Yard Utilization Capacity</span>
+            <strong id="workload-percent">0%</strong>
           </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="workload-bar"></div>
+          </div>
+        </div>
 
-          <div id="ai-chat-stream" class="ai-chat-stream"></div>
+        <h3 class="section-heading" data-i18n="weigh_counters">
+          Live Weighbridge Counters
+        </h3>
+        <div id="active-counters-container"></div>
 
-          <div class="ai-mic-controller">
-            <button id="ai-mic-btn" type="button">
-              <span id="ai-mic-icon">🎙️</span>
-              <span id="ai-mic-label">Tap to Speak</span>
+        <div class="card queue-card">
+          <h3 class="card-title" data-i18n="arrival_queue">Arrival Queue</h3>
+          <div class="data-table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Seq</th>
+                  <th>Token</th>
+                  <th>Farmer Name</th>
+                  <th>Load</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="operator-queue-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- FLOATING WIDGET (CALLER / SMART AGRO AI ASSISTANT)           -->
+    <!-- ============================================================ -->
+    <div id="ai-assistant-wrapper">
+      <button
+        id="ai-trigger-btn"
+        type="button"
+        class="mode-helpline"
+        aria-label="Support & AI Assistance"
+        title="Mandi Helpdesk"
+      >
+        <div class="caller-pulse"></div>
+        <div id="icon-caller" class="btn-icon-layer active">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
+            <path
+              d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+            />
+          </svg>
+        </div>
+        <div id="icon-agro-ai" class="btn-icon-layer">
+          <svg
+            viewBox="0 0 24 24"
+            width="28"
+            height="28"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 22V12" stroke="#a7f3d0" stroke-width="2.2" />
+            <path
+              d="M12 12C12 7.5 16 5 21 5C21 10 17 12 12 12Z"
+              fill="#34d399"
+              stroke="#ffffff"
+            />
+            <path
+              d="M12 15C12 11.5 8.5 9.5 4 10C4 14 7.5 15.5 12 15Z"
+              fill="#10b981"
+              stroke="#ffffff"
+            />
+            <circle
+              cx="12"
+              cy="5"
+              r="2.5"
+              fill="#fde047"
+              stroke="#ffffff"
+              stroke-width="1.5"
+            />
+            <path
+              d="M12 1v1.5M9.5 3.5L8.5 2.5M14.5 3.5l1-1"
+              stroke="#fde047"
+              stroke-width="1.5"
+            />
+          </svg>
+        </div>
+      </button>
+
+      <div id="ai-assistant-modal" class="ai-modal-hidden">
+        <!-- Helpline View (Gateway) -->
+        <div id="widget-view-helpline" class="widget-view active">
+          <div class="ai-modal-header helpline-header">
+            <div class="ai-header-info">
+              <div class="ai-call-avatar">📞</div>
+              <div>
+                <h4 class="ai-title">National APMC Helpdesk</h4>
+                <p class="ai-sub">Official Procurement Assistance</p>
+              </div>
+            </div>
+            <button class="ai-modal-close-btn" type="button" title="Close">
+              ✕
             </button>
-            <p id="ai-mic-status">Press the mic and answer the prompt.</p>
+          </div>
+
+          <div class="helpline-body">
+            <div class="helpline-caller-pill">
+              <span class="pulse-dot"></span> CALLER ID:
+              <strong>NAT-APMC-HQ-01</strong>
+            </div>
+            <div class="helpline-phone-card">
+              <span class="phone-label">Kisan Toll-Free Support</span>
+              <strong class="tollfree-number">1800-180-1551</strong>
+              <p class="phone-desc">
+                All-India toll-free assistance for MSP rates, appointment
+                booking, and Mandi operations.
+              </p>
+              <a href="tel:18001801551" class="btn-call-now"
+                ><span>📞</span> Call Helpdesk Directly</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Agro AI View (Inside Portals) -->
+        <div id="widget-view-ai" class="widget-view">
+          <div class="ai-modal-header agro-header">
+            <div class="ai-header-info">
+              <div class="ai-call-avatar agro-avatar">🌾</div>
+              <div>
+                <h4 id="agro-ai-title" class="ai-title">Kisan Sahayak AI</h4>
+                <p id="agro-ai-sub" class="ai-sub">
+                  Smart Multilingual Voice Copilot
+                </p>
+              </div>
+            </div>
+            <button class="ai-modal-close-btn" type="button" title="Close">
+              ✕
+            </button>
+          </div>
+          <div id="ai-mode-selector" class="ai-mode-grid">
+            <button id="btn-mode-form" type="button" class="ai-mode-btn">
+              <span class="mode-icon">🎙️</span>
+              <span id="btn-mode-title" class="mode-title"
+                >Voice Booking Assistant</span
+              >
+              <span id="btn-mode-desc" class="mode-desc"
+                >Answer questions sequentially to generate your pass</span
+              >
+            </button>
+            <button id="btn-mode-query" type="button" class="ai-mode-btn">
+              <span class="mode-icon">🌱</span>
+              <span class="mode-title">National MSP & Rules Query</span>
+              <span class="mode-desc"
+                >Moisture tolerance, certified MSP prices & documents</span
+              >
+            </button>
+          </div>
+          <div id="ai-modal-body" class="ai-modal-body-hidden">
+            <div class="ai-back-bar">
+              <button id="ai-btn-back" type="button">← Back to Menu</button>
+              <span id="ai-step-indicator" class="ai-step-pill"
+                >Step 1 of 7</span
+              >
+            </div>
+            <div id="ai-chat-stream" class="ai-chat-stream"></div>
+            <div class="ai-mic-controller">
+              <button id="ai-mic-btn" type="button">
+                <span id="ai-mic-icon">🎙️</span>
+                <span id="ai-mic-label">Tap to Speak</span>
+              </button>
+              <p id="ai-mic-status">Press the mic and answer the prompt.</p>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-  </div>
 
-  <script src="js/config.js"></script>
-  <script src="js/voice-assistant.js"></script>
-  <script src="js/app.js"></script>
-</body>
+    <script src="js/config.js"></script>
+    <script src="js/voice-assistant.js"></script>
+    <script src="js/app.js"></script>
+  </body>
 </html>

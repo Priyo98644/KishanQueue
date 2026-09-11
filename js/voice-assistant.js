@@ -107,11 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
       prompts: {
         "bn-IN": "কত কুইন্টাল ফসল বিক্রি করবেন?",
         "hi-IN": "आपकी फसल कितने क्विंटल है?",
-        "en-IN": "How many quintals do you have?"
+        "en-IN": "How many quintals do you have to sell?"
       },
       process: (transcript) => {
         const numbers = transcript.match(/\d+(\.\d+)?/);
-        return numbers ? parseFloat(numbers[0]) : 40;
+        return numbers ? parseFloat(numbers[0]) : "";
       }
     },
     {
