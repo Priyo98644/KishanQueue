@@ -1,0 +1,16 @@
+{
+  "short_name": "KisanQueue",
+  "name": "KisanQueue APMC Smart Mandi Portal",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#064e3b",
+  "theme_color": "#064e3b",
+  "display": "standalone",
+  "orientation": "portrait"
+}

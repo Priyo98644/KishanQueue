@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  apmc-edge-gateway:
+    build: .
+    container_name: kisanqueue_edge_server
+    restart: always
+    network_mode: host
+    environment:
+      - DEPLOYMENT_MODE=EDGE_OFFLINE
+      - LOCAL_DB_PATH=/data/mandi_edge.sqlite3
+      - SERIAL_SCALE_PORT=/dev/ttyUSB0
+    volumes:
+      - ./data:/data
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0" # Serial Scale Bridge (Avery/Essae)

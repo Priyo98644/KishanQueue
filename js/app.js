@@ -232,9 +232,10 @@ const INDIA_LOCATIONS = {
 };
 
 // ============================================================
-// 2. PAN-INDIA MULTILINGUAL TRANSLATION DICTIONARY
+// 2. COMPLETE ALL-INDIA 16-LANGUAGE TRANSLATION MATRIX
 // ============================================================
 const I18N_DICTIONARY = {
+  // 1. ENGLISH
   en: {
     tagline: "National Unified APMC Procurement Gateway",
     btn_home: "Gateway Home",
@@ -298,8 +299,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "Live Weighbridge Counters",
     arrival_queue: "Arrival Queue",
     brand_tagline: "Integrated e-Governance & Direct MSP Settlement across all 28 States & 8 UTs",
-    login_note: "<strong>National APMC Advisory:</strong> Farmers can claim appointments, check status, and audit DBT bank transfers via <strong>ONLINE</strong> portal mode or <strong>OFFLINE</strong> Mandi Helpdesks."
+    login_note: "<strong>National APMC Advisory:</strong> Farmers can claim appointments, check status, and audit DBT bank transfers via <strong>ONLINE</strong> portal mode or <strong>OFFLINE</strong> Mandi Helpdesks.",
+    btn_weighbridge_bay: "Weighbridge Bay",
+    btn_quality_assayer: "Quality Assayer",
+    btn_helpdesk: "Mandi Helpdesk"
   },
+
+  // 2. HINDI
   hi: {
     tagline: "राष्ट्रीय एकीकृत कृषि उपज मंडी खरीद पोर्टल",
     btn_home: "गेटवे मुख्य पृष्ठ",
@@ -363,8 +369,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "लाइव तौलकांटा काउंटर्स",
     arrival_queue: "आगमन कतार",
     brand_tagline: "सभी 28 राज्यों और 8 केंद्र शासित प्रदेशों में पारदर्शी खरीद और तत्काल भुगतान",
-    login_note: "<strong>राष्ट्रीय परामर्श:</strong> किसान ऑनलाइन पोर्टल या मंडी हेल्पडेस्क से टोकन बुक कर सकते हैं।"
+    login_note: "<strong>राष्ट्रीय परामर्श:</strong> किसान ऑनलाइन पोर्टल या मंडी हेल्पडेस्क से टोकन बुक कर सकते हैं।",
+    btn_weighbridge_bay: "तौलकांटा यार्ड",
+    btn_quality_assayer: "गुणवत्ता निरीक्षक",
+    btn_helpdesk: "मंडी सहायता केंद्र"
   },
+
+  // 3. BENGALI
   bn: {
     tagline: "জাতীয় সমন্বিত কৃষি মান্ডি প্রকিউরমেন্ট গেটওয়ে",
     btn_home: "হোম পেজ",
@@ -428,8 +439,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "সক্রিয় ওয়েব্রিজ কাউন্টার",
     arrival_queue: "আগমন কিউ",
     brand_tagline: "সমগ্র ভারতে স্বচ্ছ ক্রয় প্রক্রিয়া এবং কৃষকদের অ্যাকাউন্টে সরাসরি অর্থপ্রদান",
-    login_note: "<strong>পরামর্শ:</strong> কৃষক বন্ধু আইডি বা কেসিসি দিয়ে লগইন করে ঝামেলামুক্ত স্লট বুক করুন।"
+    login_note: "<strong>পরামর্শ:</strong> কৃষক বন্ধু আইডি বা কেসিসি দিয়ে লগইন করে ঝামেলামুক্ত স্লট বুক করুন।",
+    btn_weighbridge_bay: "ওয়েব্রিজ বে",
+    btn_quality_assayer: "গুণমান পরীক্ষক",
+    btn_helpdesk: "মাণ্ডী সহায়তা কেন্দ্ৰ"
   },
+
+  // 4. ODIA
   or: {
     tagline: "ଜାତୀୟ ଏକୀକୃତ APMC କୃଷି କ୍ରୟ ପୋର୍ଟାଲ",
     btn_home: "ମୁଖ୍ୟ ପୃଷ୍ଠା",
@@ -493,8 +509,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "ସକ୍ରିୟ ୱେବ୍ରିଜ୍ କାଉଣ୍ଟର",
     arrival_queue: "ଆଗମନ ଧାଡ଼ି",
     brand_tagline: "ସମଗ୍ର ଭାରତରେ ସ୍ୱଚ୍ଛ କ୍ରୟ ଏବଂ ସିଧାସଳଖ ବ୍ୟାଙ୍କ ଖାତାକୁ ଅର୍ଥ ପ୍ରଦାନ",
-    login_note: "<strong>ସୂଚନା:</strong> କୃଷକମାନେ ଘରେ ବସି ନିଜ ଫସଲ ବିକ୍ରୟ ପାଇଁ ଡିଜିଟାଲ୍ ଟୋକନ୍ ବୁକ୍ କରିପାରିବେ।"
+    login_note: "<strong>ସୂଚନା:</strong> କୃଷକମାନେ ଘରେ ବସି ନିଜ ଫସଲ ବିକ୍ରୟ ପାଇଁ ଡିଜିଟାଲ୍ ଟୋକନ୍ ବୁକ୍ କରିପାରିବେ।",
+    btn_weighbridge_bay: "ୱେବ୍ରିଜ୍ କଣ୍ଟା",
+    btn_quality_assayer: "ଗୁଣବତ୍ତା ନିରୀକ୍ଷକ",
+    btn_helpdesk: "ମାଣ୍ଡୀ ସହାୟତା କେନ୍ଦ୍ର"
   },
+
+  // 5. ASSAMESE
   as: {
     tagline: "ৰাষ্ট্ৰীয় একীকৃত কৃষি ক্ৰয় গেটৱে'",
     btn_home: "মুখ্য পৃষ্ঠা",
@@ -558,8 +579,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "সক্ৰিয় ওজন কেন্দ্ৰ",
     arrival_queue: "আগমন শাৰী",
     brand_tagline: "কৃষকৰ একাউণ্টত পোনে পোনে ন্যূনতম সমৰ্থন মূল্য হস্তান্তৰ",
-    login_note: "<strong>পৰামৰ্শ:</strong> কৃষকে ঘৰতে বহি নিজৰ শস্য বিক্ৰীৰ বাবে ডিজিটেল টোকেন ল'ব পাৰে।"
+    login_note: "<strong>পৰামৰ্শ:</strong> কৃষকে ঘৰতে বহি নিজৰ শস্য বিক্ৰীৰ বাবে ডিজিটেল টোকেন ল'ব পাৰে।",
+    btn_weighbridge_bay: "ওজন মাপক চকী",
+    btn_quality_assayer: "গুণমান পৰীক্ষক",
+    btn_helpdesk: "মাণ্ডী সহায়তা কেন্দ্ৰ"
   },
+
+  // 6. GARO (A·chik)
   grt: {
     tagline: "Songsalni Game-ge·e Cha·giparangni APMC Procurement Portal",
     btn_home: "Mongsonggipa Page",
@@ -623,15 +649,17 @@ const I18N_DICTIONARY = {
     weigh_counters: "Live Weighbridge Counter",
     arrival_queue: "Arrival Line",
     brand_tagline: "India a·song gimiko game-ge·giparangna direct account-ona MSP tangka on·ani",
-    login_note: "<strong>U·iatani:</strong> Game-ge·giparang online ba Mandi Helpdesk gita digital token man·gen."
+    login_note: "<strong>U·iatani:</strong> Game-ge·giparang online ba Mandi Helpdesk gita digital token man·gen.",
+    btn_weighbridge_bay: "Weighbridge Bay",
+    btn_quality_assayer: "Quality Natsokgipa",
+    btn_helpdesk: "ᱛᱩᱞᱟᱹ ᱢᱟᱥᱤᱱ"
   },
+
+  // 7. SANTALI (Ol Chiki)
   sat: {
-    tagline: "ᱫᱤᱥᱚᱢ ᱨᱮᱱᱟᱜ ᱢᱤᱫᱩᱱ APMC ᱪᱟᱥ ᱟᱨᱡᱟᱣ ᱯᱚᱨᱴᱟᱞ",
-    btn_home: "ᱢᱩᱬᱩᱛ ᱥᱟᱦᱴᱟ",
-    gov_badge: "ᱪᱟᱥ ᱟᱨ ᱪᱟᱹᱥᱤ ᱵᱷᱟᱹᱞᱟᱹᱭ ᱢᱚᱱᱛᱨᱟᱲᱚᱭ • ᱵᱷᱟᱨᱚᱛ ᱥᱚᱨᱠᱟᱨ",
-    hero_title: "ᱡᱟᱹᱛᱤᱭᱟᱹᱨᱤ ᱪᱟᱥ ᱢᱟᱱᱰᱤ ᱜᱮᱴᱣᱮ ᱟᱨ ᱠᱚᱱᱴᱨᱚᱞ ᱴᱟᱨᱢᱤᱱᱟᱞ",
-    hero_sub: "ᱪᱟᱹᱥᱤ ᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱰᱤᱡᱤᱴᱟᱞ ᱠᱤᱨᱤᱧ-ᱟᱹᱠᱷᱨᱤᱧ, ᱛᱩᱞᱟᱹ ᱫᱷᱟᱹᱲ ᱟᱨ ᱵᱮᱸᱠ ᱨᱮ ᱥᱚᱡᱷᱮ MSP ᱴᱟᱠᱟ",
-    pill_public: "ᱥᱟᱱᱟᱢ ᱦᱚᱲ ᱵᱚᱞᱚᱱ",
+    tagline: "ᱫᱤᱥᱚᱢ ᱨᱮᱱᱟᱜ ᱢᱤᱫᱚᱱ APMC ᱪᱟᱥ ᱟᱨᱡᱚᱣ ᱯᱚᱨᱚ ᱴᱚ ᱠᱚ",
+    btn_home: "ᱚ ᱠᱚ",
+    gov_badge: "ᱚ ᱠᱚ ᱟ ᱪᱚ ᱵᱚ ᱵᱚ ᱵᱚ",
     title_citizen: "ᱪᱟᱹᱥᱤ ᱯᱳᱨᱴᱟᱞ",
     desc_citizen: "ᱪᱟᱹᱥᱤ ᱩᱯᱨᱩᱢ ᱯᱚᱨᱠᱷᱟᱣ, ᱰᱤᱡᱤᱴᱟᱞ ᱯᱟᱥ, ᱞᱟᱭᱤᱵᱽ ᱛᱩᱞᱟᱹ ᱫᱷᱟᱹᱲ ᱟᱨ ᱥᱚᱡᱷᱮ DBT ᱴᱟᱠᱟ ᱧᱟᱢ।",
     btn_enter_citizen: "ᱪᱟᱹᱥᱤ ᱯᱳᱨᱴᱟᱞ ᱠᱷᱩᱞᱟᱹᱭ ᱢᱮ →",
@@ -688,8 +716,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "ᱛᱩᱞᱟᱹ ᱠᱟᱣᱩᱱᱴᱟᱨ",
     arrival_queue: "ᱦᱤᱡᱩᱜ ᱫᱷᱟᱹᱲ",
     brand_tagline: "ᱵᱷᱟᱨᱚᱛ ᱡᱟᱠᱟᱛ ᱨᱮ ᱪᱟᱹᱥᱤ ᱠᱚ ᱞᱟᱹᱜᱤᱫ ᱥᱚᱡᱷᱮ ᱵᱮᱸᱠ ᱠᱷᱟᱛᱟ ᱨᱮ MSP ᱴᱟᱠᱟ",
-    login_note: "<strong>ᱩᱪᱷᱟᱹᱱ:</strong> ᱪᱟᱹᱥᱤ ᱠᱚ ᱚᱲᱟᱜ ᱨᱮ ᱫᱩᱲᱩᱵ ᱠᱟᱛᱮ ᱰᱤᱡᱤᱴᱟᱞ ᱴᱳᱠᱮᱱ ᱠᱚ ᱵᱮᱱᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ।"
+    login_note: "<strong>ᱩᱪᱷᱟᱹᱱ:</strong> ᱪᱟᱹᱥᱤ ᱠᱚ ᱚᱲᱟᱜ ᱨᱮ ᱫᱩᱲᱩᱵ ᱠᱟᱛᱮ ᱰᱤᱡᱤᱴᱟᱞ ᱴᱳᱠᱮᱱ ᱠᱚ ᱵᱮᱱᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ।",
+    btn_weighbridge_bay: "ᱛᱩᱞᱟᱹ ᱢᱟᱥᱤᱱ",
+    btn_quality_assayer: "ᱜᱩᱱ ᱯᱚᱨᱠᱷᱟᱣᱤᱡ",
+    btn_helpdesk: "ᱛᱩᱞᱟᱹ ᱢᱟᱥᱤᱱ"
   },
+
+  // 8. BODO
   brx: {
     tagline: "गाहाय खौसेथि APMC आबाद फाननाय पर्टेल",
     btn_home: "गाहाय बिलाइ",
@@ -753,8 +786,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "वजन काउन्टार",
     arrival_queue: "फैनाय सारि",
     brand_tagline: "गासै भारताव रोखा खायदाजों आबादारिफोरनो थोंजों बेङ्क खाथायाव रां होसिंलांनाय",
-    login_note: "<strong>फोसावनाय:</strong> आबादारिफोरा न'आव थानि थानिनो दिजितेल टोकन बुकिं खालामनो हागोन।"
+    login_note: "<strong>फोसावनाय:</strong> आबादारिफोरा न'आव थानि थानिनो दिजितेल टोकन बुकिं खालामनो हागोन।",
+    btn_weighbridge_bay: "वजन मेसिन",
+    btn_quality_assayer: "गुण नायबिजिरग्रा",
+    btn_helpdesk: "मन्डि सुबिदा देसबर्ड",
   },
+
+  // 9. MAITHILI
   mai: {
     tagline: "राष्ट्रीय एकीकृत कृषि उपज मंडी खरीद पोर्टल",
     btn_home: "मुख्य पृष्ठ",
@@ -794,7 +832,7 @@ const I18N_DICTIONARY = {
     btn_new_booking: "नव स्लॉट बुक करू →",
     booking_breadcrumb: "मंडी स्लॉट बुकिंग एवं फसल घोषणा",
     form_title: "फसल बिक्री लेल स्लॉट बुक करू",
-    form_sub: "डिजिटल कतार टोकन लेल फसfullक विवरण भरू।",
+    form_sub: "डिजिटल कतार टोकन लेल फसलक विवरण भरू।",
     kyc_step: "चरण १: किसान पहचान सत्यापन",
     kyc_desc: "सरकारी डेटाबेस सं विवरण भरय लेल किसान आईडी भरू।",
     btn_verify_id: "आईडी सत्यापित करू",
@@ -802,8 +840,8 @@ const I18N_DICTIONARY = {
     lbl_phone: "२. मोबाइल नंबर",
     lbl_village: "३. गाम / प्रखंड / ब्लॉक",
     lbl_centre: "४. खरीद केंद्र (मंडी)",
-    lbl_crop: "५. फसfullक प्रकार",
-    lbl_qty: "६. फसfullक मात्रा (क्विंटल)",
+    lbl_crop: "५. फसलक प्रकार",
+    lbl_qty: "६. फसलक मात्रा (क्विंटल)",
     lbl_slot: "७. मंडी अएबाक समय",
     btn_generate_pass: "डिजिटल पास बनाउ",
     pass_title: "सक्रिय डिजिटल पास",
@@ -818,8 +856,363 @@ const I18N_DICTIONARY = {
     weigh_counters: "सक्रिय वजनकाँटा",
     arrival_queue: "आगमन कतार",
     brand_tagline: "संपूर्ण भारत मे किसानक बैंक खाता मे सोझे समर्थन मूल्यक अंतरण",
-    login_note: "<strong>सूचना:</strong> किसान घर बैसि अपन फसfullक लेल डिजिटल टोकन बुक कऽ सकैत छथि।"
+    login_note: "<strong>सूचना:</strong> किसान घर बैसि अपन फसलक लेल डिजिटल टोकन बुक कऽ सकैत छथि।",
+    btn_weighbridge_bay: "वजनकाँटा यार्ड",
+    btn_quality_assayer: "गुणवत्ता निरीक्षक",
+    btn_helpdesk: "मंडी सहायता केंद्र"
   },
+
+  // 10. PUNJABI
+  pa: {
+    tagline: "ਕੌਮੀ ਏਕੀਕ੍ਰਿਤ ਖੇਤੀਬਾੜੀ ਮੰਡੀ (APMC) ਖਰੀਦ ਪੋਰਟਲ",
+    btn_home: "ਮੁੱਖ ਸਫ਼ਾ",
+    gov_badge: "ਖੇਤੀਬਾੜੀ ਅਤੇ ਕਿਸਾਨ ਭਲਾਈ ਮੰਤਰਾਲਾ • ਭਾਰਤ ਸਰਕਾਰ",
+    hero_title: "ਕੌਮੀ ਅਨਾਜ ਮੰਡੀ ਗੇਟਵੇਅ ਅਤੇ ਕੰਟਰੋਲ ਟਰਮੀਨਲ",
+    hero_sub: "ਕਿਸਾਨਾਂ ਲਈ ਡਿਜੀਟਲ ਖਰੀਦ, ਪਾਰਦਰਸ਼ੀ ਤੋਲ ਕਤਾਰ ਅਤੇ ਸਿੱਧੀ ਐੱਮ.ਐੱਸ.ਪੀ. ਬੈਂਕ ਅਦਾਇਗੀ",
+    pill_public: "ਆਮ ਜਨਤਕ ਪਹੁੰਚ",
+    title_citizen: "ਕਿਸਾਨ ਸੇਵਾ ਪੋਰਟਲ",
+    desc_citizen: "ਪਛਾਣ ਤਸਦੀਕ, ਡਿਜੀਟਲ ਮੰਡੀ ਪਰਚੀ, ਲਾਈਵ ਕੰਡਾ ਕਤਾਰ ਅਤੇ ਸਿੱਧੀ ਖਾਤਾ ਅਦਾਇਗੀ।",
+    btn_enter_citizen: "ਕਿਸਾਨ ਪੋਰਟਲ ਦਾਖਲ ਹੋਵੋ →",
+    pill_officer: "ਅਧਿਕਾਰਤ ਅਫ਼ਸਰ ਲਾਗਇਨ",
+    title_officer: "ਮੰਡੀ ਅਫ਼ਸਰ ਲਾਗਇਨ",
+    desc_officer: "ਮਾਰਕੀਟ ਕਮੇਟੀ ਸਕੱਤਰ, ਕੰਡਾ ਓਪਰੇਟਰ ਅਤੇ ਕੁਆਲਿਟੀ ਇੰਸਪੈਕਟਰਾਂ ਲਈ।",
+    btn_enter_officer: "ਅਫ਼ਸਰ ਡੈਸਕ ਖੋਲ੍ਹੋ →",
+    login_heading: "ਕਿਸਾਨ ਲਾਗਇਨ (ਅਨਾਜ ਖਰੀਦ)",
+    lbl_state: "ਆਪਣਾ ਸੂਬਾ ਚੁਣੋ",
+    lbl_district: "ਆਪਣਾ ਜ਼ਿਲ੍ਹਾ ਚੁਣੋ",
+    district_subtext: "ਮੰਡੀ ਨਿਰਧਾਰਨ ਲਈ ਜ਼ਿਲ੍ਹਾ ਚੁਣਨਾ ਲਾਜ਼ਮੀ ਹੈ।",
+    lbl_mobile: "ਰਜਿਸਟਰਡ ਮੋਬਾਈਲ ਨੰਬਰ",
+    mobile_subtext: "ਇਸ ਨੰਬਰ ਉੱਤੇ 6 ਅੰਕਾਂ ਦਾ ਅਧਿਕਾਰਤ OTP ਭੇਜਿਆ ਜਾਵੇਗਾ।",
+    lbl_captcha: "ਸੁਰੱਖਿਆ ਕੋਡ (ਕੈਪਚਾ)",
+    btn_get_otp: "OTP ਪ੍ਰਾਪਤ ਕਰੋ →",
+    otp_title: "OTP ਕੋਡ ਦਰਜ ਕਰੋ",
+    otp_sent_to: "ਭੇਜਿਆ ਗਿਆ ਮੋਬਾਈਲ:",
+    otp_validity: "ਮਿਆਦ:",
+    lbl_enter_6digit: "6 ਅੰਕਾਂ ਵਾਲਾ OTP ਦਰਜ ਕਰੋ",
+    btn_verify_continue: "ਤਸਦੀਕ ਕਰੋ ਅਤੇ ਅੱਗੇ ਵਧੋ →",
+    btn_change_mobile: "← ਮੋਬਾਈਲ ਨੰਬਰ ਬਦਲੋ",
+    not_received: "ਕੋਡ ਨਹੀਂ ਮਿਲਿਆ?",
+    hub_breadcrumb: "ਕਿਸਾਨ ਸੁਵਿਧਾ ਕੇਂਦਰ",
+    welcome_user: "ਜੀ ਆਇਆਂ ਨੂੰ, ਤਸਦੀਕਸ਼ੁਦਾ ਕਿਸਾਨ",
+    tile_track_title: "ਪਰਚੀ ਅਤੇ ਕਤਾਰ ਸਥਿਤੀ ਦੇਖੋ",
+    tile_track_desc: "ਆਪਣੀ ਮੌਜੂਦਾ ਬੁਕਿੰਗ, ਕੰਡਾ ਨੰਬਰ ਅਤੇ ਬੈਂਕ ਅਦਾਇਗੀ ਰਸੀਦ ਦੀ ਜਾਂਚ ਕਰੋ।",
+    btn_track_status: "ਸਥਿਤੀ ਜਾਂਚੋ →",
+    tile_book_title: "ਨਵੀਂ ਬੁਕਿੰਗ ਅਤੇ ਕੇ.ਵਾਈ.ਸੀ.",
+    tile_book_desc: "ਫ਼ਸਲ ਦਾ ਵੇਰਵਾ ਦਰਜ ਕਰੋ, ਦਸਤਾਵੇਜ਼ ਤਸਦੀਕ ਕਰੋ ਅਤੇ ਨਵੀਂ ਮੰਡੀ ਪਰਚੀ ਲਵੋ।",
+    btn_new_booking: "ਨਵਾਂ ਸਲਾਟ ਬੁੱਕ ਕਰੋ →",
+    booking_breadcrumb: "ਮੰਡੀ ਸਲਾਟ ਬੁਕਿੰਗ ਅਤੇ ਫ਼ਸਲ ਘੋਸ਼ਣਾ",
+    form_title: "ਫ਼ਸਲ ਵਿਕਰੀ ਸਲਾਟ ਬੁੱਕ ਕਰੋ",
+    form_sub: "ਤੋਲ ਕਤਾਰ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਫ਼ਸਲ ਵੇਰਵੇ ਦਰਜ ਕਰੋ।",
+    kyc_step: "ਪੜਾਅ 1: ਕਿਸਾਨ ਪਛਾਣ ਤਸਦੀਕ",
+    kyc_desc: "ਸਰਕਾਰੀ ਰਿਕਾਰਡ ਨਾਲ ਮੇਲ ਕਰਨ ਲਈ ਕਿਸਾਨ ਆਈਡੀ ਦਰਜ ਕਰੋ।",
+    btn_verify_id: "ਆਈਡੀ ਤਸਦੀਕ ਕਰੋ",
+    lbl_name: "1. ਕਿਸਾਨ ਦਾ ਪੂਰਾ ਨਾਂ",
+    lbl_phone: "2. ਮੋਬਾਈਲ ਨੰਬਰ",
+    lbl_village: "3. ਪਿੰਡ / ਬਲਾਕ / ਤਹਿਸੀਲ",
+    lbl_centre: "4. ਖਰੀਦ ਕੇਂਦਰ (ਮੰਡੀ ਯਾਰਡ)",
+    lbl_crop: "5. ਫ਼ਸਲ ਦੀ ਕਿਸਮ",
+    lbl_qty: "6. ਕੁੱਲ ਅਨਾਜ (ਕੁਇੰਟਲ)",
+    lbl_slot: "7. ਮੰਡੀ ਪਹੁੰਚਣ ਦਾ ਸਮਾਂ",
+    btn_generate_pass: "ਮੰਡੀ ਪਰਚੀ ਬਣਾਓ",
+    pass_title: "ਡਿਜੀਟਲ ਮੰਡੀ ਪਰਚੀ",
+    pass_sub: "ਲਾਈਵ ਕੰਡਾ ਕਾਊਂਟਰ ਨਾਲ ਜੁੜਿਆ ਹੋਇਆ।",
+    officer_title: "ਮੰਡੀ ਪ੍ਰਬੰਧਕੀ ਕੰਸੋਲ",
+    officer_sub: "ਕਤਾਰਾਂ, ਕੰਡਾ ਰਿਕਾਰਡ ਅਤੇ ਅਦਾਇਗੀਆਂ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ।",
+    metric_total: "ਕੁੱਲ ਕਿਸਾਨ",
+    metric_line: "ਕਤਾਰ ਵਿੱਚ",
+    metric_bridge: "ਕੰਡੇ ਉੱਤੇ",
+    metric_done: "ਖਰੀਦ ਮੁਕੰਮਲ",
+    yard_cap: "ਮੰਡੀ ਸਮਰੱਥਾ",
+    weigh_counters: "ਲਾਈਵ ਕੰਡਾ ਕਾਊਂਟਰ",
+    arrival_queue: "ਆਮਦ ਕਤਾਰ",
+    brand_tagline: "ਦੇਸ਼ ਭਰ ਦੀਆਂ ਮੰਡੀਆਂ ਵਿੱਚ ਪਾਰਦਰਸ਼ੀ ਖਰੀਦ ਅਤੇ ਕਿਸਾਨਾਂ ਦੇ ਖਾਤੇ ਵਿੱਚ ਸਿੱਧੀ ਅਦਾਇਗੀ",
+    login_note: "<strong>ਸਲਾਹ:</strong> ਕਿਸਾਨ ਆਪਣੀ ਫ਼ਸਲ ਲਿਆਉਣ ਤੋਂ ਪਹਿਲਾਂ ਇੱਥੇ ਡਿਜੀਟਲ ਟੋਕਨ ਬੁੱਕ ਕਰ ਸਕਦੇ ਹਨ।",
+    btn_weighbridge_bay: "ਕੰਡਾ ਯਾਰਡ",
+    btn_quality_assayer: "ਗੁਣਵੱਤਾ ਪਰਖ ਅਫ਼ਸਰ",
+    btn_helpdesk: "ਮੰਡੀ ਸਹਾਯ ਕੇਂਦਰ"
+  },
+
+  // 11. MARATHI
+  mr: {
+    tagline: "राष्ट्रीय एकात्मिक कृषी उत्पन्न बाजार समिती (APMC) खरेदी पोर्टल",
+    btn_home: "मुख्य पृष्ठ",
+    gov_badge: "कृषी व शेतकरी कल्याण मंत्रालय • भारत सरकार",
+    hero_title: "एकात्मिक राष्ट्रीय कृषी बाजारपेठ नियंत्रण कक्ष",
+    hero_sub: "शेतकऱ्यांसाठी डिजिटल शेतमाल खरेदी, पारदर्शक वजनकाटा रांग व थेट बँक खात्यात हमीभाव जमा",
+    pill_public: "सार्वजनिक प्रवेश",
+    title_citizen: "शेतकरी सेवा पोर्टल",
+    desc_citizen: "शेतकरी ओळख पडताळणी, डिजिटल वजनकाटा पास, थेट रांग ट्रॅकिंग आणि हमीभाव (MSP) बँक जमा.",
+    btn_enter_citizen: "शेतकरी पोर्टल उघडा →",
+    pill_officer: "अधिकृत अधिकारी लॉगिन",
+    title_officer: "बाजार समिती अधिकारी लॉगिन",
+    desc_officer: "अधिकृत APMC सचिव, वजनकाटा ऑपरेटर व प्रतवारी तपासणी अधिकाऱ्यांसाठी.",
+    btn_enter_officer: "अधिकारी डेस्क उघडा →",
+    login_heading: "शेतकरी नोंदणी व लॉगिन",
+    lbl_state: "आपले राज्य निवडा",
+    lbl_district: "आपला जिल्हा निवडा",
+    district_subtext: "मार्केट यार्ड निवडीसाठी जिल्ह्याची निवड आवश्यक आहे.",
+    lbl_mobile: "नोंदणीकृत मोबाईल नंबर",
+    mobile_subtext: "या नंबरवर ६-अंकी अधिकृत पडताळणी OTP पाठवला जाईल.",
+    lbl_captcha: "सुरक्षा कोड (कॅप्चा)",
+    btn_get_otp: "OTP मिळवा →",
+    otp_title: "OTP कोड प्रविष्ट करा",
+    otp_sent_to: "पाठवलेला नंबर:",
+    otp_validity: "कालावधी:",
+    lbl_enter_6digit: "६-अंकी OTP टाका",
+    btn_verify_continue: "पडताळणी करा आणि पुढे जा →",
+    btn_change_mobile: "← मोबाईल नंबर बदला",
+    not_received: "कोड आला नाही?",
+    hub_breadcrumb: "शेतकरी सेवा केंद्र",
+    welcome_user: "स्वागत आहे, शेतकरी बांधव",
+    tile_track_title: "नोंदणी व पास स्थिती तपासा",
+    tile_track_desc: "आपला चालू टोकन क्रमांक, वजनकाटा रांग आणि हमीभाव बँक जमा पावती तपासा.",
+    btn_track_status: "स्थिती तपासा →",
+    tile_book_title: "नवीन शेतमाल नोंदणी व KYC",
+    tile_book_desc: "पिकाचा तपशील नोंदवा, ओळख पडताळा व नवीन डिजिटल वजन पावती मिळवा.",
+    btn_new_booking: "नवीन स्लॉट बुक करा →",
+    booking_breadcrumb: "APMC शेतमाल नोंदणी व स्लॉट बुकिंग",
+    form_title: "शेतमाल विक्री स्लॉट बुक करा",
+    form_sub: "वजनकाटा रांगेत नंबर लावण्यासाठी पिकाचा तपशील नोंदवा.",
+    kyc_step: "टप्पा १: शेतकरी ओळख पडताळणी",
+    kyc_desc: "सरकारी नोंदीनुसार तपशील भरण्यासाठी किसान आयडी प्रविष्ट करा.",
+    btn_verify_id: "आयडी तपासा",
+    lbl_name: "१. शेतकऱ्याचे संपूर्ण नाव",
+    lbl_phone: "२. मोबाईल नंबर",
+    lbl_village: "३. गाव / तालुका / ब्लॉक",
+    lbl_centre: "४. खरेदी केंद्र (बाजार समिती)",
+    lbl_crop: "५. पिकाचा प्रकार",
+    lbl_qty: "६. अंदाजे प्रमाण (क्विंटल)",
+    lbl_slot: "७. येण्याची वेळ",
+    btn_generate_pass: "डिजिटल पास तयार करा",
+    pass_title: "सक्रिय डिजिटल पास",
+    pass_sub: "थेट वजनकाटा प्रणालीशी जोडलेला टोकन.",
+    officer_title: "बाजार समिती व्यवस्थापन कक्ष",
+    officer_sub: "रांगांचे व्यवस्थापन, वजन नोंद आणि हमीभाव हस्तांतरण.",
+    metric_total: "आज एकूण शेतकरी",
+    metric_line: "रांगेत प्रतीक्षेत",
+    metric_bridge: "काट्यावर चालू",
+    metric_done: "खरेदी पूर्ण",
+    yard_cap: "मार्केट यार्ड क्षमता",
+    weigh_counters: "सक्रिय वजनकाटे",
+    arrival_queue: "आवक रांग",
+    brand_tagline: "सर्व बाजार समित्यांमध्ये पारदर्शक व्यवहार आणि थेट बँक खात्यात मोबदला",
+    login_note: "<strong>सूचना:</strong> शेतकरी घरबसल्या आपल्या शेतमालासाठी डिजिटल टोकन नोंदवू शकतात.",
+    btn_weighbridge_bay: "वजनकाटा कक्ष",
+    btn_quality_assayer: "प्रतवारी तपासणी",
+    btn_helpdesk: "बाजार समिती मदत कक्ष"
+  },
+
+  // 12. GUJARATI
+  gu: {
+    tagline: "રાષ્ટ્રીય સંકલિત ખેતીવાડી ઉત્પન્ન બજાર સમિતિ (APMC) ખરીદ પોર્ટલ",
+    btn_home: "મુખ્ય પૃષ્ઠ",
+    gov_badge: "કૃષિ અને ખેડૂત કલ્યાણ મંત્રાલય • ભારત સરકાર",
+    hero_title: "રાષ્ટ્રીય કૃષિ માર્કેટિંગ યાર્ડ નિયંત્રણ કેન્દ્ર",
+    hero_sub: "ખેડૂતો માટે ડિજિટલ ખરીદી, પારદર્શક વજનકાંટો કતાર અને સીધા બેંક ખાતામાં ટેકાના ભાવની ચૂકવણી",
+    pill_public: "ખેડૂત પ્રવેશ",
+    title_citizen: "ખેડૂત સેવા પોર્ટલ",
+    desc_citizen: "ખેડૂત ઓળખ ચકાસણી, ડિજિટલ મંડી પાસ, લાઈવ વજનકાંટો કતાર અને સીધા ખાતામાં MSP જમા.",
+    btn_enter_citizen: "ખેડૂત પોર્ટલ ખોલો →",
+    pill_officer: "અધિકારી લૉગિન",
+    title_officer: "માર્કેટ યાર્ડ અધિકારી લૉગિન",
+    desc_officer: "અધિકૃત APMC સેક્રેટરી, વજનકાંટો ઓપરેટર અને ગુણવત્તા નિરીક્ષકો માટે.",
+    btn_enter_officer: "અધિકારી ડેસ્ક ખોલો →",
+    login_heading: "ખેડૂત લૉગિન (મંડી સેવા)",
+    lbl_state: "તમારું રાજ્ય પસંદ કરો",
+    lbl_district: "તમારો જિલ્લો પસંદ કરો",
+    district_subtext: "માર્કેટ યાર્ડ નિર્ધારણ માટે જિલ્લો પસંદ કરવો ફરજિયાત છે.",
+    lbl_mobile: "નોંધાયેલ મોબાઈલ નંબર",
+    mobile_subtext: "આ નંબર પર 6-અંકનો સત્તાવાર ચકાસણી OTP મોકલવામાં આવશે.",
+    lbl_captcha: "સુરક્ષા કોડ (કેપ્ચા)",
+    btn_get_otp: "OTP મેળવો →",
+    otp_title: "OTP કોડ દાખલ કરો",
+    otp_sent_to: "મોકલેલ નંબર:",
+    otp_validity: "સમયગાળો:",
+    lbl_enter_6digit: "6-અંકનો OTP લખો",
+    btn_verify_continue: "ચકાસો અને આગળ વધો →",
+    btn_change_mobile: "← મોબાઈલ નંબર બદલો",
+    not_received: "કોડ નથી મળ્યો?",
+    hub_breadcrumb: "ખેડૂત સેવા કેન્દ્ર",
+    welcome_user: "સ્વાગત છે, ખેડૂત મિત્ર",
+    tile_track_title: "પાસ અને કતાર સ્થિતિ તપાસો",
+    tile_track_desc: "તમારું વર્તમાન ટોકન, વજનકાંટો નંબર અને બેંક ચુકવણીની રસીદ જુઓ.",
+    btn_track_status: "સ્થિતિ જુઓ →",
+    tile_book_title: "નવી નોંધણી અને KYC",
+    tile_book_desc: "પાકની વિગત નોંધો, ઓળખપત્ર ચકાસો અને નવી ડિજિટલ મંડી પહોંચ મેળવો.",
+    btn_new_booking: "નવો સ્લોટ બુક કરો →",
+    booking_breadcrumb: "APMC સ્લોટ બુકિંગ અને પાક નોંધણી",
+    form_title: "પાક વેચાણ સ્લોટ બુક કરો",
+    form_sub: "વજનકાંટો કતારમાં નંબર મેળવવા માટે પાકની વિગત નોંધો.",
+    kyc_step: "પગલું ૧: ખેડૂત ઓળખ ચકાસણી",
+    kyc_desc: "સરકારી વિગતો મેળવવા માટે માન્ય કિસાન આઈડી દાખલ કરો.",
+    btn_verify_id: "આઈડી ચકાસો",
+    lbl_name: "૧. ખેડૂતનું પૂરું નામ",
+    lbl_phone: "૨. મોબાઈલ નંબર",
+    lbl_village: "૩. ગામ / તાલુકો / બ્લોક",
+    lbl_centre: "૪. ખરીદ કેન્દ્ર (માર્કેટ યાર્ડ)",
+    lbl_crop: "૫. પાકનો પ્રકાર",
+    lbl_qty: "૬. પાકનો જથ્થો (ક્વિન્ટલ)",
+    lbl_slot: "૭. આવવાનો સમય",
+    btn_generate_pass: "ડિજિટલ પાસ બનાવો",
+    pass_title: "સક્રિય ડિજિટલ પાસ",
+    pass_sub: "લાઈવ વજનકાંટો સિસ્ટમ સાથે જોડાયેલ.",
+    officer_title: "યાર્ડ સંચાલન કન્સોલ",
+    officer_sub: "કતાર વ્યવસ્થાપન, વજન નોંધણી અને ટેકાના ભાવની ચુકવણીનું સંચાલન.",
+    metric_total: "આજના કુલ ખેડૂતો",
+    metric_line: "કતારમાં રાહ જોઈ રહ્યા છે",
+    metric_bridge: "વજનકાંટા પર",
+    metric_done: "ખરીદી સંપન્ન",
+    yard_cap: "યાર્ડ ક્ષમતા",
+    weigh_counters: "સક્રિય વજનકાંટા",
+    arrival_queue: "આવક કતાર",
+    brand_tagline: "તમામ માર્કેટિંગ યાર્ડમાં પારદર્શક વહીવટ અને ખેડૂતોને ત્વરિત ચૂકવણી",
+    login_note: "<strong>સલાહ:</strong> ખેડૂતો મુશ્કેલી વિના વેચાણ કરવા માટે અગાઉથી ડિજિટલ સ્લોટ બુક કરી શકે છે.",
+    btn_weighbridge_bay: "વજનકાંટો યાર્ડ",
+    btn_quality_assayer: "ગુણવત્તા નિરીક્ષક",
+    btn_helpdesk: "માર્કેટ યાર્ડ હેલ્પડેસ્ક"
+  },
+
+  // 13. TELUGU
+  te: {
+    tagline: "జాతీయ సమగ్ర వ్యవసాయ మార్కెట్ కమిటీ (APMC) కొనుగోలు పోర్టల్",
+    btn_home: "హోమ్ పేజీ",
+    gov_badge: "వ్యవసాయ & రైతు సంక్షేమ మంత్రిత్వ శాఖ • భారత ప్రభుత్వం",
+    hero_title: "జాతీయ వ్యవసాయ మార్కెట్ గేట్‌వే & నియంత్రణ కేంద్రం",
+    hero_sub: "రైతులకు డిజిటల్ కొనుగోళ్లు, పారదర్శక వేబ్రిడ్జ్ క్యూ మరియు నేరుగా బ్యాంక్ ఖాతాలో MSP జమ",
+    pill_public: "రైతు ప్రవేశం",
+    title_citizen: "రైతు సేవా పోర్టల్",
+    desc_citizen: "రైతు గుర్తింపు ధృవీకరణ, డిజిటల్ టోకెన్, ప్రత్యక్ష వేబ్రిడ్జ్ క్యూ మరియు బ్యాంకులో మద్దతు ధర జమ.",
+    btn_enter_citizen: "రైతు పోర్టల్‌లోకి వెళ్ళండి →",
+    pill_officer: "అధికారిక లాగిన్",
+    title_officer: "మార్కెట్ అధికారి లాగిన్",
+    desc_officer: "అధీకృత APMC కార్యదర్శులు, వేబ్రిడ్జ్ ఆపరేటర్లు మరియు నాణ్యత పరిశీలన అధికారుల కోసం.",
+    btn_enter_officer: "అధికారి డెస్క్ తెరవండి →",
+    login_heading: "రైతు లాగిన్ (మార్కెట్ సేవలు)",
+    lbl_state: "మీ రాష్ట్రాన్ని ఎంచుకోండి",
+    lbl_district: "మీ జిల్లాను ఎంచుకోండి",
+    district_subtext: "మార్కెట్ కేటాయింపు కోసం జిల్లా ఎంపిక తప్పనిసరి.",
+    lbl_mobile: "నమోదిత మొబైల్ నంబర్",
+    mobile_subtext: "ఈ నంబర్‌కు 6-అంకెల అధికారిక OTP పంపబడుతుంది.",
+    lbl_captcha: "భద్రతా కోడ్ (క్యాప్చా)",
+    btn_get_otp: "OTP పొందండి →",
+    otp_title: "OTP కోడ్‌ను నమోదు చేయండి",
+    otp_sent_to: "పంపబడిన నంబర్:",
+    otp_validity: "వ్యవధి:",
+    lbl_enter_6digit: "6-అంకెల OTP రాయండి",
+    btn_verify_continue: "ధృవీకరించి ముందుకు సాగండి →",
+    btn_change_mobile: "← మొబైల్ నంబర్ మార్చండి",
+    not_received: "కోడ్ రాలేదా?",
+    hub_breadcrumb: "రైతు సేవా కేంద్రం",
+    welcome_user: "స్వాగతం, ధృవీకరించబడిన రైతు మిత్రమా",
+    tile_track_title: "టోకెన్ స్థితిని తనిఖీ చేయండి",
+    tile_track_desc: "మీ ప్రస్తుత టోకెన్, ప్రత్యక్ష వేబ్రిడ్జ్ క్యూ నంబర్ మరియు బ్యాంక్ రసీదు వివరాలు చూడండి.",
+    btn_track_status: "స్థితిని చూడండి →",
+    tile_book_title: "కొత్త బుకింగ్ & KYC నమోదు",
+    tile_book_desc: "పంట వివరాలను నమోదు చేయండి, పత్రాలను ధృవీకరించండి మరియు డిజిటల్ పాస్ పొందండి.",
+    btn_new_booking: "కొత్త స్లాట్ బుక్ చేయండి →",
+    booking_breadcrumb: "మార్కెట్ స్లాట్ బుకింగ్ & పంట వివరాలు",
+    form_title: "పంట విక్రయ స్లాట్‌ను బుక్ చేయండి",
+    form_sub: "వేబ్రిడ్జ్ క్యూ టోకెన్ పొందడానికి పంట వివరాలను నమోదు చేయండి.",
+    kyc_step: "దశ 1: రైతు గుర్తింపు ధృవీకరణ",
+    kyc_desc: "ప్రభుత్వ రికార్డులను పొందడానికి మీ రైతు ఐడీని నమోదు చేయండి.",
+    btn_verify_id: "ధృవీకరించండి",
+    lbl_name: "1. రైతు పూర్తి పేరు",
+    lbl_phone: "2. మొబైల్ నంబర్",
+    lbl_village: "3. గ్రామం / మండలం / బ్లాక్",
+    lbl_centre: "4. కొనుగోలు కేంద్రం (మార్కెట్)",
+    lbl_crop: "5. పంట రకం",
+    lbl_qty: "6. అంచనా పరిమాణం (క్వింటాళ్ళు)",
+    lbl_slot: "7. మార్కెట్‌కు వచ్చే సమయం",
+    btn_generate_pass: "డిజిటల్ పాస్ జారీ చేయండి",
+    pass_title: "ప్రస్తుత డిజిటల్ పాస్",
+    pass_sub: "లైవ్ వేబ్రిడ్జ్ కౌంటర్‌తో అనుసంధానించబడింది.",
+    officer_title: "మార్కెట్ నిర్వహణ డ్యాష్‌బోర్డ్",
+    officer_sub: "క్యూలు, వేబ్రిడ్జ్ తూకాలు మరియు నిధుల బదిలీని నిర్వహించండి.",
+    metric_total: "నేటి మొత్తం రైతులు",
+    metric_line: "క్యూలో వేచి ఉన్నారు",
+    metric_bridge: "వేబ్రిడ్జ్ వద్ద",
+    metric_done: "పూర్తయింది",
+    yard_cap: "యార్డ్ సామర్థ్యం",
+    weigh_counters: "యాక్టివ్ వేబ్రిడ్జ్ కౌంటర్లు",
+    arrival_queue: "రాక క్యూ",
+    brand_tagline: "రైతుల ఖాతాల్లోకి నేరుగా కనీస మద్దతు ధర బదిలీ",
+    login_note: "<strong>గమనిక:</strong> రైతులు ముందుగానే డిజిటల్ స్లాట్ బుక్ చేసుకుని విక్రయించవచ్చు.",
+    btn_weighbridge_bay: "వేబ్రిడ్జ్ బే",
+    btn_quality_assayer: "నాణ్యత తనిఖీ అధికారి",
+    btn_helpdesk: "మార్కెట్ సహాయ కేంద్రం"
+  },
+
+  // 14. TAMIL
+  ta: {
+    tagline: "தேசிய ஒருங்கிணைந்த வேளாண்மை விற்பனை கூடம் (APMC) கொள்முதல் தளம்",
+    btn_home: "முகப்பு",
+    gov_badge: "வேளாண்மை மற்றும் உழவர் நல அமைச்சகம் • இந்திய அரசு",
+    hero_title: "ஒருங்கிணைந்த தேசிய வேளாண் ஒழுங்குமுறை விற்பனை கூடம்",
+    hero_sub: "விவசாயிகளுக்கான டிஜிட்டல் கொள்முதல், எடைமேடை வரிசை மேலாண்மை மற்றும் நேரடி வங்கி பணப்பரிமாற்றம்",
+    pill_public: "விவசாயிகள் தளம்",
+    title_citizen: "விவசாயி சேவை தளம்",
+    desc_citizen: "விவசாயி அடையாள சரிபார்ப்பு, டிஜிட்டல் நுழைவுச் சீட்டு, நேரடி எடைமேடை கண்காணிப்பு மற்றும் MSP வங்கி வரவு.",
+    btn_enter_citizen: "விவசாயி தளம் செல்ல →",
+    pill_officer: "அலுவலர் உள்நுழைவு",
+    title_officer: "மண்டி அலுவலர் தளம்",
+    desc_officer: "அங்கீகரிக்கப்பட்ட APMC செயலாளர்கள், எடைமேடை பணியாளர்கள் மற்றும் ஆய்வு அலுவலர்களுக்கானது.",
+    btn_enter_officer: "அலுவலர் தளம் திறக்க →",
+    login_heading: "விவசாயி உள்நுழைவு",
+    lbl_state: "உங்கள் மாநிலத்தைத் தேர்ந்தெடுக்கவும்",
+    lbl_district: "உங்கள் மாவட்டத்தைத் தேர்ந்தெடுக்கவும்",
+    district_subtext: "சரியான கொள்முதல் நிலையத்தைத் தேர்ந்தெடுக்க மாவட்டம் அவசியம்.",
+    lbl_mobile: "பதிவுசெய்த கைபேசி எண்",
+    mobile_subtext: "இந்த எண்ணிற்கு 6 இலக்க அதிகாரப்பூர்வ OTP அனுப்பப்படும்.",
+    lbl_captcha: "பாதுகாப்பு குறியீடு (Captcha)",
+    btn_get_otp: "OTP பெறுக →",
+    otp_title: "OTP குறியீட்டை உள்ளிடவும்",
+    otp_sent_to: "அனுப்பப்பட்ட எண்:",
+    otp_validity: "செல்லுபடியாகும் நேரம்:",
+    lbl_enter_6digit: "6 இலக்க OTP ஐ உள்ளிடவும்",
+    btn_verify_continue: "சரிபார்த்து தொடரவும் →",
+    btn_change_mobile: "← கைபேசி எண்ணை மாற்ற",
+    not_received: "குறியீடு வரவில்லையா?",
+    hub_breadcrumb: "விவசாயி சேவை மையம்",
+    welcome_user: "வணக்கம், சரிபார்க்கப்பட்ட விவசாயி",
+    tile_track_title: "டோக்கன் நிலையை அறிய",
+    tile_track_desc: "உங்கள் முன்பதிவு, எடைமேடை வரிசை எண் மற்றும் வங்கி பணவரவு ரசீதை சரிபார்க்கவும்.",
+    btn_track_status: "நிலையை பார்க்க →",
+    tile_book_title: "புதிய முன்பதிவு & KYC",
+    tile_book_desc: "விளைபொருள் விவரங்களை பதிவிட்டு, ஆவணங்களை சரிபார்த்து புதிய டோக்கன் பெறவும்.",
+    btn_new_booking: "புதிய முன்பதிவு செய்ய →",
+    booking_breadcrumb: "கொள்முதல் முன்பதிவு மற்றும் பயிர் அறிவிப்பு",
+    form_title: "விற்பனைக்கான முன்பதிவு",
+    form_sub: "எடைமேடை டோக்கன் பெற விளைபொருள் விவரங்களை நிரப்பவும்.",
+    kyc_step: "படி 1: விவசாயி அடையாள சரிபார்ப்பு",
+    kyc_desc: "அரசு ஆவணங்களுடன் சரிபார்க்க உழவர் அடையாள எண்ணை உள்ளிடவும்.",
+    btn_verify_id: "சரிபார்க்க",
+    lbl_name: "1. விவசாயியின் முழு பெயர்",
+    lbl_phone: "2. கைபேசி எண்",
+    lbl_village: "3. கிராமம் / தாலுகா",
+    lbl_centre: "4. கொள்முதல் நிலையம் (மண்டி)",
+    lbl_crop: "5. பயிர் வகை",
+    lbl_qty: "6. விளைச்சல் அளவு (குவிண்டால்)",
+    lbl_slot: "7. வருகை நேரம்",
+    btn_generate_pass: "டிஜிட்டல் டோக்கன் பெற",
+    pass_title: "செயலில் உள்ள டோக்கன்",
+    pass_sub: "நேரடி எடைமேடை அமைப்போடு இணைக்கப்பட்டுள்ளது.",
+    officer_title: "கொள்முதல் நிலைய மேலாண்மை",
+    officer_sub: "வரிசை, எடை அளவீடு மற்றும் பணப்பரிமாற்றத்தை கண்காணிக்கவும்.",
+    metric_total: "இன்றைய மொத்த விவசாயிகள்",
+    metric_line: "வரிசையில் காத்திருப்போர்",
+    metric_bridge: "எடைமேடையில்",
+    metric_done: "கொள்முதல் முடிந்தது",
+    yard_cap: "நிலைய கொள்ளளவு",
+    weigh_counters: "செயலில் உள்ள எடைமேடைகள்",
+    arrival_queue: "வருகை வரிசை",
+    brand_tagline: "விவசாயிகளின் வங்கிக் கணக்கில் நேரடியாக குறைந்தபட்ச ஆதரவு விலை வரவு",
+    login_note: "<strong>அறிவுரை:</strong> விவசாயிகள் முன்கூட்டியே டோக்கன் பெற்று சிரமமின்றி விற்பனை செய்யலாம்.",
+    btn_weighbridge_bay: "எடைமேடை பிரிவு",
+    btn_quality_assayer: "தர பரிசோதகர்",
+    btn_helpdesk: "மண்டி உதவி மையம்"
+  },
+
+  // 15. KANNADA
   kn: {
     tagline: "ರಾಷ್ಟ್ರೀಯ ಸಂಯೋಜಿತ APMC ಕೃಷಿ ಖರೀದಿ ಪೋರ್ಟಲ್",
     btn_home: "ಮುಖಪುಟ",
@@ -883,8 +1276,13 @@ const I18N_DICTIONARY = {
     weigh_counters: "ಸಕ್ರಿಯ ತೂಕದ ಕೌಂಟರ್‌ಗಳು",
     arrival_queue: "ಆಗಮನ ಕ್ಯೂ",
     brand_tagline: "ರೈತರ ಖಾತೆಗೆ ನೇರವಾಗಿ ಕನಿಷ್ಠ ಬೆಂಬಲ ಬೆಲೆ ಪಾವತಿ",
-    login_note: "<strong>ಸೂಚನೆ:</strong> ರೈತರು ಮನೆಯಿಂದಲೇ ಆನ್‌ಲೈನ್ ಮೂಲಕ ಡಿಜಿಟಲ್ ಟೋಕನ್ ಪಡೆಯಬಹುದು."
+    login_note: "<strong>ಸೂಚನೆ:</strong> ರೈತರು ಮನೆಯಿಂದಲೇ ಆನ್‌ಲೈನ್ ಮೂಲಕ ಡಿಜಿಟಲ್ ಟೋಕನ್ ಪಡೆಯಬಹುದು.",
+    btn_weighbridge_bay: "ತೂಕದ ಕೌಂಟರ್",
+    btn_quality_assayer: "ಗುಣಮಟ್ಟ ಪರೀಕ್ಷಕ",
+    btn_helpdesk: "ಮಂಡಿ ಸಹಾಯವಾಣಿ"
   },
+
+  // 16. MALAYALAM
   ml: {
     tagline: "ദേശീയ ഏകീകൃത കാർഷിക മാർക്കറ്റ് (APMC) സംഭരണ പോർട്ടൽ",
     btn_home: "ഹോം പേജ്",
@@ -948,35 +1346,31 @@ const I18N_DICTIONARY = {
     weigh_counters: "സജീവ വെയ്ബ്രിഡ്ജ് കൗണ്ടറുകൾ",
     arrival_queue: "വരവ് ക്യൂ",
     brand_tagline: "കർഷകരുടെ അക്കൗണ്ടിലേക്ക് നേരിട്ട് താങ്ങുവില കൈമാറുന്നു",
-    login_note: "<strong>അറിയിപ്പ്:</strong> കർഷകർക്ക് മുൻകൂട്ടി ഡിജിറ്റൽ ടോക്കൺ എടുത്ത് ഉൽപ്പന്നങ്ങൾ വിൽക്കാം."
+    login_note: "<strong>അറിയിപ്പ്:</strong> കർഷകർക്ക് മുൻകൂട്ടി ഡിജിറ്റൽ ടോക്കൺ എടുത്ത് ഉൽപ്പന്നങ്ങൾ വിൽക്കാം.",
+    btn_weighbridge_bay: "വെയ്ബ്രിഡ്ജ് കൗണ്ടർ",
+    btn_quality_assayer: "ഗുണനിലവാര പരിശോധകൻ",
+    btn_helpdesk: "മണ്ടി സഹായ കേന്ദ്രം"
   }
 };
 
-// Aliases for matching regional variants
-I18N_DICTIONARY.pa = I18N_DICTIONARY.pa || I18N_DICTIONARY.hi;
-I18N_DICTIONARY.mr = I18N_DICTIONARY.mr || I18N_DICTIONARY.hi;
-I18N_DICTIONARY.te = I18N_DICTIONARY.te || I18N_DICTIONARY.en;
-I18N_DICTIONARY.ta = I18N_DICTIONARY.ta || I18N_DICTIONARY.en;
-I18N_DICTIONARY.gu = I18N_DICTIONARY.gu || I18N_DICTIONARY.hi;
-
-// Web Speech Synthesis & Recognition standard regional tags
+// Complete 16-language speech recognition mapping
 const SPEECH_LANG_MAP = {
   en: "en-IN",
   hi: "hi-IN",
   bn: "bn-IN",
   or: "or-IN",
   as: "as-IN",
-  grt: "en-IN", // Fallback voice for Garo phonetics
-  sat: "hi-IN", // Fallback regional voice for Santali
-  brx: "as-IN", // Fallback regional voice for Bodo
-  mai: "hi-IN", // Maithili phonetics
-  kn: "kn-IN",
-  ml: "ml-IN",
+  grt: "en-IN",
+  sat: "hi-IN",
+  brx: "as-IN",
+  mai: "hi-IN",
   pa: "pa-IN",
   mr: "mr-IN",
+  gu: "gu-IN",
   te: "te-IN",
   ta: "ta-IN",
-  gu: "gu-IN"
+  kn: "kn-IN",
+  ml: "ml-IN"
 };
 
 function applyLanguage(langCode) {
@@ -985,13 +1379,13 @@ function applyLanguage(langCode) {
   state.currentLang = langCode;
   localStorage.setItem("kq_lang", langCode);
 
-  // 1. Text elements with fallback to English
+  // 1. Text elements with fallback
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     el.innerHTML = dict[key] || enDict[key] || "";
   });
 
-  // 2. Input placeholders localized
+  // 2. Input placeholders for all 16 languages
   const placeholders = {
     en: { name: "e.g. Ramesh Kumar", mobile: "Enter 10-digit mobile number", village: "e.g. Rampur", qty: "e.g. 45", captcha: "Type characters" },
     hi: { name: "उदा. रमेश कुमार", mobile: "10-अंकों का मोबाइल नंबर दर्ज करें", village: "उदा. रामपुर", qty: "उदा. 45", captcha: "कोड दर्ज करें" },
@@ -1002,6 +1396,11 @@ function applyLanguage(langCode) {
     sat: { name: "ᱡᱮᱞᱮᱠᱟ: ᱨᱚᱢᱮᱥ ᱠᱩᱢᱟᱨ", mobile: "᱑᱐-ᱮᱞᱟᱱ ᱢᱳᱵᱟᱭᱤᱞ ᱱᱚᱢᱵᱚᱨ", village: "ᱡᱮᱞᱮᱠᱟ: ᱨᱟᱢᱯᱩᱨ", qty: "ᱡᱮᱞᱮᱠᱟ: ᱔᱕", captcha: "ᱠᱳᱰ ᱚᱞ ᱢᱮ" },
     brx: { name: "उदा: रमेश कुमार", mobile: "१० अनजिमानि मबाइल नम्बर", village: "उदा: रामपुर", qty: "उदा: ४५", captcha: "अनजिमा सोनाव" },
     mai: { name: "उदा. रमेश कुमार", mobile: "१०-अंकक मोबाइल नंबर", village: "उदा. रामपुर", qty: "उदा. ४५", captcha: "कोड लिखू" },
+    pa: { name: "ਜਿਵੇਂ ਕਿ ਰਮੇਸ਼ ਕੁਮਾਰ", mobile: "10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਭਰੋ", village: "ਜਿਵੇਂ ਕਿ ਰਾਮਪੁਰ", qty: "ਜਿਵੇਂ ਕਿ 45", captcha: "ਕੋਡ ਭਰੋ" },
+    mr: { name: "उदा. रमेश कुमार", mobile: "१० अंकी मोबाईल नंबर टाका", village: "उदा. रामपूर", qty: "उदा. ४५", captcha: "कोड टाका" },
+    gu: { name: "દા.ત. રમેશ કુમાર", mobile: "૧૦ અંકનો મોબાઈલ નંબર", village: "દા.ત. રામપુર", qty: "દા.ત. 45", captcha: "કોડ લખો" },
+    te: { name: "ఉదా. రమేష్ కుమార్", mobile: "10 అంకెల మొబైల్ నంబర్ రాయండి", village: "ఉదా. రాంపూర్", qty: "ఉదా. 45", captcha: "కోడ్ రాయండి" },
+    ta: { name: "எ.கா. ரமேஷ் குமார்", mobile: "10 இலக்க கைபேசி எண்", village: "எ.கா. ராம்பூர்", qty: "எ.கா. 45", captcha: "குறியீடு" },
     kn: { name: "ಉದಾ: ರಮೇಶ್ ಕುಮಾರ್", mobile: "10-ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ", village: "ಉದಾ: ರಾಂಪುರ", qty: "ಉದಾ: 45", captcha: "ಕೋಡ್ ಬರೆಯಿರಿ" },
     ml: { name: "ഉദാ: രമേഷ് കുമാർ", mobile: "10 അക്ക മൊബൈൽ നമ്പർ", village: "ഉദാ: രാംപുർ", qty: "ഉദാ: 45", captcha: "കോഡ് നൽകുക" }
   };
@@ -1019,7 +1418,7 @@ function applyLanguage(langCode) {
   if (qtyEl) qtyEl.placeholder = p.qty;
   if (capEl) capEl.placeholder = p.captcha;
 
-  // 3. Sync Web Speech Recognition & Synthesizer Language
+  // 3. Speech recognition language sync
   const regionalSpeech = SPEECH_LANG_MAP[langCode] || "en-IN";
   const assistantLangSelect = document.getElementById("ai-language-select");
   if (assistantLangSelect) {
@@ -1286,7 +1685,9 @@ window.switchPanel = function(panelId, contextName) {
     "panel-farmer-otp",
     "panel-farmer-choice",
     "panel-farmer",
-    "panel-operator"
+    "panel-operator",
+    "panel-weighbridge",
+    "panel-assayer"
   ];
 
   panels.forEach(id => {
@@ -1320,14 +1721,16 @@ function initRouter() {
     btnEnterOperator.addEventListener("click", () => window.switchPanel("panel-operator", "OPERATOR"));
   }
 
+  // Routes directly to the specialized Weighbridge Bay Terminal
   const btnWeighbridge = document.getElementById("btn-enter-operator-weighbridge");
   if (btnWeighbridge) {
-    btnWeighbridge.addEventListener("click", () => window.switchPanel("panel-operator", "OPERATOR"));
+    btnWeighbridge.addEventListener("click", () => window.switchPanel("panel-weighbridge", "OPERATOR"));
   }
 
+  // Routes directly to the specialized Quality Assaying Lab Terminal
   const btnAssayer = document.getElementById("btn-enter-operator-assayer");
   if (btnAssayer) {
-    btnAssayer.addEventListener("click", () => window.switchPanel("panel-operator", "OPERATOR"));
+    btnAssayer.addEventListener("click", () => window.switchPanel("panel-assayer", "OPERATOR"));
   }
 
   const btnReturn = document.getElementById("btn-back-gateway");
@@ -1444,9 +1847,84 @@ function initBookingModule() {
 }
 
 // ============================================================
+// CONNECTION STATUS SIGNAL MANAGER (GREEN / YELLOW / RED)
+// ============================================================
+function setSignalStatus(status) {
+  const pill = document.getElementById("connection-status");
+  const offlineBanner = document.getElementById("offline-banner");
+  if (!pill) return;
+
+  // Reset existing classes while retaining base styling
+  pill.className = "status-pill";
+
+  if (status === "connected") {
+    pill.classList.add("status-connected");
+    pill.innerHTML = '<span class="status-dot"></span> 🟢 Live Connected';
+    if (offlineBanner) offlineBanner.style.display = "none";
+  } else if (status === "connecting") {
+    pill.classList.add("status-connecting");
+    pill.innerHTML = '<span class="status-dot"></span> 🟡 Connecting...';
+  } else {
+    pill.classList.add("status-reconnecting");
+    pill.innerHTML = '<span class="status-dot"></span> 🔴 Reconnecting...';
+    if (offlineBanner) offlineBanner.style.display = "block";
+  }
+}
+
+// Attach to window so other scripts can access it safely if needed
+window.setSignalStatus = setSignalStatus;
+
+// ============================================================
 // 7. WEBSOCKET REAL-TIME ENGINE
 // ============================================================
 function initWebSocket() {
+
+  function initWebSocket() {
+  setSignalStatus("connecting");
+
+  const wsUrl = (window.CONFIG && window.CONFIG.WS_BASE) 
+    ? window.CONFIG.WS_BASE 
+    : "ws://127.0.0.1:8000/ws";
+
+  let socket = null;
+
+  try {
+    socket = new WebSocket(wsUrl);
+
+    socket.onopen = () => {
+      console.log("WebSocket connected successfully.");
+      setSignalStatus("connected");
+    };
+
+    socket.onmessage = (event) => {
+      try {
+        const payload = JSON.parse(event.data);
+        if (typeof handleSocketMessage === "function") {
+          handleSocketMessage(payload);
+        }
+      } catch (err) {
+        console.warn("Incoming WS message parse failed:", err);
+      }
+    };
+
+    socket.onclose = () => {
+      setSignalStatus("reconnecting");
+      setTimeout(initWebSocket, 3000);
+    };
+
+    socket.onerror = (err) => {
+      console.error("WebSocket encountered error:", err);
+      setSignalStatus("reconnecting");
+      socket.close();
+    };
+  } catch (err) {
+    console.error("Socket instantiation failed:", err);
+    setSignalStatus("reconnecting");
+    setTimeout(initWebSocket, 3000);
+  }
+}
+
+
   const statusIndicator = document.getElementById("connection-status");
   const offlineBanner = document.getElementById("offline-banner");
 
@@ -1527,6 +2005,11 @@ function renderFarmerTracking() {
 // 8. INITIALIZATION LIFECYCLE
 // ============================================================
 document.addEventListener("DOMContentLoaded", () => {
+  initWebSocket();
+  initRouter();
+  initPanIndiaApplicantLogin();
+  initOtpResend(); // <-- Add this line
+
   // Start cleanly on the Gateway
   window.switchPanel("panel-gateway", "GATEWAY");
 
@@ -1534,6 +2017,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initPanIndiaApplicantLogin();
   initBookingModule();
   initWebSocket();
+  initHelpdeskDrawer();
 
   // Bind Global Regional Language Switcher
   const langSelect = document.getElementById("globalLanguageSelect");
@@ -1554,3 +2038,732 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// ============================================================
+// MANDI HELPDESK SLIDING DRAWER LOGIC
+// ============================================================
+function initHelpdeskDrawer() {
+  const btnOpen = document.getElementById("btn-open-helpdesk");
+  const btnClose = document.getElementById("btn-close-helpdesk");
+  const drawer = document.getElementById("helpdesk-drawer");
+  const backdrop = document.getElementById("helpdesk-backdrop");
+
+  function openDrawer() {
+    if (drawer) drawer.classList.add("active");
+    if (backdrop) backdrop.classList.add("active");
+  }
+
+  function closeDrawer() {
+    if (drawer) drawer.classList.remove("active");
+    if (backdrop) backdrop.classList.remove("active");
+  }
+
+  if (btnOpen) btnOpen.addEventListener("click", openDrawer);
+  if (btnClose) btnClose.addEventListener("click", closeDrawer);
+  if (backdrop) backdrop.addEventListener("click", closeDrawer);
+
+  // Allow closing with Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && drawer?.classList.contains("active")) {
+      closeDrawer();
+    }
+  });
+}
+
+// ============================================================
+// RESEND OTP HANDLER & COOLDOWN CONTROLLER
+// ============================================================
+function initOtpResend() {
+  const btnResend = document.getElementById("btnResendOtp");
+  const otpInput = document.getElementById("otpCodeEntry");
+  const errorBanner = document.getElementById("otpErrorBanner");
+  const mobileInput = document.getElementById("applicantMobile");
+  const countdownDisplay = document.getElementById("otpCountdown");
+
+  if (!btnResend) return;
+
+  btnResend.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (btnResend.disabled) return;
+
+    // 1. Clear input field and error state
+    if (otpInput) {
+      otpInput.value = "";
+      otpInput.focus();
+    }
+    if (errorBanner) {
+      errorBanner.classList.add("hidden-inline");
+      errorBanner.innerText = "";
+    }
+
+    // 2. Reset the 10-minute validity timer display
+    if (countdownDisplay) {
+      countdownDisplay.innerText = "10:00";
+    }
+
+    // 3. Start a 30-second anti-spam cooldown
+    let cooldown = 30;
+    btnResend.disabled = true;
+    btnResend.style.opacity = "0.5";
+    btnResend.style.cursor = "not-allowed";
+    btnResend.innerText = `Resend in ${cooldown}s`;
+
+    const cooldownTimer = setInterval(() => {
+      cooldown--;
+      if (cooldown > 0) {
+        btnResend.innerText = `Resend in ${cooldown}s`;
+      } else {
+        clearInterval(cooldownTimer);
+        btnResend.disabled = false;
+        btnResend.style.opacity = "1";
+        btnResend.style.cursor = "pointer";
+        btnResend.innerText = "Resend OTP";
+      }
+    }, 1000);
+
+    // 4. Request new OTP from backend (with demo fallback)
+    const mobile = mobileInput ? mobileInput.value.trim() : "";
+    const httpBase = window.CONFIG?.HTTP_BASE || "http://127.0.0.1:8000";
+
+    try {
+      const response = await fetch(`${httpBase}/api/farmer/otp/request`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert(`✅ New OTP generated: ${result.otp || "Dispatched successfully"}`);
+      } else {
+        // Fallback for local simulation mode
+        const generatedMockOtp = Math.floor(100000 + Math.random() * 900000);
+        console.log("Mock Resent OTP:", generatedMockOtp);
+        alert(`✅ A new 6-digit OTP has been dispatched to your mobile.`);
+      }
+    } catch (err) {
+      // Offline fallback simulation
+      const generatedMockOtp = Math.floor(100000 + Math.random() * 900000);
+      console.log("Local Simulated Resend OTP:", generatedMockOtp);
+      alert(`✅ A new 6-digit OTP has been dispatched to your mobile.`);
+    }
+  });
+}
+
+// ============================================================
+// CRYPTO HASH GENERATOR (HMAC SIMULATION VIA BROWSER CRYPTO)
+// ============================================================
+async function generatePassSignature(payload) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    enc.encode("MANDI_SECRET_APMC_2026"),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", keyMaterial, enc.encode(payload));
+  return Array.from(new Uint8Array(sig))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("")
+    .substring(0, 16)
+    .toUpperCase();
+}
+
+// ============================================================
+// DIGITAL PASS COMPONENT: RADIAL GAUGE & BREAKDOWN TOGGLE
+// ============================================================
+window.renderFarmerPass = async function (data) {
+  const container = document.getElementById("farmer-ticket-display");
+  if (!container) return;
+
+  const isPerishable = data.crop === "Tomato" || data.crop === "Green Chilli";
+  const priorityClass = isPerishable ? "priority-pass" : "standard-pass";
+  const tokenPrefix = isPerishable ? "EXP" : "KQ";
+  const randomSeq = Math.floor(100 + Math.random() * 900);
+  const tokenNumber = `${tokenPrefix}-${randomSeq}`;
+  
+  // Cryptographic Signature
+  const rawString = `${tokenNumber}|${data.farmer_name}|${data.mobile}|${data.quantity}|${data.slot_time}`;
+  const cryptoHash = await generatePassSignature(rawString);
+
+  // Cache in Browser localStorage for Offline Operation (Point 05)
+  const passRecord = { ...data, tokenNumber, cryptoHash, generatedAt: new Date().toISOString() };
+  localStorage.setItem("KISAN_ACTIVE_PASS", JSON.stringify(passRecord));
+
+  container.innerHTML = `
+    <div class="active-pass-card ${priorityClass}">
+      <div class="pass-header-strip">
+        <span class="pass-badge">${isPerishable ? "⚡ EXPRESS PERISHABLE LANE" : "STANDARD GRAIN APMC ENTRY"}</span>
+        <span class="pass-hash">SIG: ${cryptoHash}</span>
+      </div>
+
+      <div class="radial-gauge-wrapper">
+        <svg viewBox="0 0 120 120" class="radial-svg">
+          <circle class="radial-bg" cx="60" cy="60" r="50"></circle>
+          <circle class="radial-progress" id="queueRadialRing" cx="60" cy="60" r="50"></circle>
+        </svg>
+        <div class="radial-text-content">
+          <span class="radial-token-num">${tokenNumber}</span>
+          <span class="radial-token-lbl">YOUR TOKEN</span>
+        </div>
+      </div>
+
+      <div class="queue-telemetry-stats">
+        <div class="stat-cell">
+          <span>Vehicles Ahead</span>
+          <strong id="passVehiclesAhead">${isPerishable ? "2 (Express)" : "7"}</strong>
+        </div>
+        <div class="stat-cell">
+          <span>Est. Gate Entry</span>
+          <strong id="passEstWait">${isPerishable ? "12 Mins" : "38 Mins"}</strong>
+        </div>
+        <div class="stat-cell">
+          <span>Scale Bay</span>
+          <strong>Bay 01</strong>
+        </div>
+      </div>
+
+      <!-- Point 08: Transit Delay Grace Button -->
+      <div class="breakdown-control-row">
+        <button type="button" id="btnReportDelay" class="btn-breakdown-hold" onclick="handleTransitDelay('${tokenNumber}')">
+          🚜 Report Transit Delay (+45m Grace Hold)
+        </button>
+        <p id="delayStatusText" class="delay-text hidden-inline">
+          ⏱️ <strong>Grace Extended:</strong> Position reserved until 45 mins past slot time.
+        </p>
+      </div>
+    </div>
+  `;
+
+  // Trigger Point 04 Audio Dispatch automatically
+  announceQueueStatus(tokenNumber, isPerishable ? "Scale Bay 1 Express" : "Scale Bay 1");
+};
+
+// Transit Breakdown Toggle Logic (Point 08)
+window.handleTransitDelay = function (token) {
+  const btn = document.getElementById("btnReportDelay");
+  const msg = document.getElementById("delayStatusText");
+  if (!btn || !msg) return;
+
+  btn.disabled = true;
+  btn.style.opacity = "0.6";
+  btn.innerText = "Transit Grace Active (45m)";
+  msg.classList.remove("hidden-inline");
+  alert(`Pass ${token}: 45-minute breakdown grace applied. Token will not be cancelled by the APMC Gate.`);
+};
+
+// ============================================================
+// NATIVE MULTILINGUAL SPEECH SYNTHESIZER
+// ============================================================
+window.announceQueueStatus = function (token, scaleBay) {
+  if (!("speechSynthesis" in window)) return;
+
+  const currentLang = document.getElementById("globalLanguageSelect")?.value || "en";
+  let utteranceText = "";
+  let voiceLang = "en-IN";
+
+  if (currentLang === "hi") {
+    utteranceText = `टोकन संख्या ${token}, कृपया तौल कांटा ${scaleBay} पर आगे बढ़ें।`;
+    voiceLang = "hi-IN";
+  } else if (currentLang === "bn") {
+    utteranceText = `টোকেন নম্বর ${token}, অনুগ্রহ করে ওয়েটব্রিজ ${scaleBay} এ আসুন।`;
+    voiceLang = "bn-IN";
+  } else {
+    utteranceText = `Attention Token ${token}, please advance to weighbridge ${scaleBay}.`;
+    voiceLang = "en-IN";
+  }
+
+  const speakInst = new SpeechSynthesisUtterance(utteranceText);
+  speakInst.lang = voiceLang;
+  speakInst.rate = 0.95;
+  
+  // Cancel previous speech queues before announcing
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(speakInst);
+};
+
+window.addVehicleRow = function() {
+  const container = document.getElementById("vehicleRepeaterContainer");
+  if (!container) return;
+  const count = container.children.length + 1;
+  const div = document.createElement("div");
+  div.className = "vehicle-row";
+  div.style.marginTop = "6px";
+  div.innerHTML = `<input type="text" class="applicant-input" placeholder="Sub-Lot Vehicle #${count} Plate Number" />`;
+  container.appendChild(div);
+};
+
+window.disputeQualityGrade = function() {
+  const reason = prompt("Enter specific reason for re-assaying dispute (e.g. Moisture calibration error):");
+  if (reason) {
+    alert(`⚖️ Grievance Dispatched to District Mandi Board. An APMC neutral arbiter has been assigned to Bay 01.`);
+  }
+};
+
+// ============================================================
+// 1. TWO-STAGE TARE & GUNNY BAG STANDARDIZATION (Points 17 & 18)
+// ============================================================
+window.runTwoStageMathEngine = function () {
+  const gross = parseFloat(document.getElementById("wbGross")?.innerText || 0);
+  const tare = parseFloat(document.getElementById("wbTare")?.innerText || 0);
+  const bagTareUnit = parseFloat(document.getElementById("bagTypeSelect")?.value || 0);
+  const bagCount = parseInt(document.getElementById("bagCountInput")?.value || 0);
+
+  const totalBagTare = parseFloat((bagTareUnit * bagCount).toFixed(2));
+  const netWeight = parseFloat((gross - tare - totalBagTare).toFixed(2));
+
+  const wbBagTare = document.getElementById("wbBagTare");
+  const wbNet = document.getElementById("wbNet");
+
+  if (wbBagTare) wbBagTare.innerText = totalBagTare.toFixed(2);
+  if (wbNet) wbNet.innerText = Math.max(0, netWeight).toFixed(2);
+};
+
+window.simulateSerialCapture = function (weightVal) {
+  const liveReading = document.getElementById("liveScaleReading");
+  if (liveReading) liveReading.innerText = weightVal.toFixed(2);
+
+  if (weightVal > 80) {
+    document.getElementById("wbGross").innerText = weightVal.toFixed(2);
+  } else {
+    document.getElementById("wbTare").innerText = weightVal.toFixed(2);
+  }
+  runTwoStageMathEngine();
+};
+
+// ============================================================
+// 2. ICAR FAQ FORMULA DEDUCTION CALCULATOR (Point 19)
+// ============================================================
+window.runICAREvaluator = function () {
+  const moisture = parseFloat(document.getElementById("qaMoisture")?.value || 0);
+  const foreign = parseFloat(document.getElementById("qaForeign")?.value || 0);
+  const damaged = parseFloat(document.getElementById("qaDamaged")?.value || 0);
+  const baseMsp = 2275.0;
+
+  const banner = document.getElementById("gradeBanner");
+  const deductionSpan = document.getElementById("icarDeductionAmt");
+  const finalMspSpan = document.getElementById("icarFinalMsp");
+
+  if (moisture > 17.0) {
+    banner.style.background = "#fee2e2";
+    banner.style.color = "#991b1b";
+    banner.innerText = "REJECTED: MOISTURE EXCEEDS 17.0% MANDI CAP";
+    deductionSpan.innerText = "N/A";
+    finalMspSpan.innerText = "₹0.00";
+    return;
+  }
+
+  let deduction = 0.0;
+  if (moisture > 14.0) deduction += (moisture - 14.0) * 0.01 * baseMsp;
+  if (foreign > 1.0) deduction += ((foreign - 1.0) / 0.5) * (0.0075 * baseMsp);
+  if (damaged > 2.0) deduction += (damaged - 2.0) * 0.01 * baseMsp;
+
+  deduction = Math.min(deduction, baseMsp);
+  const payable = (baseMsp - deduction).toFixed(2);
+
+  banner.style.background = deduction === 0 ? "#dcfce7" : "#fef9c3";
+  banner.style.color = deduction === 0 ? "#15803d" : "#854d0e";
+  banner.innerText = deduction === 0 ? "GRADE A: 100% MSP COMPLIANT" : "FAQ ACCEPTED: STANDARD DEDUCTIONS APPLIED";
+
+  if (deductionSpan) deductionSpan.innerText = `₹${deduction.toFixed(2)}`;
+  if (finalMspSpan) finalMspSpan.innerText = `₹${payable}`;
+};
+
+// ============================================================
+// 3. NO-SHOW STANDBY & COUNTER LOAD BALANCING (Points 20 & 22)
+// ============================================================
+window.handleStandbyNoShow = function () {
+  const tokenSelect = document.getElementById("wbTokenSelect");
+  const token = tokenSelect?.value || "TOKEN-UNKNOWN";
+  
+  logTamperAuditAction("OPERATOR_01", "STANDBY_HOLD", token, "Driver not at vehicle; pushed back 2 turns.");
+  alert(`⏱️ Token ${token} marked as STANDBY. Position shifted behind 2 arrivals in the queue.`);
+};
+
+window.handleScaleBreakdown = function (bayName) {
+  logTamperAuditAction("SUPERINTENDENT", "SCALE_BREAKDOWN_REROUTE", bayName, "Scale calibration failure; queue redirected to Bay 02.");
+  alert(`⚠️ Emergency Alert: ${bayName} marked OFFLINE. All 8 waiting haulage units re-balanced to Bay 02.`);
+};
+
+// ============================================================
+// 4. FCI OUTWARD CHALLAN DISPATCH (Point 26)
+// ============================================================
+window.generateFCIChallan = function () {
+  const challanId = "FCI-CH-" + Math.floor(100000 + Math.random() * 900000);
+  logTamperAuditAction("ASSAYER_01", "FCI_DISPATCH_ISSUED", challanId, "Approved grain allocated to FCI Silo 4 Railhead.");
+  alert(`🏢 Outward Delivery Challan ${challanId} Generated!\nRouted To: Food Corporation of India Central Buffer Silo.`);
+};
+
+// ============================================================
+// 5. STATUTORY LEDGER EXPORT & TAMPER LOG (Points 24 & 25)
+// ============================================================
+window.logTamperAuditAction = function (operator, action, token, details) {
+  const tbody = document.getElementById("auditTableBody");
+  const timestamp = new Date().toISOString().substring(0, 19);
+  const hash = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+  if (tbody) {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>#${tbody.children.length + 1}</td>
+      <td>${timestamp}</td>
+      <td>${operator}</td>
+      <td>${action}</td>
+      <td>${token}</td>
+      <td>${details}</td>
+      <td><code style="font-size:0.75rem;">${hash}</code></td>
+    `;
+    tbody.prepend(row);
+  }
+};
+
+window.exportAPMCStatutoryLedger = function () {
+  const csvContent = "data:text/csv;charset=utf-8," 
+    + "Token,Farmer Name,Crop,Net Weight (Qtl),Assayed MSP,Total Payable (INR),PFMS Status\n"
+    + "KQ-DEL-001,Ramesh Kumar,Wheat,99.26,2226.80,221032.17,VERIFIED_PFMS_READY\n"
+    + "KQ-PUN-004,Gurpreet Singh,Basmati,140.20,3800.00,532760.00,VERIFIED_PFMS_READY";
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `APMC_Statutory_Ledger_${new Date().toISOString().split("T")[0]}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+// ============================================================
+// SIH 2026 JURY DEMO: 12-FARMER DYNAMIC QUEUE SIMULATOR
+// ============================================================
+const SIH_MOCK_FARMERS = [
+  // 1 & 2: Active at Weighbridge Scales
+  { seq: 1, token: "KQ-DEL-001", name: "Ramesh Kumar", state: "Delhi", crop: "Wheat", load: "142.80 Qtl", status: "AT_SCALE", vehicle: "DL-1A-9821", gross: 142.8, tare: 42.5, bags: 180, priority: false },
+  { seq: 2, token: "EXP-PUN-002", name: "Gurpreet Singh", state: "Punjab", crop: "Tomato", load: "65.40 Qtl", status: "AT_SCALE", vehicle: "PB-02-B-1124", gross: 65.4, tare: 22.1, bags: 210, priority: true },
+
+  // 3 & 4: In Quality Assaying Lab (Testing Moisture)
+  { seq: 3, token: "KQ-WB-003", name: "Subhash Ghosh", state: "West Bengal", crop: "Paddy", load: "110.20 Qtl", status: "IN_LAB", vehicle: "WB-24-K-4401", moisture: 13.8, foreign: 0.8, broken: 1.2, priority: false },
+  { seq: 4, token: "EXP-HAR-004", name: "Manjeet Hooda", state: "Haryana", crop: "Green Chilli", load: "48.00 Qtl", status: "IN_LAB", vehicle: "HR-10-F-3902", moisture: 16.4, foreign: 1.9, broken: 2.5, priority: true },
+
+  // 5 to 10: In-Line Waiting Queue
+  { seq: 5, token: "KQ-UP-005", name: "Brijesh Yadav", state: "Uttar Pradesh", crop: "Mustard", load: "85.00 Qtl", status: "IN_LINE", vehicle: "UP-32-Z-7711", priority: false },
+  { seq: 6, token: "KQ-MP-006", name: "Devendra Patel", state: "Madhya Pradesh", crop: "Wheat", load: "130.50 Qtl", status: "IN_LINE", vehicle: "MP-04-A-6520", priority: false },
+  { seq: 7, token: "EXP-MAH-007", name: "Sachin Shinde", state: "Maharashtra", crop: "Tomato", load: "72.30 Qtl", status: "IN_LINE", vehicle: "MH-12-P-9081", priority: true },
+  { seq: 8, token: "KQ-RAJ-008", name: "Kailash Gurjar", state: "Rajasthan", crop: "Mustard", load: "94.20 Qtl", status: "IN_LINE", vehicle: "RJ-14-M-4322", priority: false },
+  { seq: 9, token: "KQ-BIH-009", name: "Manoj Mahto", state: "Bihar", crop: "Paddy", load: "105.00 Qtl", status: "IN_LINE", vehicle: "BR-01-T-8829", priority: false },
+  { seq: 10, token: "KQ-ODI-010", name: "Bijay Mohanty", state: "Odisha", crop: "Paddy", load: "88.60 Qtl", status: "IN_LINE", vehicle: "OD-02-C-1903", priority: false },
+
+  // 11 & 12: Completed & DBT Disbursed
+  { seq: 11, token: "KQ-DEL-098", name: "Satish Chand", state: "Delhi", crop: "Wheat", load: "120.00 Qtl", status: "DISBURSED", vehicle: "DL-1M-4011", priority: false },
+  { seq: 12, token: "KQ-PUN-099", name: "Balwinder Brar", state: "Punjab", crop: "Wheat", load: "155.00 Qtl", status: "DISBURSED", vehicle: "PB-03-D-9988", priority: false }
+];
+
+window.launchSihJuryDemo = function () {
+  // 1. Populate Officer Operator Queue Table
+  const tbody = document.getElementById("operator-queue-tbody");
+  if (tbody) {
+    tbody.innerHTML = "";
+    SIH_MOCK_FARMERS.forEach((farmer) => {
+      let badgeStyle = "background:#f1f5f9; color:#475569;";
+      let statusLabel = farmer.status;
+
+      if (farmer.status === "AT_SCALE") {
+        badgeStyle = "background:#dbeafe; color:#1d4ed8; font-weight:700;";
+        statusLabel = "At Scale (Bay 01)";
+      } else if (farmer.status === "IN_LAB") {
+        badgeStyle = "background:#fef9c3; color:#854d0e; font-weight:700;";
+        statusLabel = "In Assaying Lab";
+      } else if (farmer.status === "IN_LINE") {
+        badgeStyle = "background:#f8fafc; color:#334155;";
+        statusLabel = "In Line (Gate Waiting)";
+      } else if (farmer.status === "DISBURSED") {
+        badgeStyle = "background:#dcfce7; color:#15803d; font-weight:700;";
+        statusLabel = "✅ PFMS Disbursed";
+      }
+
+      const priorityTag = farmer.priority 
+        ? `<span style="background:#fee2e2; color:#dc2626; font-size:0.68rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:800;">⚡ EXPRESS</span>` 
+        : "";
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><strong>#${farmer.seq}</strong></td>
+        <td><strong style="color:#0f172a; font-family:monospace;">${farmer.token}</strong> ${priorityTag}</td>
+        <td>${farmer.name} <small style="color:#64748b;">(${farmer.state})</small></td>
+        <td>${farmer.load}</td>
+        <td><span style="padding:4px 8px; border-radius:6px; font-size:0.75rem; display:inline-block; ${badgeStyle}">${statusLabel}</span></td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // 2. Update Live Telemetry Metrics & Yard Utilization Bar
+  const totalEl = document.getElementById("metric-total");
+  const waitingEl = document.getElementById("metric-waiting");
+  const procEl = document.getElementById("metric-processing");
+  const doneEl = document.getElementById("metric-completed");
+  const workloadEl = document.getElementById("workload-percent");
+  const workloadBar = document.getElementById("workload-bar");
+
+  if (totalEl) totalEl.innerText = "12";
+  if (waitingEl) waitingEl.innerText = "6";
+  if (procEl) procEl.innerText = "4"; // 2 at scale, 2 in lab
+  if (doneEl) doneEl.innerText = "2";
+  if (workloadEl) workloadEl.innerText = "78%";
+  if (workloadBar) {
+    workloadBar.style.width = "78%";
+    workloadBar.style.background = "#f59e0b"; // Warning amber at 78% capacity
+  }
+
+  // 3. Populate Weighbridge Token Select Dropdown
+  const wbSelect = document.getElementById("wbTokenSelect");
+  if (wbSelect) {
+    wbSelect.innerHTML = "";
+    SIH_MOCK_FARMERS.filter(f => f.status === "AT_SCALE" || f.status === "IN_LINE").forEach(f => {
+      const opt = document.createElement("option");
+      opt.value = f.token;
+      opt.innerText = `${f.token} (${f.name} - ${f.crop} - ${f.vehicle})`;
+      wbSelect.appendChild(opt);
+    });
+    // Prime the first vehicle
+    wbSelect.value = "KQ-DEL-001";
+    simulateSerialCapture(142.80);
+  }
+
+  // 4. Update Big-Screen LED Yard Display (/display)
+  const ledBay1 = document.getElementById("ledBay1Token");
+  const ledBay2 = document.getElementById("ledBay2Token");
+  if (ledBay1) ledBay1.innerText = "KQ-DEL-001";
+  if (ledBay2) ledBay2.innerText = "EXP-PUN-002";
+
+  // 5. Append Automated Action to Secretary Tamper Ledger
+  if (window.logTamperAuditAction) {
+    logTamperAuditAction("SYSTEM_INIT", "SIH_BATCH_SIMULATION", "12_ENTRIES", "Multi-state arrival batch auto-injected for jury demonstration.");
+  }
+
+  // 6. Native Audio Voice Announcement (First Token In Line)
+  if (window.announceQueueStatus) {
+    window.announceQueueStatus("KQ DEL 001", "Bay 01");
+  }
+
+  // 7. Interactive Toast Confirmation
+  const existingToast = document.querySelector(".sih-demo-toast");
+  if (existingToast) existingToast.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "sih-demo-toast";
+  toast.innerHTML = `
+    <strong>⚡ SIH Demo Injected Successfully!</strong><br>
+    • 12 Farmers Loaded across 8 Indian States<br>
+    • Express Perishable Priority routed to Bay 02<br>
+    • Yard Utilization calibrated to <strong>78%</strong><br>
+    • Speech Engine triggered voice gate call
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 6000);
+};
+
+// ============================================================
+// FINANCIAL DATA RECORD STORE (POINTS 27 - 36)
+// ============================================================
+const LOT_FINANCIAL_DATABASE = {
+  "KQ-DEL-001": {
+    farmer_name: "Ramesh Kumar",
+    reg_id: "KB-982145",
+    crop: "Wheat (FAQ Grade A)",
+    net_weight: 99.26,
+    gross_weight: 142.80,
+    tare_weight: 42.50,
+    bag_tare: 1.04,
+    unit_msp: 2226.80,
+    account: "987654321012",
+    ifsc: "SBIN0001234"
+  },
+  "KQ-PUN-004": {
+    farmer_name: "Gurpreet Singh",
+    reg_id: "PB-776102",
+    crop: "Paddy (Grade A)",
+    net_weight: 140.20,
+    gross_weight: 185.20,
+    tare_weight: 45.00,
+    bag_tare: 1.20,
+    unit_msp: 2320.00,
+    account: "112233445566",
+    ifsc: "PUNB0112200"
+  }
+};
+
+// Point 27, 28, 29 & 34: Real-Time Financial Multiplier
+window.runLiveFinancialEngine = function () {
+  const token = document.getElementById("settleTokenSelect")?.value || "KQ-DEL-001";
+  const lot = LOT_FINANCIAL_DATABASE[token];
+  if (!lot) return;
+
+  const netWeight = lot.net_weight;
+  const unitMsp = lot.unit_msp;
+  const cashAdvance = parseFloat(document.getElementById("settleCashAdvance")?.value || 0);
+
+  // Math Calculations
+  const grossVal = netWeight * unitMsp;
+  const hamaliSubsidy = netWeight * 14.50; // ₹14.50/Qtl unloading credit
+  const mandiCess = grossVal * 0.017;      // 1.7% Combined Mandi & Weigh cess
+  const netPayable = (grossVal + hamaliSubsidy) - cashAdvance;
+
+  // Render to DOM
+  const elNet = document.getElementById("settleNetWeight");
+  const elMsp = document.getElementById("settleUnitMsp");
+  const elGross = document.getElementById("settleGrossVal");
+  const elHamali = document.getElementById("settleHamaliSub");
+  const elCess = document.getElementById("settleMandiCess");
+  const elAdvance = document.getElementById("settleAdvanceVal");
+  const elTotal = document.getElementById("settleNetPayable");
+
+  if (elNet) elNet.innerText = netWeight.toFixed(2);
+  if (elMsp) elMsp.innerText = unitMsp.toFixed(2);
+  if (elGross) elGross.innerText = grossVal.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+  if (elHamali) elHamali.innerText = hamaliSubsidy.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+  if (elCess) elCess.innerText = mandiCess.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+  if (elAdvance) elAdvance.innerText = cashAdvance.toFixed(2);
+  if (elTotal) elTotal.innerText = Math.max(0, netPayable).toLocaleString("en-IN", { minimumFractionDigits: 2 });
+};
+
+window.syncSettlementLot = function (tokenKey) {
+  const lot = LOT_FINANCIAL_DATABASE[tokenKey];
+  if (!lot) return;
+
+  const bankAcc = document.getElementById("bankAccNumber");
+  const bankIfsc = document.getElementById("bankIfsc");
+  if (bankAcc) bankAcc.value = lot.account;
+  if (bankIfsc) bankIfsc.value = lot.ifsc;
+
+  runLiveFinancialEngine();
+};
+
+// Point 35: Penny-Drop Bank Account Verifier
+window.triggerPennyDropTest = function () {
+  const statusPill = document.getElementById("pennyDropStatus");
+  if (!statusPill) return;
+
+  statusPill.className = "status-pill status-connecting";
+  statusPill.innerHTML = "🟡 Pinging NPCI Bank Switch...";
+
+  setTimeout(() => {
+    statusPill.className = "status-pill status-connected";
+    statusPill.innerHTML = "🟢 Confirmed: Active Beneficiary Account";
+    alert("✅ Penny-Drop Verified: NPCI / PFMS reports account ACTIVE with ₹1.00 credit test confirmed.");
+  }, 900);
+};
+
+// Point 33: Split-Payment Percentage Controller
+window.toggleSplitPaymentUI = function (isChecked) {
+  const container = document.getElementById("splitAccountsContainer");
+  if (!container) return;
+  container.classList.toggle("hidden-inline", !isChecked);
+};
+
+window.recalcSplitPercentages = function () {
+  const selfShare = parseInt(document.getElementById("splitShareSelf")?.value || 60);
+  const coOwnerInput = document.getElementById("splitShareCoOwner");
+  if (coOwnerInput) {
+    const clampedSelf = Math.max(1, Math.min(99, selfShare));
+    coOwnerInput.value = 100 - clampedSelf;
+  }
+};
+
+// Point 36: Commercial Trader Invoicing Toggle
+window.toggleCommercialGstUI = function (isChecked) {
+  const box = document.getElementById("commercialGstBox");
+  if (box) box.classList.toggle("hidden-inline", !isChecked);
+};
+
+// Points 31 & 32: Open Electronic Parcha (PDF-Ready Modal)
+window.openEParchaModal = function () {
+  const token = document.getElementById("settleTokenSelect")?.value || "KQ-DEL-001";
+  const lot = LOT_FINANCIAL_DATABASE[token];
+  if (!lot) return;
+
+  const cashAdvance = parseFloat(document.getElementById("settleCashAdvance")?.value || 0);
+  const grossVal = lot.net_weight * lot.unit_msp;
+  const hamali = lot.net_weight * 14.50;
+  const netDbt = (grossVal + hamali) - cashAdvance;
+
+  const isSplit = document.getElementById("chkSplitPayment")?.checked;
+  const selfSharePct = parseInt(document.getElementById("splitShareSelf")?.value || 60);
+
+  // Populate Printable Slip Fields
+  document.getElementById("slipParchaId").innerText = `KQ-EP-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+  document.getElementById("slipTokenNum").innerText = token;
+  document.getElementById("slipFarmerName").innerText = lot.farmer_name;
+  document.getElementById("sigFarmerName").innerText = lot.farmer_name;
+  document.getElementById("slipDate").innerText = new Date().toLocaleDateString("en-IN", { day: '2-digit', month: 'short', year: 'numeric' });
+  document.getElementById("slipCrop").innerText = lot.crop;
+  document.getElementById("slipGross").innerText = lot.gross_weight.toFixed(2);
+  document.getElementById("slipTare").innerText = lot.tare_weight.toFixed(2);
+  document.getElementById("slipBagTare").innerText = lot.bag_tare.toFixed(2);
+  document.getElementById("slipNet").innerText = lot.net_weight.toFixed(2);
+  document.getElementById("slipRate").innerText = lot.unit_msp.toFixed(2);
+  document.getElementById("slipGrossVal").innerText = grossVal.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+  document.getElementById("slipHamali").innerText = hamali.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+  document.getElementById("slipAdvance").innerText = cashAdvance.toFixed(2);
+  document.getElementById("slipNetDbt").innerText = netDbt.toLocaleString("en-IN", { minimumFractionDigits: 2 });
+
+  // Render Split Accounts on Parcha if applicable
+  const splitWrapper = document.getElementById("slipSplitAllocationWrapper");
+  if (splitWrapper) {
+    if (isSplit) {
+      const coOwnerPct = 100 - selfSharePct;
+      const selfAmount = (selfSharePct / 100) * netDbt;
+      const coOwnerAmount = (coOwnerPct / 100) * netDbt;
+      splitWrapper.innerHTML = `
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; margin: 10px 0; font-size: 0.8rem;">
+          <strong>Joint Landholding Split Payment Allocation:</strong><br>
+          • ${lot.farmer_name} (Primary - ${selfSharePct}%): <strong>₹${selfAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</strong> [Ac: XXXXXX${lot.account.slice(-4)}]<br>
+          • Suresh Kumar (Co-Owner - ${coOwnerPct}%): <strong>₹${coOwnerAmount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</strong> [Ac: XXXXXX9912]
+        </div>
+      `;
+    } else {
+      splitWrapper.innerHTML = `
+        <div style="font-size: 0.78rem; color: #475569; margin: 6px 0;">
+          <strong>DBT Routing Account:</strong> Certified NPCI Beneficiary [Ac: XXXXXX${lot.account.slice(-4)} | IFSC: ${lot.ifsc}]
+        </div>
+      `;
+    }
+  }
+
+  const modal = document.getElementById("modal-eparcha-voucher");
+  if (modal) modal.classList.remove("hidden-inline");
+};
+
+window.closeEParchaModal = function () {
+  const modal = document.getElementById("modal-eparcha-voucher");
+  if (modal) modal.classList.add("hidden-inline");
+};
+
+window.triggerVoiceDisputeDictation = function () {
+  const modal = document.getElementById("ai-assistant-modal");
+  if (modal) modal.classList.remove("ai-modal-hidden");
+  
+  // Switch to Chat Stream view in modal
+  const modeSelector = document.getElementById("ai-mode-selector");
+  const modalBody = document.getElementById("ai-modal-body");
+  if (modeSelector) modeSelector.style.display = "none";
+  if (modalBody) {
+    modalBody.classList.remove("ai-modal-body-hidden");
+    modalBody.style.display = "flex";
+  }
+
+  const micBtn = document.getElementById("ai-mic-btn");
+  if (micBtn) micBtn.click();
+};
+
+window.submitVoiceDispute = function () {
+  const reason = document.getElementById("disputeReasonBox")?.value.trim();
+  if (!reason) {
+    alert("Please dictate or type dispute reasons before submitting.");
+    return;
+  }
+  if (window.logTamperAuditAction) {
+    logTamperAuditAction("FARMER_VOICE", "ARBITRATION_LODGED", "BAY_01", reason);
+  }
+  alert(`⚖️ Spoken Grievance Dispatched to District Mandi Arbiter!\nRecorded Statement: "${reason}"`);
+};

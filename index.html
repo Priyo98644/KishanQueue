@@ -6,10 +6,132 @@
     <title>KisanQueue | National APMC Procurement Platform</title>
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/ticket.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="assets/favicon.ico" />
     <style>
+      /* ============================================================
+   STRICT ISOLATION FOR CHOICE HUB (TRACK STATUS / NEW BOOKING)
+   ============================================================ */
+      #panel-farmer-choice:not(.active),
+      .view-panel:not(.active) {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+      }
+
+      #panel-farmer-choice.active,
+      .view-panel.active {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+
       .hidden-inline {
         display: none !important;
+      }
+      .ai-modal-body-hidden {
+        display: none !important;
+      }
+      #ai-assistant-modal.ai-modal-hidden {
+        display: none;
+      }
+      .ai-modal-body-visible {
+        display: block;
+      }
+      #icon-caller {
+        display: none !important;
+      }
+      #icon-agro-ai {
+        pointer-events: none;
+      }
+      .ai-trigger-icon {
+        pointer-events: none;
+      }
+      .ai-trigger-svg {
+        display: block;
+      }
+      .ai-widget-view {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .ai-mode-grid {
+        display: grid;
+      }
+      .ai-trigger-icon-layer {
+        pointer-events: none;
+      }
+      .ai-widget-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .ai-mode-selector-visible {
+        display: grid;
+      }
+      .ai-modal-body-layout {
+        display: none;
+        flex-direction: column;
+      }
+      .ai-chat-stream-layout {
+        min-height: 140px;
+        max-height: 220px;
+        overflow-y: auto;
+        padding: 10px;
+      }
+      .ai-welcome-message {
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #14532d;
+      }
+      .ai-mic-controller-layout {
+        padding: 12px;
+        text-align: center;
+      }
+      .ai-mic-button {
+        cursor: pointer;
+      }
+      .ai-mic-status-text {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 6px;
+      }
+      .ai-chat-stream {
+        min-height: 140px;
+        max-height: 220px;
+        overflow-y: auto;
+        padding: 10px;
+      }
+      .ai-chat-welcome {
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #14532d;
+      }
+      .ai-mic-controller {
+        padding: 12px;
+        text-align: center;
+      }
+      #ai-mic-btn {
+        cursor: pointer;
+      }
+      .ai-mic-status {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 6px;
+      }
+      .vehicle-add-btn {
+        margin-top: 4px;
+        display: inline-block;
       }
       .captcha-input {
         text-transform: uppercase;
@@ -41,6 +163,304 @@
       .otp-error-msg.hidden-inline {
         display: none !important;
       }
+      .wb-net-divider {
+        border: 0;
+        border-top: 1px dashed #cbd5e1;
+        margin: 8px 0;
+      }
+      .wb-net-summary {
+        font-size: 1.1rem;
+        color: #15803d;
+      }
+      .grade-banner {
+        background: #dcfce7;
+        color: #15803d;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #86efac;
+        font-weight: 700;
+        text-align: center;
+      }
+      .terminal-receipt-spaced {
+        margin-top: 10px;
+      }
+      .grade-list {
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .wb-print-btn {
+        margin-top: 1rem;
+      }
+      .grade-banner,
+      .wb-net-summary,
+      .wb-net-divider {
+        display: block;
+      }
+      .dispute-quality-btn {
+        margin-top: 8px;
+        width: 100%;
+        border-color: #fca5a5;
+        color: #991b1b;
+        background: #fff1f2;
+      }
+      .display-launch-btn {
+        width: 100%;
+        margin-top: 8px;
+        background: #f0fdf4;
+        border-color: #86efac;
+        color: #166534;
+      }
+      .financial-valuation-btn {
+        width: 100%;
+        margin-top: 6px;
+        background: #eff6ff;
+        border-color: #93c5fd;
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+      .display-brand-icon {
+        font-size: 2.5rem;
+      }
+      .display-brand-title {
+        font-size: 1.8rem;
+        margin: 0;
+        color: #38bdf8;
+      }
+      .display-brand-subtitle {
+        margin: 0;
+        color: #94a3b8;
+      }
+      .secretary-actions {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1.25rem;
+      }
+      .secretary-ledger-actions {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1.25rem;
+      }
+      .audit-hash-code {
+        font-size: 0.75rem;
+      }
+      .audit-hash-code-inline {
+        font-size: 0.75rem;
+      }
+      .assay-result-box {
+        margin-top: 10px;
+      }
+      .assay-result-box-inline {
+        margin-top: 10px;
+      }
+      .scale-breakdown-wrap {
+        margin-top: 15px;
+        border-top: 1px dashed #cbd5e1;
+        padding-top: 12px;
+      }
+      .scale-breakdown-btn {
+        border-color: #f87171;
+        color: #b91c1b;
+        background: #fff5f5;
+        width: 100%;
+      }
+      .terminal-action-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .terminal-action-row .scale-btn.secondary {
+        flex: 1;
+      }
+      .terminal-action-row .scale-btn.primary {
+        flex: 2;
+      }
+      .dispute-dictation-card {
+        margin-top: 14px;
+        border: 1.5px dashed #fca5a5;
+        background: #fff5f5;
+      }
+      .dispute-dictation-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+      .dispute-dictation-title {
+        color: #991b1b;
+        font-size: 0.85rem;
+      }
+      .dispute-dictation-btn {
+        background: #dc2626 !important;
+        font-size: 0.72rem;
+        padding: 4px 10px;
+      }
+      .dispute-reason-box {
+        resize: vertical;
+        font-size: 0.82rem;
+      }
+      .dispute-submit-btn {
+        width: 100%;
+        margin-top: 6px;
+        border-color: #f87171;
+        color: #991b1b;
+      }
+      .penny-drop-box {
+        margin-top: 10px;
+        padding: 12px;
+      }
+      .penny-drop-title {
+        margin: 0 0 6px 0;
+        font-size: 0.85rem;
+        color: #0f172a;
+      }
+      .penny-drop-actions {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .settle-cash-advance-group {
+        margin-top: 12px;
+      }
+      .split-payment-toggle,
+      .commercial-sale-toggle {
+        margin: 12px 0;
+      }
+      .split-payment-toggle label,
+      .commercial-sale-toggle label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .split-accounts-box {
+        background: #f8fafc;
+        border: 1px dashed #cbd5e1;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 12px;
+      }
+      .split-accounts-header {
+        margin: 0 0 8px 0;
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+      .split-account-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .split-account-row:last-child {
+        margin-bottom: 0;
+      }
+      .split-account-row.co-owner {
+        grid-template-columns: 2fr 1fr;
+      }
+      .split-account-row--self {
+        margin-bottom: 6px;
+      }
+      .settle-hamali-row {
+        color: #15803d;
+      }
+      .settle-mandi-row {
+        color: #64748b;
+        font-size: 0.8rem;
+      }
+      .settle-advance-row {
+        color: #b91c1c;
+      }
+      .parcha-meta-right {
+        text-align: right;
+      }
+      .parcha-header-mark {
+        font-size: 2.2rem;
+      }
+      .auth-box {
+        margin-top: 10px;
+        padding: 12px;
+      }
+      .auth-box h4 {
+        margin: 0 0 6px 0;
+        font-size: 0.85rem;
+        color: #0f172a;
+      }
+      .penny-drop-actions {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .settle-cash-advance-group {
+        margin-top: 12px;
+      }
+      .split-payment-toggle,
+      .commercial-sale-toggle {
+        margin: 12px 0;
+      }
+      .split-payment-toggle label,
+      .commercial-sale-toggle label,
+      .split-payment-inline label,
+      .commercial-sale-inline label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .split-payment-inline {
+        margin: 12px 0;
+      }
+      .commercial-sale-inline {
+        margin-bottom: 10px;
+      }
+      .split-accounts-box {
+        background: #f8fafc;
+        border: 1px dashed #cbd5e1;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 12px;
+      }
+      .split-accounts-header {
+        margin: 0 0 8px 0;
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+      .split-account-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .split-account-row--self {
+        margin-bottom: 6px;
+      }
+      .commercial-sale-toggle {
+        margin-bottom: 10px;
+      }
+      .parcha-meta-right {
+        text-align: right;
+      }
+      .parcha-header-mark {
+        font-size: 2.2rem;
+      }
+      .parcha-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+      .parcha-header h3 {
+        margin: 2px 0 0 0;
+        font-size: 0.95rem;
+        color: #166534;
+      }
+      .parcha-header p {
+        margin: 0;
+        font-size: 0.72rem;
+        color: #64748b;
+      }
     </style>
   </head>
   <body>
@@ -55,6 +475,16 @@
       </div>
 
       <div class="header-controls">
+        <!-- SIH 2026 Jury Live Simulation Launcher -->
+        <button
+          type="button"
+          id="btn-sih-demo"
+          class="sih-demo-btn"
+          onclick="launchSihJuryDemo()"
+          title="Populate 12-Farmer Live Queue & Telemetry Simulation"
+        >
+          ⚡ Run 12-Farmer Jury Simulation
+        </button>
         <!-- Universal Pan-India & Tribal Regional Language Selector -->
         <div class="lang-selector-box">
           <span class="lang-globe-icon">🌐</span>
@@ -85,6 +515,13 @@
             </optgroup>
           </select>
         </div>
+        <button
+          type="button"
+          id="btn-open-helpdesk"
+          class="header-helpdesk-btn"
+        >
+          <span>📞</span> <span data-i18n="btn_helpdesk">Mandi Helpdesk</span>
+        </button>
 
         <button
           id="btn-back-gateway"
@@ -96,6 +533,40 @@
         <div class="status-pill" id="connection-status">🟡 Connecting...</div>
       </div>
     </header>
+
+    <!-- Live Mandi Gateway Telemetry & MSP Marquee -->
+    <div id="mandi-telemetry-bar" class="telemetry-bar">
+      <div class="road-status-pill" id="roadStatusPill">
+        <span class="status-pulse-dot"></span>
+        <span id="roadStatusText"
+          >NH-19 Mandi Gate Approach: Normal Flow (8m delay)</span
+        >
+      </div>
+      <div class="msp-ticker-wrapper">
+        <div class="msp-ticker-track" id="mspTickerTrack">
+          <span class="ticker-item"
+            >🌾 Wheat (FAQ): <strong>₹2,275/Qtl</strong>
+            <span class="rate-up">▲ ₹50</span></span
+          >
+          <span class="ticker-item"
+            >🌾 Paddy (Grade A): <strong>₹2,320/Qtl</strong>
+            <span class="rate-up">▲ ₹40</span></span
+          >
+          <span class="ticker-item"
+            >🟡 Mustard Seed: <strong>₹5,650/Qtl</strong>
+            <span class="rate-stable">■ ₹0</span></span
+          >
+          <span class="ticker-item"
+            >🍅 Tomato (Hybrid): <strong>₹1,850/Qtl</strong>
+            <span class="rate-down">▼ ₹120</span></span
+          >
+          <span class="ticker-item"
+            >🥔 Potato (Jyoti): <strong>₹1,100/Qtl</strong>
+            <span class="rate-up">▲ ₹30</span></span
+          >
+        </div>
+      </div>
+    </div>
 
     <div id="offline-banner" class="banner-offline">
       ⚠️ <strong>Backend Offline:</strong> Unable to connect to
@@ -165,19 +636,9 @@
               </div>
 
               <!-- Department Officer Login Card -->
+              <!-- Department Officer Login Card -->
               <div class="doorway-card officer-card">
-                <div class="card-icon-badge officer-badge">
-                  <svg
-                    viewBox="0 0 24 24"
-                    width="26"
-                    height="26"
-                    fill="currentColor"
-                  >
-                    <path
-                      d="M4 6h16v2H4zm2 4h12v2H6zm3 4h6v2H9zm-5 6h16v2H4z"
-                    />
-                  </svg>
-                </div>
+                <div class="card-icon-badge officer-badge">...</div>
 
                 <span class="access-pill officer-pill" data-i18n="pill_officer"
                   >RESTRICTED — OFFICIAL ACCESS</span
@@ -196,16 +657,30 @@
                     class="sub-access-btn"
                     id="btn-enter-operator-weighbridge"
                   >
-                    Weighbridge Bay <span>→</span>
+                    <span data-i18n="btn_weighbridge_bay">Weighbridge Bay</span>
+                    <span>→</span>
                   </button>
                   <button
                     type="button"
                     class="sub-access-btn"
                     id="btn-enter-operator-assayer"
                   >
-                    Quality Assayer <span>→</span>
+                    <span data-i18n="btn_quality_assayer">Quality Assayer</span>
+                    <span>→</span>
                   </button>
                 </div>
+
+                <!-- PASTE IT RIGHT HERE -->
+                <button
+                  type="button"
+                  class="sub-access-btn financial-valuation-btn"
+                  onclick="
+                    window.switchPanel('panel-settlement', 'OFFICER');
+                    runLiveFinancialEngine();
+                  "
+                >
+                  💳 Financial Valuation & e-Parcha Desk →
+                </button>
 
                 <div class="doorway-footer">
                   <button
@@ -278,7 +753,6 @@
                       <option value="" disabled selected>
                         -- Choose State / UT --
                       </option>
-                      <!-- Populated dynamically via JS -->
                     </select>
                   </div>
                 </div>
@@ -347,7 +821,6 @@
                       autocomplete="tel"
                       required
                     />
-                    <!-- Dynamic Green Tick Badge -->
                     <span
                       id="mobileValidTick"
                       class="mobile-check-badge hidden-inline"
@@ -517,35 +990,25 @@
       <!-- VIEW 3: POST-LOGIN ACTION HUB (TRACK STATUS VS NEW BOOKING)  -->
       <!-- ============================================================ -->
       <section id="panel-farmer-choice" class="view-panel">
-        <div class="portal-breadcrumb">
-          <button type="button" class="breadcrumb-back-btn">
-            ← Switch Portal
-          </button>
-          <span data-i18n="hub_breadcrumb"
-            >Farmer Services & Verification Dashboard</span
-          >
-        </div>
-
         <div class="choice-hub-container">
+          <!-- Simplified Greeting Card (Welcome only) -->
           <div class="choice-greeting-card">
             <div class="choice-user-meta">
               <div class="user-avatar-initial">🌾</div>
               <div>
                 <h3>
-                  <span data-i18n="welcome_user">Welcome, Verified Farmer</span>
+                  <span data-i18n="welcome_user">Welcome</span>
                 </h3>
-                <p id="userSessionMeta">
-                  Region: State • Mobile: +91 XXXXX X1234
-                </p>
+                <p id="userSessionMeta" class="hidden-inline"></p>
               </div>
             </div>
-            <button type="button" id="btnHubLogout" class="btn-logout-pill">
+            <!-- <button type="button" id="btnHubLogout" class="btn-logout-pill">
               Logout 🚪
-            </button>
+            </button> -->
           </div>
 
           <div class="choice-tiles-grid">
-            <!-- Tile 1: Track Status -->
+            <!-- Tile 1: Track Status (Styled with Royal Blue Border) -->
             <div class="choice-card" id="card-choice-track">
               <div class="choice-icon-circle blue-circle">🔍</div>
               <h3 data-i18n="tile_track_title">
@@ -567,13 +1030,14 @@
               </button>
             </div>
 
-            <!-- Tile 2: New Slot Booking & KYC Registration -->
+            <!-- Tile 2: New Slot Booking & KYC Registration (Styled with Emerald Green Border) -->
             <div class="choice-card" id="card-choice-book">
               <div class="choice-icon-circle green-circle">📝</div>
               <h3 data-i18n="tile_book_title">New Booking & Identity KYC</h3>
               <p data-i18n="tile_book_desc">
-                Declare agricultural produce, verify Aadhaar & PAN credentials,
-                enter land records, and generate a new dynamic arrival token.
+                Declare agricultural produce, verify identification & PAN
+                credentials, enter land records, and generate a new dynamic
+                arrival token.
               </p>
               <button
                 type="button"
@@ -614,7 +1078,36 @@
             </p>
 
             <form id="booking-form">
-              <!-- Multi-Identity Verification Module with PAN, Aadhaar Placeholder, and Registry -->
+              <!-- Multi-Identity Verification Module with PAN, Resident Registry -->
+              <div class="form-group">
+                <label data-i18n="lbl_crop"
+                  >5. Produce Category & Crop Type</label
+                >
+                <select id="crop" name="crop" required>
+                  <optgroup label="Perishable Produce (Express Scale Priority)">
+                    <option value="Tomato" data-perishable="true">
+                      Tomato (Perishable - Bay Priority)
+                    </option>
+                    <option value="Green Chilli" data-perishable="true">
+                      Green Chilli (Perishable - Bay Priority)
+                    </option>
+                    <option value="Potato" data-perishable="true">
+                      Potato (Early Harvest - Semi-Perishable)
+                    </option>
+                  </optgroup>
+                  <optgroup label="Standard Dry Grains & Oilseeds">
+                    <option value="Paddy" data-perishable="false" selected>
+                      Paddy (Standard Grain)
+                    </option>
+                    <option value="Wheat" data-perishable="false">
+                      Wheat (Standard Grain)
+                    </option>
+                    <option value="Mustard" data-perishable="false">
+                      Mustard (Standard Oilseed)
+                    </option>
+                  </optgroup>
+                </select>
+              </div>
               <div class="auth-box">
                 <h3 class="auth-box-title">
                   <span>🛡️</span>
@@ -665,11 +1158,11 @@
                   </button>
                 </div>
 
-                <!-- PAN & Aadhaar Fields for Officer Verification -->
+                <!-- KYC Fields for Officer Verification -->
                 <div class="officer-kyc-grid officer-kyc-grid-spaced">
                   <div>
                     <label class="sublabel-tiny"
-                      >Aadhaar (Masked Document Reference)</label
+                      >Resident ID (Masked Document Reference)</label
                     >
                     <input
                       type="text"
@@ -748,14 +1241,6 @@
                 </select>
               </div>
               <div class="form-group">
-                <label data-i18n="lbl_crop">5. Crop Type</label>
-                <select id="crop" name="crop" title="Select crop type">
-                  <option value="Paddy">Paddy (MSP ₹2,300/Qtl)</option>
-                  <option value="Wheat">Wheat (MSP ₹2,275/Qtl)</option>
-                  <option value="Mustard">Mustard (MSP ₹5,650/Qtl)</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <label data-i18n="lbl_qty"
                   >6. Harvest Produce Quantity (Quintals)</label
                 >
@@ -795,6 +1280,27 @@
                 Generate Pass
               </button>
             </form>
+            <div class="form-group">
+              <label>Haulage Logistics & Tractor Reg.</label>
+              <div id="vehicleRepeaterContainer">
+                <div class="vehicle-row">
+                  <input
+                    type="text"
+                    class="applicant-input"
+                    placeholder="Tractor / Trailer Plate (e.g. WB-24-A-1234)"
+                    required
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                id="btnAddVehicleRow"
+                class="btn-link vehicle-add-btn"
+                onclick="addVehicleRow()"
+              >
+                + Register Linked Vehicle / Sub-Lot
+              </button>
+            </div>
           </div>
 
           <div>
@@ -897,157 +1403,1198 @@
           </div>
         </div>
       </section>
+      <!-- ======================================================== -->
+      <!-- VIEW 7: HIGH-CONTRAST BIG-SCREEN YARD DISPLAY (/display) -->
+      <!-- ======================================================== -->
+      <section id="panel-public-display" class="view-panel display-board-view">
+        <div class="display-header">
+          <div class="display-brand">
+            <span class="display-brand-icon">🌾</span>
+            <div>
+              <h1 class="display-brand-title">
+                NATIONAL APMC PUBLIC TELEMETRY SCREEN
+              </h1>
+              <p class="display-brand-subtitle">
+                Main Mandi Terminal Yard • Real-Time Scale Allocations
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-display-exit"
+            onclick="window.switchPanel('panel-gateway', 'GATEWAY')"
+          >
+            Exit Display ✕
+          </button>
+        </div>
+
+        <div class="display-grid">
+          <div class="display-scale-card">
+            <div class="scale-tag">WEIGHBRIDGE BAY 01 (SCALES 1-2)</div>
+            <div class="display-current-token" id="ledBay1Token">
+              KQ-DEL-001
+            </div>
+            <div class="display-driver-meta">
+              Ramesh Kumar • Paddy • Haryana
+            </div>
+            <div class="display-status-tag active-blink">SCALE ACTIVE</div>
+          </div>
+
+          <div class="display-scale-card">
+            <div class="scale-tag">EXPRESS PERISHABLE BAY 02</div>
+            <div class="display-current-token express-token" id="ledBay2Token">
+              EXP-418
+            </div>
+            <div class="display-driver-meta">
+              Sukhwinder Singh • Tomato • Punjab
+            </div>
+            <div class="display-status-tag express-blink">UNLOADING NOW</div>
+          </div>
+        </div>
+
+        <div class="display-queue-ticker">
+          <span class="ticker-lead">NEXT VEHICLES CALL TO GATE:</span>
+          <span class="ticker-tokens"
+            >KQ-PUN-004 &nbsp;•&nbsp; KQ-WB-009 &nbsp;•&nbsp; KQ-MP-014
+            &nbsp;•&nbsp; KQ-UP-022</span
+          >
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- VIEW 8: MANDI SECRETARY AUDIT & STATUTORY LEDGER        -->
+      <!-- ======================================================== -->
+      <section id="panel-secretary" class="view-panel">
+        <div class="panel-header-box">
+          <button
+            type="button"
+            class="breadcrumb-back-btn"
+            onclick="window.switchPanel('panel-gateway', 'GATEWAY')"
+          >
+            ← Gateway Home
+          </button>
+          <div class="terminal-badge">STATUTORY APMC SUPERINTENDENCE</div>
+          <h2>🏛️ Mandi Secretary Ledger & Audit Vault</h2>
+          <p>
+            Statutory Agricultural Marketing Board Reconciliation and Immutable
+            Action Logs
+          </p>
+        </div>
+
+        <div class="secretary-ledger-actions">
+          <!-- Point 24: One-Click Ledger Export -->
+          <button
+            type="button"
+            class="scale-btn primary"
+            onclick="exportAPMCStatutoryLedger()"
+          >
+            📥 Export End-of-Day APMC Ledger (CSV/PFMS)
+          </button>
+          <button
+            type="button"
+            class="scale-btn secondary"
+            onclick="refreshAuditLedger()"
+          >
+            🔄 Verify Cryptographic Hash Chain
+          </button>
+        </div>
+
+        <!-- Point 25: Tamper-Evident Audit Log Table -->
+        <div class="card">
+          <h3 class="card-title">Cryptographic Action Ledger</h3>
+          <div class="data-table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Timestamp</th>
+                  <th>Operator</th>
+                  <th>Action</th>
+                  <th>Token</th>
+                  <th>Details</th>
+                  <th>Block Hash (SHA-256)</th>
+                </tr>
+              </thead>
+              <tbody id="auditTableBody">
+                <tr>
+                  <td>#1</td>
+                  <td>2026-09-13T10:14:00</td>
+                  <td>OP_WEIGH_01</td>
+                  <td>MANUAL_TARE</td>
+                  <td>KQ-DEL-001</td>
+                  <td>Tare zeroed on scale</td>
+                  <td>
+                    <code class="audit-hash-code">7f83b165...d03e94</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- FLOATING WIDGET (CALLER / SMART AGRO AI ASSISTANT)           -->
-    <!-- ============================================================ -->
-    <div id="ai-assistant-wrapper">
-      <button
-        id="ai-trigger-btn"
-        type="button"
-        class="mode-helpline"
-        aria-label="Support & AI Assistance"
-        title="Mandi Helpdesk"
-      >
-        <div class="caller-pulse"></div>
-        <div id="icon-caller" class="btn-icon-layer active">
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-            <path
-              d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-            />
-          </svg>
-        </div>
-        <div id="icon-agro-ai" class="btn-icon-layer">
-          <svg
-            viewBox="0 0 24 24"
-            width="28"
-            height="28"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M12 22V12" stroke="#a7f3d0" stroke-width="2.2" />
-            <path
-              d="M12 12C12 7.5 16 5 21 5C21 10 17 12 12 12Z"
-              fill="#34d399"
-              stroke="#ffffff"
-            />
-            <path
-              d="M12 15C12 11.5 8.5 9.5 4 10C4 14 7.5 15.5 12 15Z"
-              fill="#10b981"
-              stroke="#ffffff"
-            />
-            <circle
-              cx="12"
-              cy="5"
-              r="2.5"
-              fill="#fde047"
-              stroke="#ffffff"
-              stroke-width="1.5"
-            />
-            <path
-              d="M12 1v1.5M9.5 3.5L8.5 2.5M14.5 3.5l1-1"
-              stroke="#fde047"
-              stroke-width="1.5"
-            />
-          </svg>
-        </div>
-      </button>
+    <!-- ======================================================== -->
+    <!-- VIEW 9: FINANCIAL CLEARANCE & DIGITAL e-PARCHA TERMINAL  -->
+    <!-- ======================================================== -->
+    <section id="panel-settlement" class="view-panel">
+      <div class="panel-header-box">
+        <button
+          type="button"
+          class="breadcrumb-back-btn"
+          onclick="window.switchPanel('panel-gateway', 'GATEWAY')"
+        >
+          ← Gateway Home
+        </button>
+        <div class="terminal-badge">PFMS & DIRECT BENEFIT TRANSFER CELL</div>
+        <h2>💳 Automated MSP Valuation & Settlement Desk</h2>
+        <p>
+          Statutory Cess Deduction, Hamali Subsidy Reconciliation, and Split DBT
+          Allocation
+        </p>
+      </div>
 
-      <div id="ai-assistant-modal" class="ai-modal-hidden">
-        <!-- Helpline View (Gateway) -->
-        <div id="widget-view-helpline" class="widget-view active">
-          <div class="ai-modal-header helpline-header">
-            <div class="ai-header-info">
-              <div class="ai-call-avatar">📞</div>
-              <div>
-                <h4 class="ai-title">National APMC Helpdesk</h4>
-                <p class="ai-sub">Official Procurement Assistance</p>
-              </div>
-            </div>
-            <button class="ai-modal-close-btn" type="button" title="Close">
-              ✕
-            </button>
+      <div class="dashboard-grid">
+        <!-- Left Column: Valuation Engine & Split Account Settings -->
+        <div class="terminal-card">
+          <h3>Lot Parameters & Bank Verification</h3>
+
+          <div class="terminal-form-group">
+            <label>Selected Procurement Lot</label>
+            <select
+              id="settleTokenSelect"
+              class="applicant-select"
+              onchange="syncSettlementLot(this.value)"
+            >
+              <option value="KQ-DEL-001">
+                KQ-DEL-001 (Ramesh Kumar • Wheat • 99.26 Qtl)
+              </option>
+              <option value="KQ-PUN-004">
+                KQ-PUN-004 (Gurpreet Singh • Paddy • 140.20 Qtl)
+              </option>
+            </select>
           </div>
 
-          <div class="helpline-body">
-            <div class="helpline-caller-pill">
-              <span class="pulse-dot"></span> CALLER ID:
-              <strong>NAT-APMC-HQ-01</strong>
+          <!-- Point 35: Penny Drop Verification Block -->
+          <div class="auth-box">
+            <h4>Bank Account Penny-Drop Match (NPCI Bridge)</h4>
+            <div class="officer-kyc-grid">
+              <input
+                type="text"
+                id="bankAccNumber"
+                class="applicant-input"
+                value="987654321012"
+                placeholder="Bank Account Number"
+              />
+              <input
+                type="text"
+                id="bankIfsc"
+                class="applicant-input uppercase-input"
+                value="SBIN0001234"
+                placeholder="IFSC Code"
+              />
             </div>
-            <div class="helpline-phone-card">
-              <span class="phone-label">Kisan Toll-Free Support</span>
-              <strong class="tollfree-number">1800-180-1551</strong>
-              <p class="phone-desc">
-                All-India toll-free assistance for MSP rates, appointment
-                booking, and Mandi operations.
-              </p>
-              <a href="tel:18001801551" class="btn-call-now"
-                ><span>📞</span> Call Helpdesk Directly</a
+            <div class="penny-drop-actions">
+              <button
+                type="button"
+                class="btn-verify"
+                onclick="triggerPennyDropTest()"
               >
-            </div>
-          </div>
-        </div>
-
-        <!-- Agro AI View (Inside Portals) -->
-        <div id="widget-view-ai" class="widget-view">
-          <div class="ai-modal-header agro-header">
-            <div class="ai-header-info">
-              <div class="ai-call-avatar agro-avatar">🌾</div>
-              <div>
-                <h4 id="agro-ai-title" class="ai-title">Kisan Sahayak AI</h4>
-                <p id="agro-ai-sub" class="ai-sub">
-                  Smart Multilingual Voice Copilot
-                </p>
-              </div>
-            </div>
-            <button class="ai-modal-close-btn" type="button" title="Close">
-              ✕
-            </button>
-          </div>
-          <div id="ai-mode-selector" class="ai-mode-grid">
-            <button id="btn-mode-form" type="button" class="ai-mode-btn">
-              <span class="mode-icon">🎙️</span>
-              <span id="btn-mode-title" class="mode-title"
-                >Voice Booking Assistant</span
-              >
-              <span id="btn-mode-desc" class="mode-desc"
-                >Answer questions sequentially to generate your pass</span
-              >
-            </button>
-            <button id="btn-mode-query" type="button" class="ai-mode-btn">
-              <span class="mode-icon">🌱</span>
-              <span class="mode-title">National MSP & Rules Query</span>
-              <span class="mode-desc"
-                >Moisture tolerance, certified MSP prices & documents</span
-              >
-            </button>
-          </div>
-          <div id="ai-modal-body" class="ai-modal-body-hidden">
-            <div class="ai-back-bar">
-              <button id="ai-btn-back" type="button">← Back to Menu</button>
-              <span id="ai-step-indicator" class="ai-step-pill"
-                >Step 1 of 7</span
-              >
-            </div>
-            <div id="ai-chat-stream" class="ai-chat-stream"></div>
-            <div class="ai-mic-controller">
-              <button id="ai-mic-btn" type="button">
-                <span id="ai-mic-icon">🎙️</span>
-                <span id="ai-mic-label">Tap to Speak</span>
+                Verify Account (Penny Drop)
               </button>
-              <p id="ai-mic-status">Press the mic and answer the prompt.</p>
+              <span id="pennyDropStatus" class="status-pill status-connected"
+                >🟢 Account Verified</span
+              >
+            </div>
+          </div>
+
+          <!-- Point 34: Immediate Cash Advance Adjustment -->
+          <div class="terminal-form-group settle-cash-advance-group">
+            <label>Gate Emergency Cash Advance Deducted (₹)</label>
+            <input
+              type="number"
+              id="settleCashAdvance"
+              class="applicant-input"
+              value="0.00"
+              step="500"
+              oninput="runLiveFinancialEngine()"
+            />
+          </div>
+
+          <!-- Point 33: Multi-Party Split Payment Checkbox -->
+          <div class="split-payment-toggle">
+            <label>
+              <input
+                type="checkbox"
+                id="chkSplitPayment"
+                onchange="toggleSplitPaymentUI(this.checked)"
+              />
+              <span>Enable Joint Landholding Split Payment (Co-Owners)</span>
+            </label>
+          </div>
+
+          <div
+            id="splitAccountsContainer"
+            class="hidden-inline split-accounts-box"
+          >
+            <p class="split-accounts-header">
+              Disburse percentage shares across multiple co-owner accounts:
+            </p>
+            <div
+              class="officer-kyc-grid split-account-row split-account-row--self"
+            >
+              <input
+                type="text"
+                class="applicant-input input-tiny"
+                value="Ramesh Kumar (Self)"
+                readonly
+              />
+              <input
+                type="number"
+                id="splitShareSelf"
+                class="applicant-input input-tiny"
+                value="60"
+                min="1"
+                max="99"
+                oninput="recalcSplitPercentages()"
+              />
+            </div>
+            <div
+              class="officer-kyc-grid split-account-row split-account-row--coowner"
+            >
+              <input
+                type="text"
+                class="applicant-input input-tiny"
+                value="Suresh Kumar (Co-Owner)"
+              />
+              <input
+                type="number"
+                id="splitShareCoOwner"
+                class="applicant-input input-tiny"
+                value="40"
+                min="1"
+                max="99"
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- Point 36: Commercial Private Trader Toggle -->
+          <div class="commercial-sale-toggle">
+            <label>
+              <input
+                type="checkbox"
+                id="chkCommercialSale"
+                onchange="toggleCommercialGstUI(this.checked)"
+              />
+              <span>
+                Private Miller / Commercial Trader Procurement (GST / RCM)</span
+              >
+            </label>
+          </div>
+          <div id="commercialGstBox" class="hidden-inline">
+            <input
+              type="text"
+              id="traderGstinInput"
+              class="applicant-input uppercase-input"
+              placeholder="Enter Buyer GSTIN (e.g., 07AAAAA0000A1Z5)"
+              value="07AAAAA0000A1Z5"
+            />
+          </div>
+        </div>
+
+        <!-- Right Column: Statutory Deductions, Cess & e-Parcha Generation -->
+        <div class="terminal-card">
+          <h3>Statutory Valuation Ledger</h3>
+          <div class="terminal-receipt">
+            <p>
+              <strong>Certified Net Weight:</strong>
+              <span id="settleNetWeight">99.26</span> Qtl
+            </p>
+            <p>
+              <strong>Approved MSP Rate:</strong> ₹<span id="settleUnitMsp"
+                >2226.80</span
+              >
+              / Qtl
+            </p>
+            <p>
+              <strong>Gross Crop Produce Value:</strong> ₹<span
+                id="settleGrossVal"
+                >221032.17</span
+              >
+            </p>
+            <hr class="wb-net-divider" />
+            <!-- Point 29: Hamali Subsidy -->
+            <p class="settle-hamali-row">
+              <strong>[+] Hamali Unloading Subsidy:</strong> +₹<span
+                id="settleHamaliSub"
+                >1439.27</span
+              >
+            </p>
+            <!-- Point 28: APMC Cess Information -->
+            <p class="settle-mandi-row">
+              <strong>[i] State APMC Fee & Weigh Cess (1.7%):</strong> ₹<span
+                id="settleMandiCess"
+                >3757.55</span
+              >
+            </p>
+            <!-- Point 34: Cash Advance Deducted -->
+            <p class="settle-advance-row">
+              <strong>[-] Gate Emergency Cash Advance:</strong> -₹<span
+                id="settleAdvanceVal"
+                >0.00</span
+              >
+            </p>
+            <hr class="wb-net-divider" />
+            <p class="wb-net-summary">
+              <strong>Final Direct Bank Transfer (DBT):</strong>
+              ₹<span id="settleNetPayable">222471.44</span>
+            </p>
+          </div>
+
+          <!-- Point 31 & 32: Issue e-Parcha with Multi-Party Signatures -->
+          <button
+            type="button"
+            class="gateway-btn citizen-btn wb-print-btn"
+            onclick="openEParchaModal()"
+          >
+            📜 Generate Multi-Party Signed e-Parcha Pay Slip →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- MODAL: PRINTABLE e-PARCHA SETTLEMENT CERTIFICATE (PDF)   -->
+    <!-- ======================================================== -->
+    <div
+      id="modal-eparcha-voucher"
+      class="eparcha-modal-backdrop hidden-inline"
+    >
+      <div class="eparcha-sheet">
+        <div class="eparcha-controls no-print">
+          <button
+            type="button"
+            class="scale-btn secondary"
+            onclick="closeEParchaModal()"
+          >
+            ✕ Close
+          </button>
+          <button
+            type="button"
+            class="scale-btn primary"
+            onclick="window.print()"
+          >
+            🖨️ Print / Save as PDF
+          </button>
+        </div>
+
+        <!-- Official Government Pay Slip Content -->
+        <div class="parcha-printable-content" id="printableParchaArea">
+          <div class="parcha-header">
+            <span class="parcha-header-mark">🌾</span>
+            <div>
+              <h2 class="parcha-heading-main">
+                MINISTRY OF AGRICULTURE & FARMERS WELFARE
+              </h2>
+              <h3 class="parcha-heading-sub">
+                NATIONAL APMC UNIFIED PROCUREMENT PASS & WEIGHMENT SETTLEMENT
+                SLIP
+              </h3>
+              <p class="parcha-heading-note">
+                (Statutory Form 'J' Electronic Settlement Voucher • Rule 24-B)
+              </p>
+            </div>
+          </div>
+
+          <div class="parcha-grid-2col">
+            <div>
+              <p>
+                <strong>e-Parcha ID:</strong>
+                <span id="slipParchaId">KQ-EP-2026-9812A</span>
+              </p>
+              <p>
+                <strong>Arrival Token:</strong>
+                <span id="slipTokenNum">KQ-DEL-001</span>
+              </p>
+              <p>
+                <strong>Farmer Name:</strong>
+                <span id="slipFarmerName">Ramesh Kumar</span>
+              </p>
+              <p><strong>Registry Ref:</strong> KB-982145</p>
+            </div>
+            <div class="parcha-meta-right">
+              <p>
+                <strong>Procurement Date:</strong>
+                <span id="slipDate">13-Sep-2026</span>
+              </p>
+              <p>
+                <strong>Procurement Centre:</strong> Centre A (Main Mandi
+                Terminal)
+              </p>
+              <p>
+                <strong>Weighbridge Bay:</strong> Bay 01 (Certified Avery IoT)
+              </p>
+              <p>
+                <strong>PFMS Batch Ref:</strong>
+                <span id="slipPfmsRef">PFMS-13092026-B81</span>
+              </p>
+            </div>
+          </div>
+
+          <table class="parcha-table">
+            <thead>
+              <tr>
+                <th>Produce Description</th>
+                <th>Gross Weight</th>
+                <th>Tare Weight</th>
+                <th>Bag Deduction</th>
+                <th>Certified Net</th>
+                <th>Assayed MSP Rate</th>
+                <th>Total Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong id="slipCrop">Wheat (FAQ Grade A)</strong></td>
+                <td><span id="slipGross">142.80</span> Qtl</td>
+                <td><span id="slipTare">42.50</span> Qtl</td>
+                <td><span id="slipBagTare">1.04</span> Qtl</td>
+                <td>
+                  <strong><span id="slipNet">99.26</span> Qtl</strong>
+                </td>
+                <td>₹<span id="slipRate">2226.80</span></td>
+                <td>
+                  <strong>₹<span id="slipGrossVal">221032.17</span></strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="parcha-reconciliation-box">
+            <div class="recon-col">
+              <p>
+                <strong>[+] Hamali Subsidy Reimbursed:</strong> ₹<span
+                  id="slipHamali"
+                  >1439.27</span
+                >
+              </p>
+              <p>
+                <strong>[-] Emergency Gate Cash Advance:</strong> ₹<span
+                  id="slipAdvance"
+                  >0.00</span
+                >
+              </p>
+              <p>
+                <strong>APMC Mandi Development Cess (1.5%):</strong> Absorbed by
+                Ledger
+              </p>
+            </div>
+            <div class="recon-col final-net">
+              <span>NET PAYABLE DBT DISBURSEMENT</span>
+              <strong>₹<span id="slipNetDbt">222471.44</span></strong>
+            </div>
+          </div>
+
+          <div id="slipSplitAllocationWrapper" class="parcha-split-block">
+            <!-- Dynamic split accounts itemization will inject here -->
+          </div>
+
+          <!-- Point 32: Multi-Party Digital Signatures Verification -->
+          <div class="parcha-signatures-row">
+            <div class="sig-box">
+              <div class="sig-seal approved">DIGITALLY ACKNOWLEDGED</div>
+              <span class="sig-name" id="sigFarmerName">Ramesh Kumar</span>
+              <span class="sig-role">Farmer Payee (Aadhaar Seeded)</span>
+              <span class="sig-hash">SHA256: e82f...91bc</span>
+            </div>
+            <div class="sig-box">
+              <div class="sig-seal approved">SCALE CALIBRATED & VERIFIED</div>
+              <span class="sig-name">OP_SCALE_01 (Bay 01)</span>
+              <span class="sig-role">Licensed APMC Weighman</span>
+              <span class="sig-hash">Avery Serial ID: AV-8812</span>
+            </div>
+            <div class="sig-box">
+              <div class="sig-seal approved">STATUTORY PFMS CLEARANCE</div>
+              <span class="sig-name">Mandi Secretary & Assayer</span>
+              <span class="sig-role">Agricultural Marketing Board</span>
+              <span class="sig-hash">Cryptographic Token: SEC-APMC-99</span>
             </div>
           </div>
         </div>
       </div>
     </div>
+<!-- ============================================================ -->
+<!-- FULLY SELF-CONTAINED AGRO AI ASSISTANT (ZERO EXTERNAL DEPS)  -->
+<!-- ============================================================ -->
+<style>
+  #agro-widget-box {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 9999999 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+  #agro-fab-button {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle at 35% 35%, #15803d, #052e16) !important;
+    border: 2.5px solid #86efac !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    outline: none !important;
+    transition: transform 0.2s ease !important;
+  }
+  #agro-fab-button:hover { transform: scale(1.08) !important; }
+
+  #agro-chat-card {
+    display: none;
+    position: fixed !important;
+    bottom: 96px !important;
+    right: 24px !important;
+    width: 360px !important;
+    max-width: calc(100vw - 40px) !important;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.3) !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    z-index: 9999999 !important;
+  }
+  .agro-card-header {
+    background: #064e3b !important;
+    color: #ffffff !important;
+    padding: 12px 16px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+  .agro-card-btn {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    background: #f8fafc !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    transition: background 0.15s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .agro-card-btn:hover {
+    background: #f0fdf4 !important;
+    border-color: #86efac !important;
+  }
+  .agro-msg-bot {
+    background: #f0fdf4 !important;
+    border: 1px solid #86efac !important;
+    color: #14532d !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+  .agro-msg-user {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+    font-size: 0.85rem !important;
+    align-self: flex-end !important;
+    font-weight: 600 !important;
+  }
+</style>
+
+<style>
+  .agro-header-content { display: flex; align-items: center; gap: 8px; }
+  .agro-header-icon { font-size: 1.3rem; }
+  .agro-header-title { display: block; font-size: 0.95rem; }
+  .agro-header-subtitle { color: #a7f3d0; font-size: 0.72rem; }
+  .agro-close-btn { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem; font-weight: bold; }
+  .agro-menu { display: flex; flex-direction: column; gap: 10px; padding: 16px; }
+  .agro-card-btn-title { display: block; color: #14532d; font-size: 0.88rem; }
+  .agro-card-btn-description { color: #64748b; font-size: 0.75rem; }
+  .agro-chat-view { display: none; flex-direction: column; height: 380px; }
+  .agro-chat-toolbar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+  .agro-back-btn { background: none; border: none; color: #15803d; font-weight: 700; cursor: pointer; font-size: 0.8rem; }
+  .agro-chat-tag { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 9999px; }
+  .agro-msg-stream { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .agro-controls { padding: 10px; background: #fff; border-top: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 6px; }
+  .agro-input-row { display: flex; gap: 8px; align-items: center; }
+  .agro-mic-btn { background: #16a34a; color: #fff; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 1.1rem; cursor: pointer; flex-shrink: 0; }
+  .agro-input { flex: 1; height: 36px; padding: 0 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.82rem; outline: none; }
+  .agro-submit-btn { background: #15803d; color: #fff; border: none; border-radius: 8px; padding: 0 12px; height: 36px; font-weight: bold; cursor: pointer; }
+  .agro-mic-hint { text-align: center; color: #64748b; font-size: 0.7rem; }
+</style>
+
+<div id="agro-widget-box">
+  <!-- Round Floating Crop Icon -->
+  <button id="agro-fab-button" type="button" title="Agro AI Assistant" onclick="AgroEngine.toggleModal()">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M12 22V12" stroke="#a7f3d0" stroke-width="2.2"/>
+      <path d="M12 12C12 7.5 16 5 21 5C21 10 17 12 12 12Z" fill="#34d399" stroke="#ffffff"/>
+      <path d="M12 15C12 11.5 8.5 9.5 4 10C4 14 7.5 15.5 12 15Z" fill="#10b981" stroke="#ffffff"/>
+      <circle cx="12" cy="5" r="2.5" fill="#fde047" stroke="#ffffff" stroke-width="1.5"/>
+    </svg>
+  </button>
+
+  <!-- Assistant Dialog Window -->
+  <div id="agro-chat-card">
+    <!-- Top Bar -->
+    <div class="agro-card-header">
+      <div class="agro-header-content">
+        <span class="agro-header-icon">🌾</span>
+        <div>
+          <strong class="agro-header-title">Kisan Sahayak AI</strong>
+          <small class="agro-header-subtitle">Smart Mandi Copilot</small>
+        </div>
+      </div>
+      <button type="button" onclick="AgroEngine.toggleModal(false)" class="agro-close-btn">✕</button>
+    </div>
+
+    <!-- View 1: Menu Options -->
+    <div id="agro-view-menu" class="agro-menu">
+      <button type="button" class="agro-card-btn" onclick="AgroEngine.showChat('booking')">
+        <span class="agro-card-btn-icon">🎙️</span>
+        <div>
+          <strong class="agro-card-btn-title">Voice Booking Assistant</strong>
+          <small class="agro-card-btn-description">Answer prompts to fill produce and generate pass</small>
+        </div>
+      </button>
+
+      <button type="button" class="agro-card-btn" onclick="AgroEngine.showChat('query')">
+        <span class="agro-card-btn-icon">🌱</span>
+        <div>
+          <strong class="agro-card-btn-title">National MSP & Rules Query</strong>
+          <small class="agro-card-btn-description">Check daily market rates, moisture caps & tolerances</small>
+        </div>
+      </button>
+    </div>
+
+    <!-- View 2: Live Chat & Voice View -->
+    <div id="agro-view-chat" class="agro-chat-view">
+      <div class="agro-chat-toolbar">
+        <button type="button" onclick="AgroEngine.showMenu()" class="agro-back-btn">
+          ← Back to Menu
+        </button>
+        <span id="agro-chat-tag" class="agro-chat-tag">
+          Voice Assistant
+        </span>
+      </div>
+
+      <!-- Scrollable Message Body -->
+      <div id="agro-msg-stream" class="agro-msg-stream"></div>
+
+      <!-- Controls: Mic + Text Fallback -->
+      <div class="agro-controls">
+        <div class="agro-input-row">
+          <button id="agro-mic-btn" type="button" onclick="AgroEngine.toggleMic()" class="agro-mic-btn">
+            🎙️
+          </button>
+          <input
+            type="text"
+            id="agro-input-box"
+            placeholder="Type in Hindi, Bengali or English..."
+            class="agro-input"
+            onkeydown="if(event.key==='Enter') AgroEngine.submitUserText()"
+          />
+          <button type="button" onclick="AgroEngine.submitUserText()" class="agro-submit-btn">
+            ➤
+          </button>
+        </div>
+        <small id="agro-mic-hint" class="agro-mic-hint">Tap mic to speak or type your question above.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Isolated, Zero-Dependency Controller
+const AgroEngine = {
+  isListening: false,
+  recognition: null,
+
+  toggleModal(force) {
+    const card = document.getElementById("agro-chat-card");
+    if (!card) return;
+    const shouldOpen = force !== undefined ? force : (card.style.display === "none" || !card.style.display);
+    card.style.display = shouldOpen ? "flex" : "none";
+  },
+
+  showMenu() {
+    document.getElementById("agro-view-chat").style.display = "none";
+    document.getElementById("agro-view-menu").style.display = "flex";
+  },
+
+  showChat(mode) {
+    document.getElementById("agro-view-menu").style.display = "none";
+    const chatView = document.getElementById("agro-view-chat");
+    chatView.style.display = "flex";
+
+    const tag = document.getElementById("agro-chat-tag");
+    tag.innerText = mode === "booking" ? "Voice Booking" : "MSP & Rules Query";
+
+    const stream = document.getElementById("agro-msg-stream");
+    if (stream && stream.children.length === 0) {
+      const greeting = mode === "booking"
+        ? "🌾 Namaste! Speak your crop name and quantity (e.g., '80 quintals Wheat' or '৫০ বস্তা ধান')."
+        : "🌱 Ask any question regarding today's MSP rates, moisture limits, or gate queues.";
+      this.addMessage("bot", greeting);
+    }
+  },
+
+  addMessage(sender, text) {
+    const stream = document.getElementById("agro-msg-stream");
+    if (!stream) return;
+    const div = document.createElement("div");
+    div.className = sender === "user" ? "agro-msg-user" : "agro-msg-bot";
+    div.innerText = text;
+    stream.appendChild(div);
+    stream.scrollTop = stream.scrollHeight;
+  },
+
+  async submitUserText() {
+    const input = document.getElementById("agro-input-box");
+    const val = input ? input.value.trim() : "";
+    if (!val) return;
+    input.value = "";
+    this.addMessage("user", val);
+
+    // Intent checks
+    const lower = val.toLowerCase();
+    let reply = "";
+
+    if (lower.includes("gehun") || lower.includes("wheat") || lower.includes("गेहूं") || lower.includes("গম")) {
+      const cropField = document.getElementById("crop");
+      if (cropField) cropField.value = "Wheat";
+      reply = "Wheat recorded. Current Fair Average Quality (FAQ) MSP is ₹2,275/Qtl with 14% permissible moisture.";
+    } else if (lower.includes("dhan") || lower.includes("paddy") || lower.includes("धान")) {
+      const cropField = document.getElementById("crop");
+      if (cropField) cropField.value = "Paddy";
+      reply = "Paddy recorded. MSP for Grade A Paddy is ₹2,320/Qtl.";
+    } else if (lower.includes("breakdown") || lower.includes("late") || lower.includes("jam")) {
+      reply = "Transit delay recorded! A 45-minute breakdown grace hold has been applied to your pass.";
+    } else {
+      reply = "Received your query. The APMC Mandi yard is operating under normal flow with 8-minute average scale delays.";
+    }
+
+    this.addMessage("bot", reply);
+    this.speak(reply);
+  },
+
+  toggleMic() {
+    const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Speech) {
+      alert("Microphone recognition not supported in this browser. Please type into the text box below!");
+      return;
+    }
+
+    const micBtn = document.getElementById("agro-mic-btn");
+    const hint = document.getElementById("agro-mic-hint");
+
+    if (!this.recognition) {
+      this.recognition = new Speech();
+      this.recognition.continuous = false;
+      this.recognition.interimResults = false;
+
+      this.recognition.onstart = () => {
+        this.isListening = true;
+        if (micBtn) micBtn.style.background = "#dc2626";
+        if (hint) hint.innerText = "Listening... Speak your crop or question now.";
+      };
+      this.recognition.onend = () => {
+        this.isListening = false;
+        if (micBtn) micBtn.style.background = "#16a34a";
+        if (hint) hint.innerText = "Tap mic to speak or type your question above.";
+      };
+      this.recognition.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        const box = document.getElementById("agro-input-box");
+        if (box) box.value = text;
+        this.submitUserText();
+      };
+    }
+
+    if (this.isListening) {
+      this.recognition.stop();
+    } else {
+      const lang = document.getElementById("globalLanguageSelect")?.value || "en";
+      this.recognition.lang = lang === "hi" ? "hi-IN" : lang === "bn" ? "bn-IN" : "en-IN";
+      this.recognition.start();
+    }
+  },
+
+  speak(text) {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    const lang = document.getElementById("globalLanguageSelect")?.value || "en";
+    u.lang = lang === "hi" ? "hi-IN" : lang === "bn" ? "bn-IN" : "en-IN";
+    u.rate = 0.95;
+    window.speechSynthesis.speak(u);
+  }
+};
+</script>
+<!-- ============================================================ -->
+
+    <!-- ======================================================== -->
+    <!-- VIEW 5: DEDICATED WEIGHBRIDGE BAY OPERATOR TERMINAL      -->
+    <!-- ======================================================== -->
+    <section id="panel-weighbridge" class="view-panel">
+      <div class="panel-header-box">
+        <button
+          type="button"
+          class="breadcrumb-back-btn"
+          onclick="window.switchPanel('panel-gateway', 'GATEWAY')"
+        >
+          ← Gateway Home
+        </button>
+        <div class="terminal-badge">SCALE TELEMETRY TERMINAL • BAY 01</div>
+        <h2>⚖️ Live Digital Weighbridge Bay</h2>
+        <p>Automated Gross & Tare Weight Capture with IoT Telemetry Sync</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Left: Scale Indicator Stream & Controls -->
+        <div class="terminal-card">
+          <h3>Active Scale Telemetry</h3>
+          <div class="scale-display">
+            <span class="scale-label">CURRENT BAY LOAD (ESSAE/AVERY IOT)</span>
+            <span class="scale-digits" id="liveScaleReading">0.00</span>
+            <span class="scale-unit">QUINTALS</span>
+          </div>
+          <div class="scale-controls">
+            <button
+              type="button"
+              id="btnTareScale"
+              class="scale-btn secondary"
+              onclick="simulateSerialCapture(42.5)"
+            >
+              Capture Tare (Empty Cart)
+            </button>
+            <button
+              type="button"
+              id="btnCaptureWeight"
+              class="scale-btn primary"
+              onclick="simulateSerialCapture(142.8)"
+            >
+              Capture Gross Weight
+            </button>
+          </div>
+
+          <!-- Point 22: Scale Breakdown Dynamic Re-router -->
+          <div class="scale-breakdown-wrap">
+            <button
+              type="button"
+              class="scale-btn secondary scale-breakdown-btn"
+              onclick="handleScaleBreakdown('Bay 01')"
+            >
+              ⚠️ Bay Scale Breakdown (Load Balance Queue)
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Calculation Math Engine, Gunny Tare & Labor -->
+        <div class="terminal-card">
+          <h3>Weighment & Labor Settlement</h3>
+          <div class="terminal-form-group">
+            <label for="wbTokenSelect">Arrival Token</label>
+            <select id="wbTokenSelect" class="applicant-select">
+              <option value="KQ-DEL-001">
+                KQ-DEL-001 (Ramesh Kumar - Wheat)
+              </option>
+              <option value="KQ-PUN-004">
+                KQ-PUN-004 (Gurpreet Singh - Basmati)
+              </option>
+            </select>
+          </div>
+
+          <!-- Point 18: Gunny Bag Standardization Table Inputs -->
+          <div class="officer-kyc-grid">
+            <div class="terminal-form-group">
+              <label>Packaging Type</label>
+              <select
+                id="bagTypeSelect"
+                class="applicant-select"
+                onchange="runTwoStageMathEngine()"
+              >
+                <option value="0.0058">Jute 50kg (580g tare)</option>
+                <option value="0.0012">HDPE Woven (120g tare)</option>
+                <option value="0.00">Loose / Bulk Trolley (0g)</option>
+              </select>
+            </div>
+            <div class="terminal-form-group">
+              <label>Bag Count</label>
+              <input
+                type="number"
+                id="bagCountInput"
+                class="applicant-input"
+                value="180"
+                oninput="runTwoStageMathEngine()"
+              />
+            </div>
+          </div>
+
+          <!-- Point 23: Hamali & Labor Allocation -->
+          <div class="terminal-form-group">
+            <label>Assigned Hamali / Labor Gang</label>
+            <select id="hamaliGangSelect" class="applicant-select">
+              <option value="GANG_01">
+                Gang A - Subhas Sardar (8 Laborers)
+              </option>
+              <option value="GANG_02">Gang B - Ratan Majhi (6 Laborers)</option>
+            </select>
+          </div>
+
+          <!-- Point 17: Two-Stage Mathematical Receipt -->
+          <div class="terminal-receipt">
+            <p>
+              <strong>Gross Weight:</strong>
+              <span id="wbGross">142.80</span> Qtl
+            </p>
+            <p>
+              <strong>Vehicle Tare:</strong> <span id="wbTare">42.50</span> Qtl
+            </p>
+            <p>
+              <strong>Bag Tare Deduction:</strong>
+              <span id="wbBagTare">1.04</span> Qtl
+            </p>
+            <hr class="wb-net-divider" />
+            <p class="wb-net-summary">
+              <strong>Certified Net Weight:</strong>
+              <span id="wbNet">99.26</span> Qtl
+            </p>
+          </div>
+
+          <!-- Point 20: No-Show Standby Hold and Commit -->
+          <div class="terminal-action-row">
+            <button
+              type="button"
+              class="scale-btn secondary"
+              onclick="handleStandbyNoShow()"
+            >
+              ⏱️ Standby Hold
+            </button>
+            <button
+              type="button"
+              class="scale-btn primary"
+              onclick="commitWeighbridgeSlip()"
+            >
+              Confirm & Print WBR Slip →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW 6: DEDICATED QUALITY ASSAYING LABORATORY TERMINAL   -->
+    <!-- ======================================================== -->
+    <section id="panel-assayer" class="view-panel">
+      <!-- Point 44: Spoken Dispute Dictation Container -->
+      <div class="card dispute-dictation-card">
+        <div class="dispute-dictation-header">
+          <strong class="dispute-dictation-title"
+            >⚖️ Voice-Dictated Arbitration Dispute</strong
+          >
+          <button
+            type="button"
+            class="sih-demo-btn dispute-dictation-btn"
+            onclick="triggerVoiceDisputeDictation()"
+          >
+            🎙️ Dictate Dispute (Speak Aloud)
+          </button>
+        </div>
+        <textarea
+          id="disputeReasonBox"
+          class="applicant-input dispute-reason-box"
+          rows="2"
+          placeholder="Click 'Dictate Dispute' and speak moisture/refraction reasons..."
+        ></textarea>
+        <button
+          type="button"
+          class="scale-btn secondary dispute-submit-btn"
+          onclick="submitVoiceDispute()"
+        >
+          Submit Spoken Grievance to Mandi Arbiter →
+        </button>
+      </div>
+      <div class="panel-header-box">
+        <button type="button" class="breadcrumb-back-btn">
+          ← Gateway Home
+        </button>
+        <div class="terminal-badge">FAIR AVERAGE QUALITY (FAQ) LAB</div>
+        <h2>🔬 Quality Assaying & Moisture Lab</h2>
+        <p>
+          Scientific Grain Assessment, Moisture Meter Certification & MSP
+          Clearance
+        </p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="terminal-card">
+          <h3>Physical Assay Parameters</h3>
+          <div class="terminal-form-group">
+            <label
+              >Commodity Standard:
+              <strong>Wheat (Base MSP: ₹2,275/Qtl)</strong></label
+            >
+          </div>
+          <div class="terminal-form-group">
+            <label for="qaMoisture"
+              >Moisture Content (%) [Permissible: &le; 14.0% | Max:
+              17.0%]</label
+            >
+            <input
+              type="number"
+              id="qaMoisture"
+              class="applicant-input"
+              value="15.2"
+              step="0.1"
+              oninput="runICAREvaluator()"
+            />
+          </div>
+          <div class="terminal-form-group">
+            <label for="qaForeign"
+              >Foreign Matter (%) [Permissible: &le; 1.0%]</label
+            >
+            <input
+              type="number"
+              id="qaForeign"
+              class="applicant-input"
+              value="1.8"
+              step="0.1"
+              oninput="runICAREvaluator()"
+            />
+          </div>
+          <div class="terminal-form-group">
+            <label for="qaDamaged"
+              >Damaged / Discolored Grains (%) [Permissible: &le; 2.0%]</label
+            >
+            <input
+              type="number"
+              id="qaDamaged"
+              class="applicant-input"
+              value="2.5"
+              step="0.1"
+              oninput="runICAREvaluator()"
+            />
+          </div>
+        </div>
+
+        <div class="terminal-card">
+          <h3>ICAR Settlement Outcome</h3>
+          <div class="grade-banner" id="gradeBanner">EVALUATING SAMPLES...</div>
+          <div class="terminal-receipt terminal-receipt-spaced">
+            <p><strong>Base Minimum Support Price:</strong> ₹2,275.00/Qtl</p>
+            <p>
+              <strong>Statutory Refuse Deduction:</strong> -<span
+                id="icarDeductionAmt"
+                >₹48.20</span
+              >/Qtl
+            </p>
+            <hr class="wb-net-divider" />
+            <p class="wb-net-summary">
+              <strong>Final Approved MSP:</strong>
+              <span id="icarFinalMsp">₹2,226.80</span>/Qtl
+            </p>
+          </div>
+
+          <!-- Point 26: Outward FCI Mill/Warehouse Delivery Challan -->
+          <button
+            type="button"
+            class="gateway-btn citizen-btn wb-print-btn"
+            onclick="generateFCIChallan()"
+          >
+            🏢 Issue FCI Warehouse Outward Challan →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDING MANDI HELPDESK DRAWER & BACKDROP                 -->
+    <!-- ======================================================== -->
+    <div id="helpdesk-backdrop" class="drawer-backdrop"></div>
+
+    <aside id="helpdesk-drawer" class="sliding-drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="drawer-icon">📞</span>
+          <div>
+            <h3>Mandi Helpdesk & Support</h3>
+            <p>National APMC Assistance & Telemetry Desk</p>
+          </div>
+        </div>
+        <button
+          type="button"
+          id="btn-close-helpdesk"
+          class="drawer-close-btn"
+          aria-label="Close Helpdesk"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- 24x7 Kisan Call Centre -->
+        <div class="support-card emergency-card">
+          <span class="support-badge">24x7 TOLL-FREE</span>
+          <h4>Kisan Call Centre (KCC)</h4>
+          <p class="support-number">1800-180-1551</p>
+          <p class="support-sub">
+            Toll-free agricultural guidance in all Indian regional languages.
+          </p>
+          <a href="tel:18001801551" class="drawer-call-btn">Dial Toll-Free →</a>
+        </div>
+
+        <!-- APMC Yard Operations -->
+        <div class="support-card">
+          <span class="support-badge secondary">YARD CONTROL</span>
+          <h4>Weighbridge & Token Support</h4>
+          <p class="support-number">011-2338-3911</p>
+          <p class="support-sub">
+            For bay queue bypass issues, gross/tare re-weighment, or gate
+            passes.
+          </p>
+          <a href="tel:01123383911" class="drawer-call-btn secondary"
+            >Call Yard Control →</a
+          >
+        </div>
+
+        <!-- DBT & MSP Grievance -->
+        <div class="support-card">
+          <span class="support-badge secondary">DBT GRIEVANCE</span>
+          <h4>PFMS & Bank Credit Cell</h4>
+          <p class="support-number">1800-11-5555</p>
+          <p class="support-sub">
+            Direct Bank Transfer settlement issues and account link queries.
+          </p>
+          <a href="tel:1800115555" class="drawer-call-btn secondary"
+            >Lodge DBT Ticket →</a
+          >
+        </div>
+      </div>
+    </aside>
 
     <script src="js/config.js"></script>
     <script src="js/voice-assistant.js"></script>
     <script src="js/app.js"></script>
+    <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js")
+        .then(() => console.log("PWA Service Worker registered for cellular dead zones."))
+        .catch((err) => console.warn("ServiceWorker registration failed:", err));
+    });
+  }
+</script>
   </body>
 </html>
