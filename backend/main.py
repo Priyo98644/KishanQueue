@@ -785,7 +785,7 @@ async def assistant_chat_endpoint(payload: AIChatPayload):
 import asyncio
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
-from queue_engine import bot_shield, live_yard_queue, QueueItem
+from backend.queue_engine import bot_shield, live_yard_queue, QueueItem
 
 # Middleware: Point 50 Rate Limiting Guard
 @app.middleware("http")
@@ -856,7 +856,7 @@ def get_enam_procurement_feed(secret_key: str = ""):
     }
     
 # Change this:
-from queue_engine import bot_shield, live_yard_queue, QueueItem
+from backend.queue_engine import bot_shield, live_yard_queue, QueueItem
 
 # To this:
 from backend.queue_engine import bot_shield, live_yard_queue, QueueItem
